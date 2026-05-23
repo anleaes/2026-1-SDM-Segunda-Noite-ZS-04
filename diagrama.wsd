@@ -1,0 +1,114 @@
+@startuml MeAjudaApp
+
+
+class Usuario {
+    -nome: Char
+    -sobrenome: Char
+    -cpf: Char
+    -email: Email
+    +toString()
+}
+
+
+class Cidadao {
+    -fone: Char
+    -endereco: Char
+    -cep: Char
+    -bairro: Char
+    +toString()
+}
+
+
+class Funcionario {
+    -registro: Char
+    -funcao: CharChoices (TEC, GES, ANA)
+    -ativo: Boolean
+    -secretaria: ManyToMany[Secretaria]
+    +toString()
+}
+
+
+class Secretaria {
+    -nome: Char
+    -sigla: Char
+    -descricao: Text
+    -site: Char
+    +toString()
+}
+
+
+class Servico {
+    -nome: Char
+    -descricao: Text
+    -nivel_prioridade: Integer
+    -secretaria: ForeignKey[Secretaria]
+    +toString()
+}
+
+
+class Ocorrencia {
+    -titulo: Char
+    -descricao: Text
+    -criado_em: DateTime
+    -fechado_em: DateTime
+    -status: CharChoices (ABE, AND, FEC)
+    -foto: Image
+    -cidadao: ForeignKey[Cidadao]
+    -servico: ForeignKey[Servico]
+    +toString()
+}
+
+
+class Intervencao {
+    -data_exec: Date
+    -relato: Text
+    -custo_trab: Decimal
+    -doc: File
+    -ocorrencia: ForeignKey[Ocorrencia]
+    -funcionario: ForeignKey[Funcionario]
+    +toString()
+}
+
+
+class Protocolo {
+    -protocolo_numero: Char
+    -gerado_em: DateTime
+    -prazo: Date
+    -ocorrencia: OneToOne[Ocorrencia]
+    +toString()
+}
+
+
+class Equipamento {
+    -nome: Char
+    -descricao: Char
+    -disponivel: Boolean
+    -preco: Decimal
+    -intervencao: ManyToMany[Intervencao]
+    +toString()
+}
+
+
+class IntervencaoEquipamento {
+    -horas_usado: Integer
+    -custo_total: Float
+    -intervencao: ForeignKey[Intervencao]
+    -equipamento: ForeignKey[Equipamento]
+    +toString()
+}
+
+
+Servico <--* Secretaria : 1..n
+Funcionario <--* Secretaria : 1..n
+Servico *--> Ocorrencia : 0..n
+Cidadao *--> Ocorrencia : 0..n
+Ocorrencia *--> Intervencao : 0..n
+Ocorrencia *--> Protocolo : 1..1
+Funcionario *--> Intervencao : 0..n
+Intervencao *--> IntervencaoEquipamento : 0..n
+Equipamento *--> IntervencaoEquipamento : 0..n
+Cidadao -up-|> Usuario: 1..1
+Funcionario -up-|> Usuario: 1..1
+
+
+@enduml
