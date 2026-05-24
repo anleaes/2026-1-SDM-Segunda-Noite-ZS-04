@@ -2,3 +2,5 @@
 .env
 /apps/usuarios/__pycache__/*
 /apps/usuarios/migrations/*
+/apps/cidadaos/__pycache__/*
+/apps/cidadaos/migrations/*
