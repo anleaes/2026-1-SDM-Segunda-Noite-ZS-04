@@ -10,3 +10,5 @@
 /apps/servicos/migrations/*
 /apps/funcionarios/__pycache__/*
 /apps/funcionarios/migrations/*
+/apps/ocorrencias/__pycache__/*
+/apps/ocorrencias/migrations/*
