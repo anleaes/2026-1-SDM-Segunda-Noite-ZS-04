@@ -8,3 +8,5 @@
 /apps/secretarias/migrations/*
 /apps/servicos/__pycache__/*
 /apps/servicos/migrations/*
+/apps/funcionarios/__pycache__/*
+/apps/funcionarios/migrations/*
