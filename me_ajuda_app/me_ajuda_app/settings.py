@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'cidadaos.apps.CidadaosConfig',
     'secretarias.apps.SecretariasConfig',
     'funcionarios.apps.FuncionariosConfig',
+    'ocorrencias.apps.OcorrenciasConfig',
 ]
 
 MIDDLEWARE = [
