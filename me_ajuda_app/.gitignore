@@ -18,3 +18,5 @@
 /apps/protocolos/migrations/*
 /apps/equipamentos/__pycache__/*
 /apps/equipamentos/migrations/*
+/apps/intervencaoequipamentos/__pycache__/*
+/apps/intervencaoequipamentos/migrations/*

@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'intervencoes.apps.IntervencoesConfig',
     'protocolos.apps.ProtocolosConfig',
     'equipamentos.apps.EquipamentosConfig',
+    'intervencaoequipamentos.apps.IntervencaoequipamentosConfig',
 ]
 
 MIDDLEWARE = [
