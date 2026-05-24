@@ -6,3 +6,5 @@
 /apps/cidadaos/migrations/*
 /apps/secretarias/__pycache__/*
 /apps/secretarias/migrations/*
+/apps/servicos/__pycache__/*
+/apps/servicos/migrations/*
