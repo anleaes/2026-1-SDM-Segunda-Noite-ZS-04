@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'usuarios.apps.UsuariosConfig',
     'cidadaos.apps.CidadaosConfig',
     'secretarias.apps.SecretariasConfig',
+    'funcionarios.apps.FuncionariosConfig',
 ]
 
 MIDDLEWARE = [
