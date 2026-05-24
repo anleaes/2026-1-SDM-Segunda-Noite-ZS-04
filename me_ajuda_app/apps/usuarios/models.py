@@ -7,4 +7,11 @@ class Usuario(models.Model):
     cpf = models.CharField('Cpf', max_length=11)
     email = models.CharField('Email', max_length=50)
 
+    class Meta:
+        verbose_name = 'Usuario'
+        verbose_name_plural = 'Usuarios'
+        ordering =['id']
+
+    def __str__(self):
+        return  f'{self.nome} - {self.sobrenome}'
 
