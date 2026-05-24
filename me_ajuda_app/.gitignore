@@ -14,3 +14,5 @@
 /apps/ocorrencias/migrations/*
 /apps/intervencoes/__pycache__/*
 /apps/intervencoes/migrations/*
+/apps/protocolos/__pycache__/*
+/apps/protocolos/migrations/*
