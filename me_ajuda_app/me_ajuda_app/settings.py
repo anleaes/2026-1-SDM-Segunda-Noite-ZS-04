@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'funcionarios.apps.FuncionariosConfig',
     'servicos.apps.ServicosConfig',
     'ocorrencias.apps.OcorrenciasConfig',
+    'intervencoes.apps.IntervencoesConfig',
 ]
 
 MIDDLEWARE = [
