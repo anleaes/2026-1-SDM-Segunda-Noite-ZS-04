@@ -50,6 +50,10 @@ INSTALLED_APPS = [
     'usuarios.apps.UsuariosConfig',
     'cidadaos.apps.CidadaosConfig',
     'secretarias.apps.SecretariasConfig',
+    'funcionarios.apps.FuncionariosConfig',
+    'servicos.apps.ServicosConfig',
+    'ocorrencias.apps.OcorrenciasConfig',
+    'intervencoes.apps.IntervencoesConfig',
 ]
 
 MIDDLEWARE = [
