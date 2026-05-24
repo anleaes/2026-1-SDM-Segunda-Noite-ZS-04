@@ -4,3 +4,5 @@
 /apps/usuarios/migrations/*
 /apps/cidadaos/__pycache__/*
 /apps/cidadaos/migrations/*
+/apps/secretarias/__pycache__/*
+/apps/secretarias/migrations/*
