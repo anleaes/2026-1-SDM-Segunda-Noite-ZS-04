@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'usuarios.apps.UsuariosConfig',
     'cidadaos.apps.CidadaosConfig',
+    'secretarias.apps.SecretariasConfig',
 ]
 
 MIDDLEWARE = [
