@@ -10,3 +10,11 @@ class Ocorrencia(models.Model):
     foto = models.ImageField('Foto', upload_to='ocorrencias/', null=True, blank=True)
     cidadao = models.ForeignKey('cidadaos.Cidadao', on_delete=models.CASCADE, related_name='ocorrencias')
     servico = models.ForeignKey('servicos.Servico', on_delete=models.CASCADE, related_name='ocorrencias')
+
+     class Meta:
+        verbose_name = 'Ocorrência'
+        verbose_name_plural = 'Ocorrências'
+        ordering =['id']
+
+    def __str__(self):
+        return  f'{self.titulo}'
