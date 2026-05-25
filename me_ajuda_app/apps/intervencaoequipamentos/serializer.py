@@ -1,0 +1,2 @@
+from .models import IntervencaoEquipamento
+from rest_framework import serializers
