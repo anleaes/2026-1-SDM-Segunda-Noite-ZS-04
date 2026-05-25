@@ -15,4 +15,4 @@ class Equipamento(models.Model):
         ordering = ["id"]
 
     def __str__(self):
-        return f"{self.nome} - {self.disponivel}"
+        return f"{self.nome} - R${self.preco}"
