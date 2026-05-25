@@ -9,3 +9,12 @@ class Intervencao(models.Model):
     doc = models.FileField('Documento', upload_to='intervencoes/', null=True, blank=True)
     ocorrencia = models.ForeignKey('ocorrencias.Ocorrencia', on_delete=models.CASCADE, related_name='intervencoes')
     funcionario = models.ForeignKey('funcionarios.Funcionario', on_delete=models.CASCADE, related_name='intervencoes')
+
+class Meta:
+        verbose_name = 'Intervenção'
+        verbose_name_plural = 'Intervenções'
+        ordering =['id']
+
+def __str__(self):
+        return  f'{self.titulo} - {self.data_exec}'
+    
