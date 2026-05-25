@@ -60,6 +60,7 @@ class Ocorrencia {
 
 
 class Intervencao {
+    -titulo: Char
     -data_exec: Date
     -relato: Text
     -custo_trab: Decimal
@@ -84,7 +85,6 @@ class Equipamento {
     -descricao: Char
     -disponivel: Boolean
     -preco: Decimal
-    -intervencao: ManyToMany[Intervencao]
     +toString()
 }
 
