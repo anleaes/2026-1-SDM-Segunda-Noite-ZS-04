@@ -29,7 +29,7 @@ urlpatterns = [
     path('ocorrencias/', include('ocorrencias.urls', namespace='ocorrencias')),
     path('intervencoes/', include('intervencoes.urls', namespace='intervencoes')),
     path('equipamentos/', include('equipamentos.urls', namespace='equipamentos')),
-    path('intervencaoEquipamentos/', include('intervencaoequipamentos.urls', namespace='intervencaoequipamentos')),
+    path('equipamentos_intervencao/', include('intervencaoequipamentos.urls', namespace='intervencaoequipamentos')),
     path('protocolos/', include('protocolos.urls', namespace='protocolos')),
 ]
 
