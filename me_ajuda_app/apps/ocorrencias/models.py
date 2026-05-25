@@ -11,7 +11,7 @@ class Ocorrencia(models.Model):
     cidadao = models.ForeignKey('cidadaos.Cidadao', on_delete=models.CASCADE, related_name='ocorrencias')
     servico = models.ForeignKey('servicos.Servico', on_delete=models.CASCADE, related_name='ocorrencias')
 
-     class Meta:
+    class Meta:
         verbose_name = 'Ocorrência'
         verbose_name_plural = 'Ocorrências'
         ordering =['id']
