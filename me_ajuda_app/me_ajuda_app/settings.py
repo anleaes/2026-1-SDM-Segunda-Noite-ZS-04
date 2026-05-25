@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'equipamentos.apps.EquipamentosConfig',
     'intervencaoequipamentos.apps.IntervencaoequipamentosConfig',
     'corsheaders',
+    'core.apps.CoreConfig',
 ]
 
 MIDDLEWARE = [
