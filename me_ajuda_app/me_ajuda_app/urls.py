@@ -28,6 +28,7 @@ urlpatterns = [
     path('cidadaos/', include('cidadaos.urls', namespace='cidadaos')),
     path('ocorrencias/', include('ocorrencias.urls', namespace='ocorrencias')),
     path('intervencoes/', include('intervencoes.urls', namespace='intervencoes')),
+    path('equipamentos/', include('equipamentos.urls', namespace='equipamentos')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
