@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'protocolos.apps.ProtocolosConfig',
     'equipamentos.apps.EquipamentosConfig',
     'intervencaoequipamentos.apps.IntervencaoequipamentosConfig',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -67,6 +68,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'me_ajuda_app.urls'
@@ -144,3 +146,5 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/' 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
+
+CORS_ALLOW_ALL_ORIGINS = True
