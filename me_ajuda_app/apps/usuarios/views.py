@@ -1,10 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render,get_object_or_404, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import UsuarioForm, UserForm
 from .models import Usuario
 from rest_framework import viewsets
 from .serializer import UsuarioSerializer
+from .forms import UsuarioForm, CidadaoForm, FuncionarioForm
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 class UsuarioViewSet(viewsets.ModelViewSet):
