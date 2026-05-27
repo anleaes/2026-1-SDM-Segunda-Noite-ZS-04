@@ -2,19 +2,65 @@
 
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}"> -->
-    <title>{% block title %}Me Ajuda App{% endblock title %}</title>
-</head>
-<body>
+    <title>
+      {% block title %}MeAjuda - Zeladoria Urbana{% endblock title %}
+    </title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <a href="/">MeAjuda</a>
+        </div>
+
+        <ul class="nav-links">
+          <li>
+            <a href="{% url 'secretarias:secretarias_lista' %}">Secretarias</a>
+          </li>
+          <li><a href="{% url 'servicos:servicos_lista' %}">Serviços</a></li>
+
+          {% if user.is_authenticated %} {% if is_funcionario %}
+          <li>
+            <a href="{% url 'funcionarios:funcionarios_dashboard' %}">Painel</a>
+          </li>
+          <li>
+            <a href="{% url 'intervencoes:intervencoes_lista' %}">Intervenções</a>
+          </li>
+          {% elif is_cidadao %}
+          <li>
+            <a href="{% url 'ocorrencias:ocorrencias_lista' %}">Minhas Ocorrências</a>
+          </li>
+          {% endif %}
+
+          <li>
+            <form
+              method="POST"
+              action="{% url 'usuarios:logout' %}"
+              style="display: inline"
+            >
+              {% csrf_token %}
+              <button type="submit" class="btn-logout">Sair</button>
+            </form>
+          </li>
+
+          <li><a href="{% url 'usuarios:usuario_perfil' %}">Meu Perfil</a></li>
+          {% else %}
+          <li><a href="{% url 'usuarios:login' %}">Entrar</a></li>
+          <li><a href="{% url 'usuarios:registro' %}">Cadastrar</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </header>
 
     {% block body %}
-    
+
     {% endblock body %}
-    
+
     <!-- <script src="{% static 'js/script.js' %}"></script> -->
-</body>
+  </body>
 </html>
