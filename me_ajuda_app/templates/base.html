@@ -15,32 +15,32 @@
     <header>
       <nav class="navbar">
         <div class="logo">
-          <a href="/">MeAjuda</a>
+          <a href="{% url 'core:home' %}">MeAjuda</a>
         </div>
 
         <ul class="nav-links">
           <li>
-            <a href="{% url 'secretarias:secretarias_lista' %}">Secretarias</a>
+            <a href="#">Secretarias</a>
           </li>
-          <li><a href="{% url 'servicos:servicos_lista' %}">Serviços</a></li>
+          <li><a href="#">Serviços</a></li>
 
           {% if user.is_authenticated %} {% if is_funcionario %}
           <li>
-            <a href="{% url 'funcionarios:funcionarios_dashboard' %}">Painel</a>
+            <a href="#">Painel</a>
           </li>
           <li>
-            <a href="{% url 'intervencoes:intervencoes_lista' %}">Intervenções</a>
+            <a href="#">Intervenções</a>
           </li>
           {% elif is_cidadao %}
           <li>
-            <a href="{% url 'ocorrencias:ocorrencias_lista' %}">Minhas Ocorrências</a>
+            <a href="#">Minhas Ocorrências</a>
           </li>
           {% endif %}
 
           <li>
             <form
               method="POST"
-              action="{% url 'usuarios:logout' %}"
+              action="#"
               style="display: inline"
             >
               {% csrf_token %}
@@ -48,10 +48,10 @@
             </form>
           </li>
 
-          <li><a href="{% url 'usuarios:usuario_perfil' %}">Meu Perfil</a></li>
+          <li><a href="#">Meu Perfil</a></li>
           {% else %}
-          <li><a href="{% url 'usuarios:login' %}">Entrar</a></li>
-          <li><a href="{% url 'usuarios:registro' %}">Cadastrar</a></li>
+          <li><a href="#">Entrar</a></li>
+          <li><a href="#">Cadastrar</a></li>
           {% endif %}
         </ul>
       </nav>
