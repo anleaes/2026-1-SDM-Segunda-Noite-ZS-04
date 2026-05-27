@@ -1,11 +1,29 @@
 {% extends 'base.html' %}
 
-{% block title %}
-    {{ block.super }}
-{% endblock title %}
+{% block title %} {{ block.super }} {% endblock title%} 
 
 {% block body %}
+<main class="container">
+  <div class="home">
+    <h1>MeAjuda</h1>
+    <h2>Zeladoria Urbana</h2>
+    <p>A plataforma oficial para conectar os cidadãos à prefeitura.</p>
 
-<!-- Código -->
-
+    {% if not user.is_authenticated %}
+    <div class="acoes">
+      <a href="#" class="btn-primario">Fazer Login</a>
+      <a href="#" class="btn-secundario">Cadastre-se</a>
+    </div>
+    {% else %}
+    <div class="acoes">
+      <a href="#" class="btn-primario">Meu Perfil</a>
+      {% if is_funcionario %}
+      <a href="#" class="btn-secundario">Painel do Funcionário</a>
+      {% elif is_cidadao %}
+      <a href="#" class="btn-secundario">Minhas Ocorrências</a>
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+</main>
 {% endblock body %}
