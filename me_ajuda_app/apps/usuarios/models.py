@@ -7,6 +7,7 @@ class Usuario(models.Model):
     sobrenome = models.CharField("Sobrenome", max_length=50)
     cpf = models.CharField("Cpf", max_length=11)
     email = models.CharField("Email", max_length=50)
+    senha = models.CharField("Senha", max_length=50)
 
     class Meta:
         verbose_name = "Usuario"
