@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>
       {% block title %}MeAjuda - Zeladoria Urbana{% endblock title %}
     </title>
@@ -15,7 +15,9 @@
     <header>
       <nav class="navbar">
         <div class="logo">
-          <a href="{% url 'core:home' %}">MeAjuda</a>
+          <a href="{% url 'core:home' %}">
+            <img src="{% static 'img/logo.png' %}" />
+          </a>
         </div>
 
         <ul class="nav-links">
@@ -50,8 +52,8 @@
 
           <li><a href="#">Meu Perfil</a></li>
           {% else %}
-          <li><a href="#">Entrar</a></li>
-          <li><a href="#">Cadastrar</a></li>
+          <li><a href="#" class="btn-primario">Entrar</a></li>
+          <li><a href="#" class="btn-secundario">Cadastrar</a></li>
           {% endif %}
         </ul>
       </nav>
