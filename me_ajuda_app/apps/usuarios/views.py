@@ -5,9 +5,11 @@ from .forms import UsuarioForm, UserForm
 from .models import Usuario
 from rest_framework import viewsets
 from .serializer import UsuarioSerializer
-from .forms import UsuarioForm, CidadaoForm, FuncionarioForm
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from .forms import UsuarioForm
+from cidadaos.forms import CidadaoForm
+from funcionarios.forms import FuncionarioForm
 
 
 # Create your views here.
