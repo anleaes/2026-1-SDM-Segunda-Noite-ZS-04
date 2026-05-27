@@ -48,6 +48,9 @@ class Servico {
 
 class Ocorrencia {
     -titulo: Char
+    -endereco: Char
+    -numero: Char
+    -complemento: Char
     -descricao: Text
     -criado_em: DateTime
     -fechado_em: DateTime
