@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
-from me_ajuda_app.apps.usuarios.forms import UsuarioForm
+from .forms import UsuarioForm, UserForm
 from .models import Usuario
 from rest_framework import viewsets
 from .serializer import UsuarioSerializer
