@@ -9,7 +9,8 @@ router = routers.SimpleRouter()
 router.register('', views.UsuarioViewSet, basename='usuarios')
 
 urlpatterns = [
+    path('registrar/', views.registrar, name='registrar'),
     path('perfil/', views.usuario_perfil, name='usuario_perfil'),
     path('perfil/editar/', views.editar_perfil, name='editar_perfil'),
-    path('', include(router.urls) )
+    path('api/', include(router.urls))
 ]
