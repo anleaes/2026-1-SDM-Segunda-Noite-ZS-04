@@ -1,13 +1,12 @@
 from django.shortcuts import render,get_object_or_404, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .forms import UsuarioForm, UserForm
 from .models import Usuario
 from rest_framework import viewsets
 from .serializer import UsuarioSerializer
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
-from .forms import UsuarioForm
+from .forms import UsuarioForm, UserForm
 from cidadaos.forms import CidadaoForm
 from funcionarios.forms import FuncionarioForm
 
@@ -25,7 +24,7 @@ def registrar(request):
         if user_form.is_valid() and usuario_form.is_valid():
             f_user = user_form.save(commit=False)
             f_user.set_password(f_user.password)
-            f_user.username = usuario_form.get('cpf')
+            f_user.username = usuario_form.cleaned_data.get('cpf')
             f_user.save()
 
             f_usuario = usuario_form.save(commit=False)
@@ -52,37 +51,37 @@ def registrar(request):
 def usuario_perfil(request):   
 
     try:
-        user = request.user.usuario
+        usuario = request.user.usuario
     except:
-        user = None
+        usuario = None
 
     context = {
-        'is_cidadao': hasattr(request.user, 'cidadao'),
-        'is_funcionario': hasattr(request.user, 'funcionario'),
-        'user': user,
+        'is_cidadao': hasattr(usuario, 'cidadao'),
+        'is_funcionario': hasattr(usuario, 'funcionario'),
+        'usuario': usuario,
     }
     return render(request, 'usuario_perfil.html', context)
 
 @login_required(login_url='/usuarios/login/')
 def editar_perfil(request):
-    user = request.user.usuario
-    is_cidadao = hasattr(request.user, 'cidadao')
-    is_funcionario = hasattr(request.user, 'funcionario')
+    usuario = request.user.usuario
+    is_cidadao = hasattr(usuario, 'cidadao')
+    is_funcionario = hasattr(usuario, 'funcionario')
 
     if is_cidadao:
-        perfil_instance = user.cidadao
+        perfil = usuario.cidadao
         PerfilForm = CidadaoForm
     elif is_funcionario:
-        perfil_instance = user.funcionario
+        perfil = usuario.funcionario
         PerfilForm = FuncionarioForm
     else:
-        perfil_instance = None
+        perfil = None
         PerfilForm = None
 
     if request.method == 'POST':
-        usuario_form = UsuarioForm(request.POST, instance=user)
+        usuario_form = UsuarioForm(request.POST, instance=usuario)
         if PerfilForm:
-            perfil_form = PerfilForm(request.POST, instance=perfil_instance)
+            perfil_form = PerfilForm(request.POST, instance=perfil)
         else:
             perfil_form = None
 
@@ -94,9 +93,9 @@ def editar_perfil(request):
             return redirect('usuario_perfil')
             
     else:
-        usuario_form = UsuarioForm(instance=user)
+        usuario_form = UsuarioForm(instance=usuario)
         if PerfilForm:
-            perfil_form = PerfilForm(instance=perfil_instance)
+            perfil_form = PerfilForm(instance=perfil)
         else:
             perfil_form = None
 
