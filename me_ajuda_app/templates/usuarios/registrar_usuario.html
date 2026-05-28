@@ -9,10 +9,13 @@
     <form method="POST" action="{% url 'usuarios:registrar_usuario' %}" id="formRegistro">
         {% csrf_token %}
         
-        {{ user_form.non_field_errors }}
-        {{ usuario_form.non_field_errors }}
-        {{ cidadao_form.non_field_errors }}
-        {{ funcionario_form.non_field_errors }}
+        {% if messages %}
+            <div class="erros-bloco">
+                {% for message in messages %}
+                    <span style="color: red; font-weight: bold;">{{ message }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
 
         <div class="form-grid">
             <div class="coluna">
