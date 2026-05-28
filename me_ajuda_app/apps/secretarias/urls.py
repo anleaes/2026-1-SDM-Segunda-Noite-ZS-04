@@ -8,6 +8,6 @@ router = routers.SimpleRouter()
 router.register('', views.SecretariaViewSet, basename='secretarias')
 
 urlpatterns = [
-    path('', include(router.urls) ),
+    path('Api/', include(router.urls) ),
     path('secretarias/', views.secretarias_lista, name='secretarias_lista'),
 ]
