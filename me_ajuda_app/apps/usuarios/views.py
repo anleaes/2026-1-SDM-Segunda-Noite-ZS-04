@@ -76,6 +76,24 @@ def registrar_usuario(request):
     
     return render(request, 'usuarios/registrar_usuario.html', context)
 
+def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('usuarios:usuario_perfil')
+
+    if request.method == 'POST':
+        cpf = request.POST.get('cpf')
+        senha = request.POST.get('senha')
+
+        user = authenticate(request, username=cpf, password=senha)
+
+        if user is not None:
+            login(request, user)
+            return redirect('usuarios:usuario_perfil')
+        else:
+            messages.error(request, 'CPF ou senha incorretos.')
+
+    return render(request, 'usuarios/login.html')
+
 #criação de perfil do usuario
 @login_required(login_url='/usuarios/login/')
 def usuario_perfil(request):   
