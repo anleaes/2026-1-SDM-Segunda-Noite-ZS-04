@@ -57,6 +57,18 @@ li a {
   font-weight: bold;
 }
 
+li .nav-item {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  border-right: 1px solid #fff;
+  padding-right: 10px;
+}
+
+li .nav-item:hover {
+  color: #ddd;
+}
+
 .container {
   box-sizing: border-box;
   margin: 0 auto;
@@ -144,8 +156,8 @@ li a {
 }
 
 .form-grid .coluna:first-child {
-    border-right: 2px solid #e0e0e0;
-    padding-right: 30px;
+  border-right: 2px solid #e0e0e0;
+  padding-right: 30px;
 }
 
 .erro {
@@ -175,7 +187,7 @@ li a {
 .btn-logout {
   background-color: red;
   color: #fff;
-  border: none; 
+  border: none;
   cursor: pointer;
   font-weight: bold;
   border-radius: 5px;
