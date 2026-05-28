@@ -22,38 +22,40 @@
 
         <ul class="nav-links">
           <li>
-            <a href="#">Secretarias</a>
+            <a class="nav-item" href="#">Secretarias</a>
           </li>
-          <li><a href="#">Serviços</a></li>
+          <li>
+            <a class="nav-item" href="{% url 'servicos:servicos_lista' %}">Serviços</a>
+          </li>
 
           {% if user.is_authenticated %} {% if is_funcionario %}
           <li>
-            <a href="#">Painel</a>
+            <a class="nav-item" href="#">Painel</a>
           </li>
           <li>
-            <a href="#">Intervenções</a>
+            <a class="nav-item" href="#">Intervenções</a>
           </li>
           {% elif is_cidadao %}
           <li>
-            <a href="#">Minhas Ocorrências</a>
+            <a class="nav-item" href="{% url 'ocorrencias:ocorrencias_lista' %}">Minhas Ocorrências</a>
           </li>
           {% endif %}
 
           <li>
-            <form
-              method="POST"
-              action="#"
-              style="display: inline"
-            >
+            <a class="nav-item" href="{% url 'usuarios:usuario_perfil' %}">Meu Perfil</a>
+          </li>
+
+          <li>
+            <form method="POST"
+              action="{% url 'usuarios:logout_usuario' %}" style="display: inline">
               {% csrf_token %}
               <button type="submit" class="btn-logout">Sair</button>
             </form>
           </li>
 
-          <li><a href="#">Meu Perfil</a></li>
           {% else %}
-          <li><a href="#" class="btn-primario">Entrar</a></li>
-          <li><a href="#" class="btn-secundario">Cadastrar</a></li>
+          <li><a href="{% url 'usuarios:login_usuario' %}" class="btn-primario">Entrar</a></li>
+          <li><a href="{% url 'usuarios:registrar_usuario' %}" class="btn-secundario">Cadastrar</a></li>
           {% endif %}
         </ul>
       </nav>
@@ -63,6 +65,5 @@
 
     {% endblock body %}
 
-    <!-- <script src="{% static 'js/script.js' %}"></script> -->
   </body>
 </html>

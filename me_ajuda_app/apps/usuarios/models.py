@@ -7,8 +7,8 @@ class Usuario(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='usuario')
     nome = models.CharField("Nome", max_length=50)
     sobrenome = models.CharField("Sobrenome", max_length=50)
-    cpf = models.CharField("Cpf", max_length=11)
-    email = models.CharField("Email", max_length=50)
+    cpf = models.CharField("Cpf", max_length=11, unique=True)
+    email = models.CharField("Email", max_length=50, unique=True)
 
     class Meta:
         verbose_name = "Usuario"

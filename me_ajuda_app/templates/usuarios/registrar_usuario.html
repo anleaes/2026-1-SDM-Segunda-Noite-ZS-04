@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body %}
+<div class="registro-container">
+    <h2 class="form-title">Cadastrar Nova Conta</h2>
+
+    <form method="POST" action="{% url 'usuarios:registrar_usuario' %}" id="formRegistro">
+        {% csrf_token %}
+        
+        {% if messages %}
+            <div class="erros-bloco">
+                {% for message in messages %}
+                    <span style="color: red; font-weight: bold;">{{ message }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="form-grid">
+            <div class="coluna">
+                <h3>Dados de Acesso</h3>
+
+                <div class="form-group margin-bottom 20px">
+                    <label>Nome:</label>
+                    {{ usuario_form.nome }}
+                    <span class="erro">{{ usuario_form.nome.errors }}</span>
+                </div>
+
+                <div class="form-group">
+                    <label>Sobrenome:</label>
+                    {{ usuario_form.sobrenome }}
+                    <span class="erro">{{ usuario_form.sobrenome.errors }}</span>
+                </div>
+
+                <div class="form-group">
+                    <label>CPF (somente números):</label>
+                    {{ usuario_form.cpf }}
+                    <span class="erro">{{ usuario_form.cpf.errors }}</span>
+                </div>
+
+                <div class="form-group">
+                    <label>E-mail:</label>
+                    {{ usuario_form.email }}
+                    <span class="erro">{{ usuario_form.email.errors }}</span>
+                </div>
+
+                <div class="form-group">
+                    <label>Senha:</label>
+                    {{ user_form.password }}
+                    <span class="erro">{{ user_form.password.errors }}</span>
+                </div>
+
+                <div class="form-group">
+                    <label>Confirmar Senha:</label>
+                    <input type="password" id="confirmar_senha" required>
+                    <span id="erro_senha">As senhas não são iguais!</span>
+                </div>
+
+            </div>
+
+            <div class="coluna">
+                <div class="form-group">
+                    <label >Selecione o Tipo de usuário:</label>
+                    <select id="tipo_usuario" name="tipo_usuario">
+                        <option value="cidadao">Cidadão</option>
+                        <option value="funcionario">Funcionário</option>
+                    </select>
+                </div>
+
+                <div id="secao_cidadao">
+                    <h3>Dados do Cidadão</h3>
+                    
+                    <div class="form-group">
+                        <label>Telefone:</label>
+                        {{ cidadao_form.fone }}
+                        <span class="erro">{{ cidadao_form.fone.errors }}</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Endereço:</label>
+                        {{ cidadao_form.endereco }}
+                        <span class="erro">{{ cidadao_form.endereco.errors }}</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>CEP:</label>
+                        {{ cidadao_form.cep }}
+                        <span class="erro">{{ cidadao_form.cep.errors }}</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Bairro:</label>
+                        {{ cidadao_form.bairro }}
+                        <span class="erro">{{ cidadao_form.bairro.errors }}</span>
+                    </div>
+                </div>
+
+                <div id="secao_funcionario" style="display: none;">
+                    <h3>Dados Profissionais</h3>
+                    
+                    <div class="form-group">
+                        <label>Registro (Matrícula):</label>
+                        {{ funcionario_form.registro }}
+                        <span class="erro">{{ funcionario_form.registro.errors }}</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Função:</label>
+                        {{ funcionario_form.funcao }}
+                        <span class="erro">{{ funcionario_form.funcao.errors }}</span>
+                    </div>
+
+                    <div class="form-group form-checkbox">
+                        <label>Ativo:</label>
+                        {{ funcionario_form.ativo }}
+                        <span class="erro">{{ funcionario_form.ativo.errors }}</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Secretaria(s):</label>
+                        {{ funcionario_form.secretarias }}
+                        <span class="erro">{{ funcionario_form.secretarias.errors }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        
+        <div style="text-align: right;">
+            <button type="submit" class="btn-primario" id="btn_submit">Cadastrar</button>
+        </div>
+    </form>
+
+    <script src="{% static 'js/registrar_usuario.js' %}"></script>
+</div>
+{% endblock body%}

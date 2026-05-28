@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="editar-perfil-container">
+    <h2>Editar Perfil</h2>
+
+    <form method="POST" action="{% url 'usuarios:editar_perfil' %}">
+        {% csrf_token %}
+        
+        {{ usuario_form.non_field_errors }}
+
+        <h3>Dados Pessoais</h3>
+        
+        <div class="form-group">
+            <label>Nome:</label>
+            {{ usuario_form.nome }}
+            <span class="erro">{{ usuario_form.nome.errors }}</span>
+        </div>
+
+        <div class="form-group">
+            <label>Sobrenome:</label>
+            {{ usuario_form.sobrenome }}
+            <span class="erro">{{ usuario_form.sobrenome.errors }}</span>
+        </div>
+
+        <div class="form-group">
+            <label>CPF:</label>
+            {{ usuario_form.cpf }}
+            <span class="erro">{{ usuario_form.cpf.errors }}</span>
+        </div>
+
+        <div class="form-group">
+            <label>E-mail:</label>
+            {{ usuario_form.email }}
+            <span class="erro">{{ usuario_form.email.errors }}</span>
+        </div>
+
+        <hr>
+
+        {% if is_cidadao %}
+            <h3>Endereço e Contato</h3>
+            {{ perfil_form.non_field_errors }}
+
+            <div class="form-group">
+                <label>Telefone:</label>
+                {{ perfil_form.fone }}
+                <span class="erro">{{ perfil_form.fone.errors }}</span>
+            </div>
+
+            <div class="form-group">
+                <label>Endereço:</label>
+                {{ perfil_form.endereco }}
+                <span class="erro">{{ perfil_form.endereco.errors }}</span>
+            </div>
+
+            <div class="form-group">
+                <label>CEP:</label>
+                {{ perfil_form.cep }}
+                <span class="erro">{{ perfil_form.cep.errors }}</span>
+            </div>
+
+            <div class="form-group">
+                <label>Bairro:</label>
+                {{ perfil_form.bairro }}
+                <span class="erro">{{ perfil_form.bairro.errors }}</span>
+            </div>
+        {% endif %}
+
+        {% if is_funcionario %}
+            <h3>Dados Profissionais</h3>
+            {{ perfil_form.non_field_errors }}
+
+            <div class="form-group">
+                <label>Registro (Matrícula):</label>
+                {{ perfil_form.registro }}
+                <span class="erro">{{ perfil_form.registro.errors }}</span>
+            </div>
+
+            <div class="form-group">
+                <label>Função:</label>
+                {{ perfil_form.funcao }}
+                <span class="erro">{{ perfil_form.funcao.errors }}</span>
+            </div>
+
+            <div class="form-group">
+                <label>Ativo:</label>
+                {{ perfil_form.ativo }}
+                <span class="erro">{{ perfil_form.ativo.errors }}</span>
+            </div>
+
+            <div class="form-group">
+                <label>Secretaria(s):</label>
+                {{ perfil_form.secretaria }}
+                <span class="erro">{{ perfil_form.secretaria.errors }}</span>
+            </div>
+        {% endif %}
+
+        <button type="submit" class="btn-salvar">Salvar Alterações</button>
+        <a href="{% url 'usuario_perfil' %}" class="btn-cancelar">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
