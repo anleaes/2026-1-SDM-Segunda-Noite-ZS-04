@@ -21,4 +21,4 @@ def secretaria_lista(request):
         'is_funcionario': is_funcionario,
     }
     
-    return render(request, 'secretaria_lista.html', context)
+    return render(request, 'secretaria/secretarias_lista.html', context)
