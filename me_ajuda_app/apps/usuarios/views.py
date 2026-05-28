@@ -95,6 +95,11 @@ def login_usuario(request):
 
     return render(request, 'usuarios/login.html')
 
+@login_required(login_url='/usuarios/login/')
+def logout_usuario(request):
+    logout(request)
+    return redirect('usuarios:login_usuario')
+
 #criação de perfil do usuario
 @login_required(login_url='/usuarios/login/')
 def usuario_perfil(request):   
@@ -109,7 +114,7 @@ def usuario_perfil(request):
         'is_funcionario': hasattr(usuario, 'funcionario'),
         'usuario': usuario,
     }
-    return render(request, 'usuario_perfil.html', context)
+    return render(request, 'usuarios/usuario_perfil.html', context)
 
 @login_required(login_url='/usuarios/login/')
 def editar_perfil(request):
@@ -139,7 +144,7 @@ def editar_perfil(request):
             if perfil_form:
                 perfil_form.save()
                 
-            return redirect('usuario_perfil')
+            return redirect('usuarios:usuario_perfil')
             
     else:
         usuario_form = UsuarioForm(instance=usuario)
@@ -155,4 +160,4 @@ def editar_perfil(request):
         'is_funcionario': is_funcionario,
     }
     
-    return render(request, 'editar_perfil.html', context)
+    return render(request, 'usuarios/editar_perfil.html', context)
