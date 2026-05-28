@@ -26,13 +26,10 @@ def registrar_usuario(request):
         if tipo_usuario == 'cidadao':
             cidadao_form = CidadaoForm(request.POST)
             funcionario_form = FuncionarioForm()
+            tipo_form_valido = cidadao_form.is_valid()
         else:
             cidadao_form = CidadaoForm()
             funcionario_form = FuncionarioForm(request.POST)
-
-        if tipo_usuario == 'cidadao':
-            tipo_form_valido = cidadao_form.is_valid()
-        else:
             tipo_form_valido = funcionario_form.is_valid()
 
         if user_form.is_valid() and usuario_form.is_valid() and tipo_form_valido:
@@ -42,22 +39,26 @@ def registrar_usuario(request):
             f_user.username = usuario_form.cleaned_data.get('cpf')
             f_user.save()
 
-            f_usuario = usuario_form.save(commit=False)
-            f_usuario.user = f_user
-            f_usuario.save()
-
             if tipo_usuario == 'cidadao':
                 f_cidadao = cidadao_form.save(commit=False)
-                f_cidadao.usuario_ptr = f_usuario 
+                f_cidadao.user = f_user 
+                
+                for campo, valor in usuario_form.cleaned_data.items():
+                    setattr(f_cidadao, campo, valor)
+
                 f_cidadao.save()
             else:
                 f_funcionario = funcionario_form.save(commit=False)
-                f_funcionario.usuario_ptr = f_usuario
+                f_funcionario.user = f_user
+
+                for campo, valor in usuario_form.cleaned_data.items():
+                    setattr(f_funcionario, campo, valor)
+
                 f_funcionario.save()
                 funcionario_form.save_m2m() 
 
             messages.success(request, 'Conta criada com sucesso!')
-            return redirect('usuarios:login')
+            return redirect('usuarios:login_usuario')
         else:
             messages.error(request, 'Por favor, corrija os erros abaixo.')
             
@@ -76,7 +77,7 @@ def registrar_usuario(request):
     
     return render(request, 'usuarios/registrar_usuario.html', context)
 
-def login_view(request):
+def login_usuario(request):
     if request.user.is_authenticated:
         return redirect('usuarios:usuario_perfil')
 

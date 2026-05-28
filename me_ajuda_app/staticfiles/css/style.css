@@ -24,7 +24,7 @@ h2 {
   margin-top: -10px;
 }
 
-p {
+.slogan {
   font-size: 1.2em;
   color: #ffffff7e;
   margin-bottom: 30px;
@@ -160,4 +160,14 @@ li a {
   margin-top: 5px;
   text-align: center;
   display: none;
+}
+
+.login-container {
+  margin: 50px auto;
+  max-width: 400px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
 }

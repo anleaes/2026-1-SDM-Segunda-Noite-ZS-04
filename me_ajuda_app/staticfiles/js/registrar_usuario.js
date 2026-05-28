@@ -3,13 +3,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const senha = document.getElementById('id_senha');
     const confirmarSenha = document.getElementById('confirmar_senha');
     const erroSenha = document.getElementById('erro_senha');
-    const tipoPerfil = document.getElementById('tipo_perfil');
+    const tipoUsuario = document.getElementById('tipo_usuario');
     const secaoCidadao = document.getElementById('secao_cidadao');
     const secaoFuncionario = document.getElementById('secao_funcionario');
     const inputsCidadao = secaoCidadao.querySelectorAll('input, select');
     const inputsFuncionario = secaoFuncionario.querySelectorAll('input, select');
 
-    function alternarPerfil(tipo) {
+    function alternarTipoUsuario(tipo) {
         if (tipo === 'cidadao') {
             secaoCidadao.style.display = 'block';
             secaoFuncionario.style.display = 'none';
@@ -48,11 +48,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     senha.addEventListener('input', verificarSenhasIguais);
     confirmarSenha.addEventListener('input', verificarSenhasIguais);
-    tipoPerfil.addEventListener('change', function() {
-        alternarPerfil(this.value);
+    tipoUsuario.addEventListener('change', function() {
+        alternarTipoUsuario(this.value);
     });
 
-    alternarPerfil(tipoPerfil.value);
+    alternarTipoUsuario(tipoUsuario.value);
 
     form.addEventListener('submit', function (event) {
         if (!verificarSenhasIguais() || senha.value !== confirmarSenha.value) {
