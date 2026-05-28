@@ -97,3 +97,67 @@ li a {
 .btn-secundario:hover {
   opacity: 0.8;
 }
+
+.registro-container {
+  margin: 50px auto;
+  max-width: 900px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #1a325a;
+}
+
+.form-group {
+  display: flex;
+  max-width: 400px;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form-checkbox {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-checkbox label {
+  margin-bottom: 0;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.form-grid input:not([type="checkbox"]),
+.form-grid select {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-grid .coluna:first-child {
+    border-right: 2px solid #e0e0e0;
+    padding-right: 30px;
+}
+
+.erro {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+#erro_senha {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+  text-align: center;
+  display: none;
+}
