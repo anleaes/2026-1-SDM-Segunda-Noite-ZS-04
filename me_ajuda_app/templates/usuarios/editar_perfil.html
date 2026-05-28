@@ -4,7 +4,7 @@
 <div class="editar-perfil-container">
     <h2>Editar Perfil</h2>
 
-    <form method="POST" action="{% url 'editar_perfil' %}">
+    <form method="POST" action="{% url 'usuarios:editar_perfil' %}">
         {% csrf_token %}
         
         {{ usuario_form.non_field_errors }}

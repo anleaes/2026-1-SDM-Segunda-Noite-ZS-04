@@ -26,13 +26,10 @@ def registrar_usuario(request):
         if tipo_usuario == 'cidadao':
             cidadao_form = CidadaoForm(request.POST)
             funcionario_form = FuncionarioForm()
+            tipo_form_valido = cidadao_form.is_valid()
         else:
             cidadao_form = CidadaoForm()
             funcionario_form = FuncionarioForm(request.POST)
-
-        if tipo_usuario == 'cidadao':
-            tipo_form_valido = cidadao_form.is_valid()
-        else:
             tipo_form_valido = funcionario_form.is_valid()
 
         if user_form.is_valid() and usuario_form.is_valid() and tipo_form_valido:
@@ -42,22 +39,26 @@ def registrar_usuario(request):
             f_user.username = usuario_form.cleaned_data.get('cpf')
             f_user.save()
 
-            f_usuario = usuario_form.save(commit=False)
-            f_usuario.user = f_user
-            f_usuario.save()
-
             if tipo_usuario == 'cidadao':
                 f_cidadao = cidadao_form.save(commit=False)
-                f_cidadao.usuario_ptr = f_usuario 
+                f_cidadao.user = f_user 
+                
+                for campo, valor in usuario_form.cleaned_data.items():
+                    setattr(f_cidadao, campo, valor)
+
                 f_cidadao.save()
             else:
                 f_funcionario = funcionario_form.save(commit=False)
-                f_funcionario.usuario_ptr = f_usuario
+                f_funcionario.user = f_user
+
+                for campo, valor in usuario_form.cleaned_data.items():
+                    setattr(f_funcionario, campo, valor)
+
                 f_funcionario.save()
                 funcionario_form.save_m2m() 
 
             messages.success(request, 'Conta criada com sucesso!')
-            return redirect('usuarios:login')
+            return redirect('usuarios:login_usuario')
         else:
             messages.error(request, 'Por favor, corrija os erros abaixo.')
             
@@ -76,6 +77,29 @@ def registrar_usuario(request):
     
     return render(request, 'usuarios/registrar_usuario.html', context)
 
+def login_usuario(request):
+    if request.user.is_authenticated:
+        return redirect('usuarios:usuario_perfil')
+
+    if request.method == 'POST':
+        cpf = request.POST.get('cpf')
+        senha = request.POST.get('senha')
+
+        user = authenticate(request, username=cpf, password=senha)
+
+        if user is not None:
+            login(request, user)
+            return redirect('usuarios:usuario_perfil')
+        else:
+            messages.error(request, 'CPF ou senha incorretos.')
+
+    return render(request, 'usuarios/login.html')
+
+@login_required(login_url='/usuarios/login/')
+def logout_usuario(request):
+    logout(request)
+    return redirect('usuarios:login_usuario')
+
 #criação de perfil do usuario
 @login_required(login_url='/usuarios/login/')
 def usuario_perfil(request):   
@@ -90,7 +114,7 @@ def usuario_perfil(request):
         'is_funcionario': hasattr(usuario, 'funcionario'),
         'usuario': usuario,
     }
-    return render(request, 'usuario_perfil.html', context)
+    return render(request, 'usuarios/usuario_perfil.html', context)
 
 @login_required(login_url='/usuarios/login/')
 def editar_perfil(request):
@@ -120,7 +144,7 @@ def editar_perfil(request):
             if perfil_form:
                 perfil_form.save()
                 
-            return redirect('usuario_perfil')
+            return redirect('usuarios:usuario_perfil')
             
     else:
         usuario_form = UsuarioForm(instance=usuario)
@@ -136,4 +160,4 @@ def editar_perfil(request):
         'is_funcionario': is_funcionario,
     }
     
-    return render(request, 'editar_perfil.html', context)
+    return render(request, 'usuarios/editar_perfil.html', context)

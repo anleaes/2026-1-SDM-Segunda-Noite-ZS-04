@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>CPF:</label>
+                    <label>CPF (somente números):</label>
                     {{ usuario_form.cpf }}
                     <span class="erro">{{ usuario_form.cpf.errors }}</span>
                 </div>
@@ -59,7 +59,7 @@
             <div class="coluna">
                 <div class="form-group">
                     <label >Selecione o Tipo de usuário:</label>
-                    <select id="tipo_perfil" name="tipo_perfil">
+                    <select id="tipo_usuario" name="tipo_usuario">
                         <option value="cidadao">Cidadão</option>
                         <option value="funcionario">Funcionário</option>
                     </select>
