@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %} Catálogo de Serviços {% endblock title %}
+
+{% block content %}
+<div class="servicos-container" style="padding: 20px;">
+    <h2>Catálogo de Serviços Disponíveis</h2>
+    <p>Selecione um serviço abaixo para entender os requisitos ou iniciar uma nova solicitação.</p>
+    
+    {% if is_funcionario %}
+        <div style="margin-bottom: 15px;">
+            <a href="#" class="btn-novo" style="background-color: #28a745; color: white; padding: 8px 12px; text-decoration: none; border-radius: 4px;">
+                + Cadastrar Novo Serviço
+            </a>
+        </div>
+    {% endif %}
+
+    <table class="tabela-servicos" border="1" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead>
+            <tr style="background-color: #f2f2f2; text-align: left;">
+                <th style="padding: 10px; width: 25%;">Nome do Serviço</th>
+                <th style="padding: 10px; width: 45%;">Descrição</th>
+                <th style="padding: 10px; width: 15%;">Secretaria Responsável</th>
+                <th style="padding: 10px; width: 15%; text-align: center;">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for servico in servicos %}
+            <tr>
+                <td style="padding: 10px;"><strong>{{ servico.nome }}</strong></td>
+                <td style="padding: 10px;">{{ servico.descricao|default:"Sem descrição disponível." }}</td>
+                <td style="padding: 10px;">{{ servico.secretaria }}</td>
+                <td style="padding: 10px; text-align: center;">
+                    <a href="#" style="background-color: #007bff; color: white; padding: 5px 10px; text-decoration: none; border-radius: 4px; font-size: 14px;">
+                        Solicitar
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" style="padding: 20px; text-align: center;">Nenhum serviço cadastrado no momento.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
