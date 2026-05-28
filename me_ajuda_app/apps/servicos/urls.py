@@ -9,5 +9,6 @@ router = routers.SimpleRouter()
 router.register('', views.ServicoViewSet, basename='servicos')
 
 urlpatterns = [
-    path('', include(router.urls) )
+    path('', include(router.urls) ),
+    path('lista/', views.servicos_lista, name='servicos_lista'),
 ]
