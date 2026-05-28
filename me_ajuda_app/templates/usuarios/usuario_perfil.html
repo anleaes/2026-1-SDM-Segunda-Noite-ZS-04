@@ -3,9 +3,9 @@
 {% block title %} Meu Perfil {% endblock title %}
 
 {% block body %}
-
-<div class="perfil-container">    
-    <div class="perfil-comum">
+<div class="perfil-container">   
+    <h2 class="perfil-title">Meu Perfil</h2> 
+    <div class="perfil-secao">
         <h3>Dados Pessoais</h3>
         <p><strong>Nome:</strong> {{ usuario.nome }} {{ usuario.sobrenome }}</p>
         <p><strong>CPF:</strong> {{ usuario.cpf }}</p>
@@ -15,7 +15,7 @@
     <hr>
 
     {% if is_cidadao %}
-    <div class="perfil-especifico">
+    <div class="perfil-secao">
         <h3>Endereço e Contato</h3>
         <p><strong>Telefone:</strong> {{ usuario.cidadao.fone }}</p>
         <p><strong>Endereço:</strong> {{ usuario.cidadao.endereco }}</p>
@@ -25,7 +25,7 @@
     {% endif %}
 
     {% if is_funcionario %}
-    <div class="perfil-especifico">
+    <div class="perfil-secao">
         <h3>Dados Profissionais</h3>
         <p><strong>Registro:</strong> {{ usuario.funcionario.registro }}</p>
         <p><strong>Função:</strong> {{ usuario.funcionario.funcao }}</p>
@@ -35,10 +35,9 @@
 
     <hr>
 
-    <div class="acoes-perfil">
+    <div style="margin-top: 20px">
         <a href="{% url 'usuarios:editar_perfil' %}" class="btn-primario">Editar Dados</a>
     </div>
 
 </div>
-
 {% endblock body %}

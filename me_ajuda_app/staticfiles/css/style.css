@@ -110,6 +110,7 @@ li .nav-item:hover {
   opacity: 0.8;
 }
 
+.perfil-container,
 .registro-container {
   margin: 50px auto;
   max-width: 900px;
@@ -120,6 +121,7 @@ li .nav-item:hover {
   box-sizing: border-box;
 }
 
+.perfil-title,
 .form-title {
   text-align: center;
   margin-bottom: 20px;
@@ -202,4 +204,8 @@ li .nav-item:hover {
   border-radius: 5px;
   padding: 5px 10px;
   margin-top: -5px;
+}
+
+.perfil-secao {
+  margin-bottom: 30px;
 }
