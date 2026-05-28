@@ -8,5 +8,6 @@ router = routers.SimpleRouter()
 router.register('', views.OcorrenciaViewSet, basename='ocorrencias')
 
 urlpatterns = [
-    path('', include(router.urls) )
+    path('', include(router.urls) ),
+    path('lista/', views.ocorrencias_lista, name='ocorrencias_lista'),
 ]
