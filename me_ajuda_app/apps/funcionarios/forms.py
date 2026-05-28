@@ -5,4 +5,7 @@ class FuncionarioForm(forms.ModelForm):
 
     class Meta:
         model = Funcionario
-        exclude = ()
+        fields = ['registro', 'funcao', 'ativo', 'secretarias']
+        widgets = {
+            'secretarias': forms.CheckboxSelectMultiple(),
+        }

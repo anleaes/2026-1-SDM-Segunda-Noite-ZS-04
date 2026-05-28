@@ -6,4 +6,4 @@ class CidadaoForm(forms.ModelForm):
 
     class Meta:
         model = Cidadao
-        exclude = ()
+        exclude = ['user']

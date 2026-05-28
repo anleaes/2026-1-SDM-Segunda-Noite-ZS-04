@@ -24,7 +24,7 @@ h2 {
   margin-top: -10px;
 }
 
-p {
+.slogan {
   font-size: 1.2em;
   color: #ffffff7e;
   margin-bottom: 30px;
@@ -55,6 +55,18 @@ li a {
   color: #fff;
   text-decoration: none;
   font-weight: bold;
+}
+
+li .nav-item {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  border-right: 1px solid #fff;
+  padding-right: 10px;
+}
+
+li .nav-item:hover {
+  color: #ddd;
 }
 
 .container {
@@ -96,4 +108,89 @@ li a {
 .btn-primario:hover,
 .btn-secundario:hover {
   opacity: 0.8;
+}
+
+.registro-container {
+  margin: 50px auto;
+  max-width: 900px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #1a325a;
+}
+
+.form-group {
+  display: flex;
+  max-width: 400px;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form-checkbox {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-checkbox label {
+  margin-bottom: 0;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.form-grid input:not([type="checkbox"]),
+.form-grid select {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-grid .coluna:first-child {
+  border-right: 2px solid #e0e0e0;
+  padding-right: 30px;
+}
+
+.erro {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+#erro_senha {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+  text-align: center;
+  display: none;
+}
+
+.login-container {
+  margin: 50px auto;
+  max-width: 400px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.btn-logout {
+  background-color: red;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-top: -5px;
 }

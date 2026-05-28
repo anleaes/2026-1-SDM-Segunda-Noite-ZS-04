@@ -7,12 +7,12 @@
   <div class="home">
     <h1>MeAjuda</h1>
     <h2>Zeladoria Urbana</h2>
-    <p>A plataforma oficial para conectar os cidadãos à prefeitura.</p>
+    <p class="slogan">A plataforma oficial para conectar os cidadãos à prefeitura.</p>
 
     {% if not user.is_authenticated %}
     <div class="acoes">
       <a href="#" class="btn-primario">Fazer Login</a>
-      <a href="#" class="btn-secundario">Cadastre-se</a>
+      <a href="{% url 'usuarios:registrar_usuario' %}" class="btn-secundario">Cadastre-se</a>
     </div>
     {% else %}
     <div class="acoes">
