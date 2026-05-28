@@ -44,7 +44,7 @@ def registrar(request):
         'usuario_form': usuario_form,
     }
     
-    return render(request, 'registrar.html', context)
+    return render(request, 'usuarios/registrar.html', context)
 
 #criação de perfil do usuario
 @login_required(login_url='/usuarios/login/')

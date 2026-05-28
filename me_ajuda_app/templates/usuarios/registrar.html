@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% block body %}
 <div class="registro-container">
     <h2>Cadastrar Nova Conta</h2>
 
-    <form method="POST" action="{% url 'registro' %}" id="formRegistro">
+    <form method="POST" action="{% url 'usuarios:registrar' %}" id="formRegistro">
         {% csrf_token %}
         
         {{ user_form.non_field_errors }}
@@ -54,3 +54,5 @@
 
         <button type="submit" class="btn-primario" id="btn_submit">Cadastrar</button>
     </form>
+
+{% endblock body%}
