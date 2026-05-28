@@ -22,4 +22,4 @@ def servicos_lista(request):
         'is_funcionario': is_funcionario,
     }
     
-    return render(request, 'servicos_lista.html', context)
+    return render(request, 'servicos/servicos_lista.html', context)
