@@ -35,7 +35,7 @@
           </li>
           {% elif is_cidadao %}
           <li>
-            <a href="#">Minhas Ocorrências</a>
+            <a href="{% url 'ocorrencias:ocorrencias_lista' %}">Minhas Ocorrências</a>
           </li>
           {% endif %}
 
