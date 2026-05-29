@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from .models import Ocorrencia
 from rest_framework import viewsets
 from .serializer import OcorrenciaSerializer
@@ -30,11 +30,10 @@ def ocorrencias_lista(request):
     
     return render(request, 'ocorrencia/ocorrencias_lista.html', context)
 
-    def detalhar_ocorrencia(request, id):
-    # Busca a ocorrência pelo ID ou retorna erro 404 se não existir
+def detalhar_ocorrencia(request, id):
     ocorrencia = get_object_or_404(Ocorrencia, id=id)
 
     context = {
         'ocorrencia': ocorrencia,
     }
-    return render(request, 'ocorrencias/ocorrencia_detail.html', context)
+    return render(request, 'ocorrencia/ocorrencia_detail.html', context)
