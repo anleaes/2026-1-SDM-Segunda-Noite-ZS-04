@@ -21,3 +21,24 @@ def equipamentos_lista(request):
     }
     
     return render(request, 'equipamentos/equipamentos_lista.html', context)
+
+
+from django.shortcuts import render, redirect
+from .forms import EquipamentoForm
+
+def equipamento_criar(request):
+
+    if request.method == 'POST':
+        form = EquipamentoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('equipamentos_lista')  
+    else:
+       
+        form = EquipamentoForm()
+
+    context = {
+        'form': form,
+    }
+    
+    return render(request, 'equipamento_form.html', context)
