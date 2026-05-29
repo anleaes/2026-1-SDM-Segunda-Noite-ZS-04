@@ -7,7 +7,7 @@
     <h2>Cadastrar Novo Serviço</h2>
     <p>Preencha as informações necessárias para registrar o serviço no sistema.</p>
 
-    <form method="POST" action="{% url 'servico_criar' %}">
+    <form method="POST" action="{% url 'servicos:servico_criar' %}">
         {% csrf_token %}
 
         {{ form.non_field_errors }}
@@ -24,7 +24,7 @@
 
         <div class="form-acoes">
             <button type="submit" class="btn-salvar">Salvar Serviço</button>
-            <a href="{% url 'servicos_lista' %}" class="btn-cancelar">Cancelar</a>
+            <a href="{% url 'servicos:servicos_lista' %}" class="btn-cancelar">Cancelar</a>
         </div>
     </form>
 </div>
