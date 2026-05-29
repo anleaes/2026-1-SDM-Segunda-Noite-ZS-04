@@ -21,21 +21,25 @@
         </div>
 
         <ul class="nav-links">
-          <li>
-            <a class="nav-item" href="{% url 'secretarias:secretarias_lista' %}">Secretarias</a>
-          </li>
-          <li>
-            <a class="nav-item" href="{% url 'servicos:servicos_lista' %}">Serviços</a>
-          </li>
-
-          {% if user.is_authenticated %} {% if is_funcionario %}
+          {% if user.is_authenticated %}
+          
+          {% if is_funcionario %}
           <li>
             <a class="nav-item" href="#">Painel</a>
           </li>
           <li>
             <a class="nav-item" href="#">Intervenções</a>
           </li>
+          <li>
+            <a class="nav-item" href="{% url 'ocorrencias:ocorrencias_lista' %}">Ocorrências</a>
+          </li>
           {% elif is_cidadao %}
+          <li>
+            <a class="nav-item" href="{% url 'secretarias:secretarias_lista' %}">Secretarias</a>
+          </li>
+          <li>
+            <a class="nav-item" href="{% url 'servicos:servicos_lista' %}">Serviços</a>
+          </li>
           <li>
             <a class="nav-item" href="{% url 'ocorrencias:ocorrencias_lista' %}">Minhas Ocorrências</a>
           </li>
