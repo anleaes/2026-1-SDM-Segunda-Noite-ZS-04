@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %} Cadastrar Novo Equipamento {% endblock title %}
+
+{% block body %}
+<div class="form-equipamento-container">
+    <h2>Cadastrar Novo Equipamento</h2>
+    <p>Insira as especificações e detalhes técnicos do equipamento para registrá-lo no inventário.</p>
+
+    <form method="POST" action="{% url 'equipamentos:equipamento_criar' %}">
+        {% csrf_token %}
+
+        {{ form.non_field_errors }}
+
+        {% for field in form %}
+            <div class="form-group-equipamento">
+                <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                {{ field }}
+                {% if field.errors %}
+                    <span class="erro-equipamento">{{ field.errors|striptags }}</span>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <div class="form-equipamento-acoes">
+            <button type="submit" class="btn-salvar-equipamento">Salvar Equipamento</button>
+            <a href="{% url 'equipamentos:equipamentos_lista' %}" class="btn-cancelar-equipamento">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock body %}
