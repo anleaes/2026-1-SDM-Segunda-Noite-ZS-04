@@ -32,3 +32,13 @@ def ocorrencias_lista(request):
     }
     
     return render(request, 'ocorrencias_lista.html', context)
+
+def listar_ocorrencias(request):
+    # Busca todas as ocorrências no banco de dados. 
+    # Você pode adicionar .order_by('-id') para mostrar as mais recentes primeiro
+    ocorrencias = Ocorrencia.objects.all()
+
+    context = {
+        'ocorrencias': ocorrencias,
+    }
+    return render(request, 'ocorrencias/listar_ocorrencias.html', context)
