@@ -29,3 +29,12 @@ def ocorrencias_lista(request):
     }
     
     return render(request, 'ocorrencia/ocorrencias_lista.html', context)
+
+    def detalhar_ocorrencia(request, id):
+    # Busca a ocorrência pelo ID ou retorna erro 404 se não existir
+    ocorrencia = get_object_or_404(Ocorrencia, id=id)
+
+    context = {
+        'ocorrencia': ocorrencia,
+    }
+    return render(request, 'ocorrencias/ocorrencia_detail.html', context)
