@@ -32,7 +32,7 @@ def equipamento_criar(request):
         form = EquipamentoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('equipamentos_lista')  
+            return redirect('equipamentos:equipamentos_lista')  
     else:
        
         form = EquipamentoForm()
