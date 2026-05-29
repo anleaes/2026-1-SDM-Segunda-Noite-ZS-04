@@ -18,9 +18,9 @@
     <div class="acoes">
       <a href="{% url 'usuarios:usuario_perfil' %}" class="btn-primario">Meu Perfil</a>
       {% if is_funcionario %}
-      <a href="#" class="btn-secundario">Painel do Funcionário</a>
+      <a href="{% url 'ocorrencias:painel_funcionario' %}" class="btn-secundario">Painel do Funcionário</a>
       {% elif is_cidadao %}
-      <a href="#" class="btn-secundario">Minhas Ocorrências</a>
+      <a href="{% url 'ocorrencias:ocorrencias_lista' %}" class="btn-secundario">Minhas Ocorrências</a>
       {% endif %}
     </div>
     {% endif %}
