@@ -7,7 +7,10 @@
     <h2>Lista de Ocorrências</h2>
     
     {% if is_cidadao %}
-        <p>Abaixo estão listadas as suas ocorrências registradas.</p>
+    <div style="margin-bottom: 15px;">
+        <a href="{% url 'ocorrencias:ocorrencia_criar' %}" class="btn-primario">+ Cadastrar Nova Ocorrência</a>
+    </div>
+    <p>Abaixo estão listadas as suas ocorrências registradas.</p>
     {% elif is_funcionario %}
         <p>Abaixo estão listadas todas as ocorrências do sistema para análise.</p>
     {% endif %}

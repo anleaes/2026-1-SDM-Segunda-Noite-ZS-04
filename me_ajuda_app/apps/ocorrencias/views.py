@@ -4,6 +4,7 @@ from .models import Ocorrencia
 from rest_framework import viewsets
 from .serializer import OcorrenciaSerializer
 from django.contrib.auth.decorators import login_required
+from .forms import OcorrenciaForm
 
 # Create your views here.
 class OcorrenciaViewSet(viewsets.ModelViewSet):
@@ -43,6 +44,7 @@ def atualizar_status(request, ocorrencia_id):
                 
     return redirect('ocorrencias:ocorrencias_lista')
 
+@login_required(login_url='/usuarios/login/')
 def detalhar_ocorrencia(request, id):
     ocorrencia = get_object_or_404(Ocorrencia, id=id)
 
@@ -51,7 +53,7 @@ def detalhar_ocorrencia(request, id):
     }
     return render(request, 'ocorrencia/ocorrencia_detail.html', context)
 
-@login_required
+@login_required(login_url='/usuarios/login/')
 def painel_funcionario(request):
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
@@ -73,3 +75,32 @@ def painel_funcionario(request):
     }
     
     return render(request, 'ocorrencia/painel.html', context)
+
+@login_required(login_url='/usuarios/login/')
+def ocorrencia_criar(request):
+
+    usuario = request.user.usuario
+    is_funcionario = hasattr(usuario, 'funcionario')
+    is_cidadao = hasattr(usuario, 'cidadao')
+
+    if request.method == 'POST':
+        form = OcorrenciaForm(request.POST)
+        if form.is_valid():
+            f = form.save(commit=False)
+            f.cidadao = usuario.cidadao
+            f.status = 'ABE'
+            f.save()
+            return redirect('ocorrencias:ocorrencias_lista')  
+    else:
+        form = OcorrenciaForm()
+        servico_id = request.GET.get('servico_id')
+        if servico_id:
+            form.fields['servico'].initial = servico_id
+
+    context = {
+        'form': form,
+        'is_funcionario': is_funcionario,
+        'is_cidadao': is_cidadao,
+    }
+
+    return render(request, 'ocorrencia/ocorrencias_form.html', context)
