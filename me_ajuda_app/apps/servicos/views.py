@@ -29,10 +29,12 @@ def servicos_lista(request):
     if request.user.is_authenticated:
         usuario = request.user.usuario
         is_funcionario = hasattr(usuario, 'funcionario')
+        is_cidadao = hasattr(usuario, 'cidadao')
         is_gestor = hasattr(usuario, 'funcionario') and usuario.funcionario.funcao == 'GES'
 
     context = {
         'servicos': servicos,
+        'is_cidadao': is_cidadao,
         'is_funcionario': is_funcionario,
         'is_gestor': is_gestor,
     }
@@ -41,6 +43,9 @@ def servicos_lista(request):
 
 
 def servico_criar(request):
+
+    usuario = request.user.usuario
+    is_funcionario = hasattr(usuario, 'funcionario')
 
     if request.method == 'POST':
         form = ServicoForm(request.POST)
@@ -52,6 +57,7 @@ def servico_criar(request):
 
     context = {
         'form': form,
+        'is_funcionario': is_funcionario,
     }
 
     return render(request, 'servicos/servicos_form.html', context)
