@@ -8,7 +8,7 @@
 
     {% if is_gestor %}
     <div style="margin-bottom: 15px;">
-        <a href="#" class="btn-primario">+ Cadastrar Novo Serviço</a>
+        <a href="{% url 'servicos:servico_criar' %}" class="btn-primario">+ Cadastrar Novo Serviço</a>
     </div>
     {% endif %}
 

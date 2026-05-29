@@ -46,9 +46,8 @@ def servico_criar(request):
         form = ServicoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('servicos_lista')  
+            return redirect('servicos:servicos_lista')  
     else:
-    
         form = ServicoForm()
 
     context = {
