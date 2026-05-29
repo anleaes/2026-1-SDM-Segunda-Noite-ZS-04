@@ -31,6 +31,9 @@
             <a class="nav-item" href="#">Intervenções</a>
           </li>
           <li>
+            <a class="nav-item" href="{% url 'servicos:servicos_lista' %}">Serviços</a>
+          </li>
+          <li>
             <a class="nav-item" href="{% url 'ocorrencias:ocorrencias_lista' %}">Ocorrências</a>
           </li>
           {% elif is_cidadao %}
