@@ -53,13 +53,18 @@ def atualizar_status(request, ocorrencia_id):
     return redirect('ocorrencias:ocorrencias_lista')
 
 @login_required(login_url='/usuarios/login/')
-def detalhar_ocorrencia(request, id):
+def visualizar_ocorrencia(request, id):
+    usuario = request.user.usuario
+    is_cidadao = hasattr(usuario, 'cidadao')
+    is_funcionario = hasattr(usuario, 'funcionario')
     ocorrencia = get_object_or_404(Ocorrencia, id=id)
 
     context = {
         'ocorrencia': ocorrencia,
+        'is_cidadao': is_cidadao,
+        'is_funcionario': is_funcionario,
     }
-    return render(request, 'ocorrencia/ocorrencia_detail.html', context)
+    return render(request, 'ocorrencia/ocorrencia_details.html', context)
 
 @login_required(login_url='/usuarios/login/')
 def painel_funcionario(request):

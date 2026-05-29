@@ -110,6 +110,7 @@ li .nav-item:hover {
   opacity: 0.8;
 }
 
+.detail-container,
 .perfil-container,
 .registro-container {
   margin: 50px auto;
@@ -389,7 +390,6 @@ li .nav-item:hover {
   min-height: 100px;
 }
 
-/* Alertas de Erro */
 .erro-feedback {
   color: #dc2626;
   font-size: 0.85rem;
@@ -407,7 +407,6 @@ li .nav-item:hover {
   font-size: 0.9rem;
 }
 
-/* Área de Botões */
 .form-servico-acoes {
   display: flex;
   align-items: center;
@@ -488,18 +487,6 @@ li .nav-item:hover {
   background-color: #0056b3;
 }
 
-/* static/css/ocorrencia_detail.css */
-
-.detail-container {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 25px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  border: 1px solid #e0e0e0;
-}
-
 .detail-header {
   border-bottom: 2px solid #0056b3;
   padding-bottom: 12px;
@@ -568,7 +555,7 @@ li .nav-item:hover {
   color: white;
   padding: 10px 20px;
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: 5px;
   text-align: center;
 }
 
