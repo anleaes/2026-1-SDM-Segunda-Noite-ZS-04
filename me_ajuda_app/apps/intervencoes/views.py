@@ -25,7 +25,10 @@ def listar_intervencoes(request):
     return render(request, 'intervencoes/intervencoes_lista.html', context)
 
 @login_required(login_url='/usuarios/login/')
-def nova_intervencao(request):   
+def nova_intervencao(request):  
+    usuario = request.user.usuario
+    is_funcionario = hasattr(usuario, 'funcionario') 
+
     if request.method == 'POST':
         form = IntervencaoForm(request.POST, request.FILES)
         if form.is_valid():
@@ -36,9 +39,9 @@ def nova_intervencao(request):
 
     context = {
         'form': form,
-        'acao': 'Nova',
+        'is_funcionario': is_funcionario,
     }
-    return render(request, 'intervencoes/intervencao_form.html', context)
+    return render(request, 'intervencoes/intervencoes_forms.html', context)
 
 @login_required(login_url='/usuarios/login/')
 def editar_intervencao(request, id):
@@ -56,4 +59,4 @@ def editar_intervencao(request, id):
         'form': form,
         'acao': 'Editar',
     }
-    return render(request, 'intervencoes/intervencao_form.html', context)
+    return render(request, 'intervencoes/intervencoes_forms.html', context)

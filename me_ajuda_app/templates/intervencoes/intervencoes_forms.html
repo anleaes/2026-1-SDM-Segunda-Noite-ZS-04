@@ -1,37 +1,64 @@
 {% extends 'base.html' %}
-{% load static %}
 
-{% block title %} {{ acao }} Intervenção {% endblock title %}
+{% block title %} Nova Intervenção {% endblock title %}
 
-{% block extra_head %}
-<link rel="stylesheet" href="{% static 'css/intervencao_form.css' %}">
-{% endblock extra_head %}
+{% block body %}
+<div class="registro-container">
+    
+    <div style="flex: 2; min-width: 300px; margin-bottom: 30px;">
+        <h2 style="text-align: center;">Nova Intervenção</h2>
 
-{% block content %}
-<div class="form-container">
-    <h2>{{ acao }} Intervenção</h2>
+        <h3 style="margin-top: 0; color: #001f3f;">Detalhes da Intervenção</h3>
+        <p>Preencha os detalhes técnicos da intervenção</p>
 
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        
-        {{ form.non_field_errors }}
+        <form method="POST" action="{% url 'intervencoes:nova_intervencao' %}" enctype="multipart/form-data">
+            {% csrf_token %}
 
-        {% for field in form %}
-            <div class="form-group">
-                <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+            {% for field in form %}
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label>{{ field.label }}:</label>
                 {{ field }}
                 {% if field.errors %}
-                    <span class="erro">{{ field.errors }}</span>
+                <span class="erro">{{ field.errors|striptags }}</span>
                 {% endif %}
             </div>
-        {% endfor %}
+            {% endfor %}
 
-        <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 25px 0;">
+            <div class="form-acoes" style="margin-top: 20px;">
+                <button type="submit" class="btn-primario">Confirmar e Salvar Intervenção</button>
+                <a href="#" class="btn-voltar">Alocar Equipamentos</a>
+            </div>
+        </form>
+    </div>
 
-        <div class="botoes-grupo">
-            <button type="submit" class="btn-registrar">Salvar Dados</button>
-            <a href="{% url 'intervencoes_lista' %}" class="btn-voltar">Cancelar</a>
+    <hr>
+
+    <div class="resumo-lateral">
+        <div>
+            <h3 style="margin-top: 0; color: #001f3f;">Equipamentos Utilizados</h3>
+            
+            {% if alocacao %}
+            <ul class="resumo-lista">
+                {% for id, item in cart.items %}
+                <li style="margin-bottom: 10px; font-size: 14px;">
+                    <strong>{{ item.nome }}</strong> <br>
+                    {{ item.horas_usado }}h x R$ {{ item.preco|floatformat:2 }} = 
+                    <span style="color: #28a745; font-weight: bold;">R$ {{ item.custo_total|floatformat:2 }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+            
+            <hr class="resumo-divisor margin-vertical">
+            
+            <div style="font-size: 16px;">
+                <strong>Total Equipamentos:</strong> 
+                <span class="resumo-total-valor">R$ {{ total_equipamentos|floatformat:2 }}</span>
+            </div>
+            {% else %}
+            <p style="font-size: 14px; color: #666;"">Nenhum equipamento foi adicionado a esta intervenção.</p>
+            {% endif %}
         </div>
-    </form>
+    </div>
+
 </div>
-{% endblock content %}
+{% endblock body %}

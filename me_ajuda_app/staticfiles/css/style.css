@@ -559,6 +559,10 @@ li .nav-item:hover {
   text-align: center;
 }
 
+.btn-voltar:hover {
+  background-color: #5a6268;
+}
+
 .btn-editar {
   background-color: #0056b3;
   color: white;
@@ -631,4 +635,40 @@ li .nav-item:hover {
   color: #336bd3;
   text-decoration: none;
   font-size: 14px;
+}
+
+.resumo-lateral {
+  flex: 1;
+  min-width: 250px;
+  margin-top: 20px;
+}
+
+.resumo-card {
+  background-color: #f8f9fa;
+  border: 1px solid #e0e6ed;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.resumo-divisor {
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin-bottom: 15px;
+}
+
+.resumo-divisor.margin-vertical {
+  margin: 15px 0;
+}
+
+.resumo-lista {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.resumo-total-valor {
+  color: #d9534f;
+  font-size: 18px;
+  float: right;
+  font-weight: bold;
 }
