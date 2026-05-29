@@ -41,4 +41,4 @@ def equipamento_criar(request):
         'form': form,
     }
     
-    return render(request, 'equipamento_form.html', context)
+    return render(request, 'equipamentos/equipamento_form.html', context)
