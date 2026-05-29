@@ -11,17 +11,14 @@ class OcorrenciaViewSet(viewsets.ModelViewSet):
 
 @login_required(login_url='/usuarios/login/')
 def ocorrencias_lista(request):
-    # Identifica o tipo de usuário logado
-    is_cidadao = hasattr(request.user, 'cidadao')
-    is_funcionario = hasattr(request.user, 'funcionario')
+    usuario = request.user.usuario
+    is_cidadao = hasattr(usuario, 'cidadao')
+    is_funcionario = hasattr(usuario, 'funcionario')
     
     if is_funcionario:
-        # Funcionários visualizam todas as ocorrências do sistema
-        ocorrencias = Ocorrencia.objects.all().order_by('-data_criacao') # ou o campo de data do seu modelo
+        ocorrencias = Ocorrencia.objects.all().order_by('criado_em')
     elif is_cidadao:
-        # Cidadãos visualizam apenas as ocorrências criadas por eles mesmos
-        # (Ajuste 'usuario' ou 'cidadao' dependendo de como está a ForeignKey no seu modelo Ocorrencia)
-        ocorrencias = Ocorrencia.objects.filter(usuario=request.user.usuario).order_by('-data_criacao')
+        ocorrencias = Ocorrencia.objects.filter(cidadao=usuario.cidadao).order_by('criado_em')
     else:
         ocorrencias = Ocorrencia.objects.none()
 
@@ -31,14 +28,4 @@ def ocorrencias_lista(request):
         'is_cidadao': is_cidadao,
     }
     
-    return render(request, 'ocorrencias_lista.html', context)
-
-def listar_ocorrencias(request):
-    # Busca todas as ocorrências no banco de dados. 
-    # Você pode adicionar .order_by('-id') para mostrar as mais recentes primeiro
-    ocorrencias = Ocorrencia.objects.all()
-
-    context = {
-        'ocorrencias': ocorrencias,
-    }
-    return render(request, 'ocorrencias/listar_ocorrencias.html', context)
+    return render(request, 'ocorrencia/ocorrencias_lista.html', context)
