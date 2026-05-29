@@ -1,52 +1,46 @@
 {% extends 'base.html' %}
-{% load static %}
 
 {% block title %} Detalhes da Ocorrência {% endblock title %}
 
-{% block extra_head %}
-<link rel="stylesheet" href="{% static 'css/ocorrencia_detail.css' %}">
-{% endblock extra_head %}
-
-{% block content %}
+{% block body %}
 <div class="detail-container">
-    
-    <div class="detail-header">
-        <h2>Ocorrência #{{ ocorrencia.id }}</h2>
-        {% if ocorrencia.status %}
-            <span class="status-badge">{{ ocorrencia.status }}</span>
+    <h2 class="perfil-title">Ocorrência #{{ ocorrencia.id }}</h2>
+
+    <div class="perfil-secao">
+        <h3>Informações Gerais</h3>
+        <p><strong>Título:</strong> {{ ocorrencia.titulo }}</p>
+        <p><strong>Serviço:</strong> {{ ocorrencia.servico.nome }}</p>
+        <p><strong>Status:</strong> {{ ocorrencia.get_status_display }}</p>
+        <p><strong>Protocolo:</strong> {{ ocorrencia.protocolo.protocolo_numero }}</p>
+    </div>
+
+    <hr>
+
+    <div class="perfil-secao">
+        <h3>Descrição do Problema</h3>
+        <p>{{ ocorrencia.descricao }}</p>
+        <p><strong>Local:</strong> {{ ocorrencia.endereco }}, {{ ocorrencia.numero }} {% if ocorrencia.complemento %}- {{ ocorrencia.complemento }}{% endif %}</p>
+        {% if ocorrencia.foto %}
+            <p><strong>Foto:</strong></p>
+            <img src="{{ ocorrencia.foto.url }}" alt="Foto da Ocorrência" style="max-width: 100%; border-radius: 8px;">
         {% endif %}
     </div>
 
-    <div class="detail-section">
-        <div class="detail-group">
-            <span class="detail-label">Título / Assunto:</span>
-            <span class="detail-value">{{ ocorrencia.titulo }}</span>
-        </div>
+    <hr>
 
-        <div class="detail-group">
-            <span class="detail-label">Descrição detalhada:</span>
-            <span class="detail-value detail-value-text">{{ ocorrencia.descricao }}</span>
-        </div>
-
-        {% if ocorrencia.localizacao %}
-        <div class="detail-group">
-            <span class="detail-label">Localização:</span>
-            <span class="detail-value">{{ ocorrencia.localizacao }}</span>
-        </div>
-        {% endif %}
-
-        {% if ocorrencia.data_criacao %}
-        <div class="detail-group">
-            <span class="detail-label">Data de Registro:</span>
-            <span class="detail-value">{{ ocorrencia.data_criacao|date:"d/m/Y H:i" }}</span>
-        </div>
+    <div class="perfil-secao">
+        <h3>Datas</h3>
+        <p><strong>Criada em:</strong> {{ ocorrencia.criado_em|date:"d/m/Y H:i" }}</p>
+        {% if ocorrencia.fechado_em %}
+            <p><strong>Fechada em:</strong> {{ ocorrencia.fechado_em|date:"d/m/Y H:i" }}</p>
         {% endif %}
     </div>
 
-    <div class="acoes-detail">
-        <a href="{% url 'listar_ocorrencias' %}" class="btn-voltar">Voltar para Lista</a>
-        <a href="{% url 'editar_ocorrencia' ocorrencia.id %}" class="btn-editar">Editar Ocorrência</a>
+    <hr>
+
+    <div style="margin-top: 20px;">
+        <a href="{% url 'ocorrencias:ocorrencias_lista' %}" class="btn-voltar">Voltar para Lista</a>
     </div>
 
 </div>
-{% endblock content %}
+{% endblock body %}

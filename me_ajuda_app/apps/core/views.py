@@ -8,11 +8,16 @@ def home(request):
 
     if request.user.is_authenticated:
         try:
-            user = request.user.usuario
-            context["is_cidadao"] = hasattr(user, "cidadao")
-            context["is_funcionario"] = hasattr(user, "funcionario")
+            usuario = request.user.usuario
+            is_cidadao = hasattr(usuario, "cidadao")
+            is_funcionario = hasattr(usuario, "funcionario")
         except Exception:
-            context["is_cidadao"] = False
-            context["is_funcionario"] = False
+            is_funcionario = False
+            is_cidadao = False
+
+    context = {
+        'is_cidadao': is_cidadao,
+        'is_funcionario': is_funcionario,
+    }
 
     return render(request, template_name, context)

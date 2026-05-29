@@ -25,10 +25,10 @@
           
           {% if is_funcionario %}
           <li>
-            <a class="nav-item" href="#">Painel</a>
+            <a class="nav-item" href="{% url 'ocorrencias:painel_funcionario' %}">Painel</a>
           </li>
           <li>
-            <a class="nav-item" href="#">Intervenções</a>
+            <a class="nav-item" href="{% url 'intervencoes:intervencoes_lista' %}">Intervenções</a>
           </li>
           <li>
             <a class="nav-item" href="{% url 'servicos:servicos_lista' %}">Serviços</a>

@@ -1,8 +1,12 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
+from django.utils import timezone
+from intervencoes.models import Intervencao
+from protocolos.views import protocolo_criar
 from .models import Ocorrencia
 from rest_framework import viewsets
 from .serializer import OcorrenciaSerializer
 from django.contrib.auth.decorators import login_required
+from .forms import OcorrenciaForm
 
 # Create your views here.
 class OcorrenciaViewSet(viewsets.ModelViewSet):
@@ -16,9 +20,10 @@ def ocorrencias_lista(request):
     is_funcionario = hasattr(usuario, 'funcionario')
     
     if is_funcionario:
-        ocorrencias = Ocorrencia.objects.all().order_by('criado_em')
+        secretarias = usuario.funcionario.secretarias.all()
+        ocorrencias = Ocorrencia.objects.filter(servico__secretaria__in=secretarias).order_by('-criado_em')
     elif is_cidadao:
-        ocorrencias = Ocorrencia.objects.filter(cidadao=usuario.cidadao).order_by('criado_em')
+        ocorrencias = Ocorrencia.objects.filter(cidadao=usuario.cidadao).order_by('-criado_em')
     else:
         ocorrencias = Ocorrencia.objects.none()
 
@@ -30,10 +35,86 @@ def ocorrencias_lista(request):
     
     return render(request, 'ocorrencia/ocorrencias_lista.html', context)
 
-def detalhar_ocorrencia(request, id):
+def atualizar_status(request, ocorrencia_id):
+    usuario = request.user.usuario
+    
+    if request.method == 'POST' and hasattr(usuario, 'funcionario'):
+        ocorrencia = get_object_or_404(Ocorrencia, id=ocorrencia_id)
+        novo_status = request.POST.get('status')
+
+        if novo_status == 'FEC':
+            ocorrencia.fechado_em = timezone.now()
+        else:            
+            ocorrencia.fechado_em = None
+        
+        ocorrencia.status = novo_status
+        ocorrencia.save()
+                
+    return redirect('ocorrencias:ocorrencias_lista')
+
+@login_required(login_url='/usuarios/login/')
+def visualizar_ocorrencia(request, id):
+    usuario = request.user.usuario
+    is_cidadao = hasattr(usuario, 'cidadao')
+    is_funcionario = hasattr(usuario, 'funcionario')
     ocorrencia = get_object_or_404(Ocorrencia, id=id)
 
     context = {
         'ocorrencia': ocorrencia,
+        'is_cidadao': is_cidadao,
+        'is_funcionario': is_funcionario,
     }
-    return render(request, 'ocorrencia/ocorrencia_detail.html', context)
+    return render(request, 'ocorrencia/ocorrencia_details.html', context)
+
+@login_required(login_url='/usuarios/login/')
+def painel_funcionario(request):
+    usuario = request.user.usuario
+    is_funcionario = hasattr(usuario, 'funcionario')
+    abertas_count = Ocorrencia.objects.filter(status='ABE').count()
+    andamento_count = Ocorrencia.objects.filter(status='AND').count()
+    fechadas_count = Ocorrencia.objects.filter(status='FEC').count()
+    
+    intervencoes_count = Intervencao.objects.filter(funcionario__user=request.user).count()
+    
+    recentes = Ocorrencia.objects.select_related('servico').order_by('-criado_em')[:5]
+
+    context = {
+        'abertas': abertas_count,
+        'em_andamento': andamento_count,
+        'fechadas': fechadas_count,
+        'intervencoes': intervencoes_count,
+        'recentes': recentes,
+        'is_funcionario': is_funcionario,
+    }
+    
+    return render(request, 'ocorrencia/painel.html', context)
+
+@login_required(login_url='/usuarios/login/')
+def ocorrencia_criar(request):
+
+    usuario = request.user.usuario
+    is_funcionario = hasattr(usuario, 'funcionario')
+    is_cidadao = hasattr(usuario, 'cidadao')
+
+    if request.method == 'POST':
+        form = OcorrenciaForm(request.POST)
+        if form.is_valid():
+            f = form.save(commit=False)
+            f.cidadao = usuario.cidadao
+            f.status = 'ABE'
+            f.save()
+            protocolo_criar(f)
+            return redirect('ocorrencias:ocorrencias_lista')  
+    else:
+        form = OcorrenciaForm()
+        servico_id = request.GET.get('servico_id')
+        if servico_id:
+            form.fields['servico'].initial = servico_id
+
+    context = {
+        'form': form,
+        'is_funcionario': is_funcionario,
+        'is_cidadao': is_cidadao,
+    }
+
+    return render(request, 'ocorrencia/ocorrencias_form.html', context)

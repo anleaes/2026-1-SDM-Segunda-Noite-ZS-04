@@ -10,10 +10,17 @@ class SecretariaViewSet(viewsets.ModelViewSet):
 
 def secretaria_lista(request):
 
+    if request.user.is_authenticated:
+        usuario = request.user.usuario
+        is_funcionario = hasattr(usuario, 'funcionario')
+        is_cidadao = hasattr(usuario, 'cidadao')
+
     secretarias = Secretaria.objects.all().order_by('nome')
     
     context = {
         'secretarias': secretarias,
+        'is_cidadao': is_cidadao,
+        'is_funcionario': is_funcionario,
     }
     
     return render(request, 'secretaria/secretarias_lista.html', context)

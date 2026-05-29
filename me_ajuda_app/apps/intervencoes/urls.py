@@ -8,5 +8,6 @@ router = routers.SimpleRouter()
 router.register('', views.IntervencaoViewSet, basename='intervencoes')
 
 urlpatterns = [
-    path('', include(router.urls) )
+    path('api/', include(router.urls) ),
+    path('lista/', views.listar_intervencoes, name='intervencoes_lista'),
 ]
