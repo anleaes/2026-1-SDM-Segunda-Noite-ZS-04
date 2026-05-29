@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %} Meu Perfil {% endblock title %}
+
+{% block body %}
+<div class="perfil-container">   
+    <h2 class="perfil-title">Meu Perfil</h2> 
+    <div class="perfil-secao">
+        <h3>Dados Pessoais</h3>
+        <p><strong>Nome:</strong> {{ usuario.nome }} {{ usuario.sobrenome }}</p>
+        <p><strong>CPF:</strong> {{ usuario.cpf }}</p>
+        <p><strong>E-mail:</strong> {{ usuario.email }}</p>
+    </div>
+
+    <hr>
+
+    {% if is_cidadao %}
+    <div class="perfil-secao">
+        <h3>Endereço e Contato</h3>
+        <p><strong>Telefone:</strong> {{ usuario.cidadao.fone }}</p>
+        <p><strong>Endereço:</strong> {{ usuario.cidadao.endereco }}</p>
+        <p><strong>Bairro:</strong> {{ usuario.cidadao.bairro }}</p>
+        <p><strong>CEP:</strong> {{ usuario.cidadao.cep }}</p>
+    </div>
+    {% endif %}
+
+    {% if is_funcionario %}
+    <div class="perfil-secao">
+        <h3>Dados Profissionais</h3>
+        <p><strong>Registro:</strong> {{ usuario.funcionario.registro }}</p>
+        <p><strong>Função:</strong> {{ usuario.funcionario.funcao }}</p>
+        <p><strong>Situação:</strong> {% if usuario.funcionario.ativo %}Ativo{% else %}Inativo{% endif %}</p>
+    </div>
+    {% endif %}
+
+    <hr>
+
+    <div style="margin-top: 20px">
+        <a href="{% url 'usuarios:editar_perfil' %}" class="btn-primario">Editar Dados</a>
+    </div>
+
+</div>
+{% endblock body %}

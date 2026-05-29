@@ -10,4 +10,5 @@ router.register('', views.OcorrenciaViewSet, basename='ocorrencias')
 urlpatterns = [
     path('api/', include(router.urls)),
     path('ocorrencia/criar', ocorrencia_form, name='ocorrencia_novo'),
+    path('lista/', views.ocorrencias_lista, name='ocorrencias_lista'),
 ]

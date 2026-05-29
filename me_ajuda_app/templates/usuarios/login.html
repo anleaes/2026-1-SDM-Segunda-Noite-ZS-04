@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body %}
+<div class="login-container">
+  <h2 class="form-title">Login</h2>
+
+  {% if messages %}
+      <div class="erros-bloco">
+          {% for message in messages %}
+              <span style="color: red; font-weight: bold;">{{ message }}</span>
+          {% endfor %}
+      </div>
+  {% endif %}
+
+  <form method="POST" action="{% url 'usuarios:login_usuario' %}" id="formLogin">
+    {% csrf_token %}
+
+    <div class="form-group" style="margin-bottom: 20px">
+      <label>CPF:</label>
+      <input type="text" name="cpf" id="cpf" max_length="11" required placeholder="Digite seu CPF"/>
+    </div>
+
+    <div class="form-group" style="margin-bottom: 20px">
+      <label>Senha:</label>
+      <input type="password" name="senha" id="senha" required placeholder="Digite sua senha"/>
+    </div>
+
+    <button type="submit" class="btn-primario" style="width: 100%">Entrar</button>
+  </form>
+
+  <div style="text-align: center; margin-top: 20px">
+    <p style="color: #666; font-size: 0.9em">
+      Não possui uma conta?
+      <a href="{% url 'usuarios:registrar_usuario' %}" style="color: #336bd3; font-weight: bold" >Cadastre-se aqui</a>.
+    </p>
+  </div>
+</div>
+{% endblock body %}
