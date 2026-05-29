@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ acao }} Intervenção {% endblock title %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/intervencao_form.css' %}">
+{% endblock extra_head %}
+
+{% block content %}
+<div class="form-container">
+    <h2>{{ acao }} Intervenção</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        {{ form.non_field_errors }}
+
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                {{ field }}
+                {% if field.errors %}
+                    <span class="erro">{{ field.errors }}</span>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 25px 0;">
+
+        <div class="botoes-grupo">
+            <button type="submit" class="btn-registrar">Salvar Dados</button>
+            <a href="{% url 'intervencoes_lista' %}" class="btn-voltar">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock content %}
