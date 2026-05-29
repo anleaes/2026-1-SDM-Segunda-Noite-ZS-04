@@ -8,5 +8,6 @@ router = routers.SimpleRouter()
 router.register('', views.OcorrenciaViewSet, basename='ocorrencias')
 
 urlpatterns = [
-    path('', include(router.urls) )
+    path('api/', include(router.urls)),
+    path('ocorrencia/criar', ocorrencia_form, name='ocorrencia_novo'),
 ]
