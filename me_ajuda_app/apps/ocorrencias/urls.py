@@ -12,4 +12,5 @@ urlpatterns = [
     path('painel/', views.painel_funcionario, name='painel_funcionario'),
    # path('ocorrencia/criar', ocorrencia_form, name='ocorrencia_novo'),
     path('lista/', views.ocorrencias_lista, name='ocorrencias_lista'),
+    path('atualizar-status/<int:ocorrencia_id>/', views.atualizar_status, name='atualizar_status'),
 ]

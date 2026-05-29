@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from intervencoes.models import Intervencao
 from .models import Ocorrencia
 from rest_framework import viewsets
@@ -30,6 +30,18 @@ def ocorrencias_lista(request):
     }
     
     return render(request, 'ocorrencia/ocorrencias_lista.html', context)
+
+def atualizar_status(request, ocorrencia_id):
+    usuario = request.user.usuario
+    
+    if request.method == 'POST' and hasattr(usuario, 'funcionario'):
+        ocorrencia = get_object_or_404(Ocorrencia, id=ocorrencia_id)
+        novo_status = request.POST.get('status')
+        
+        ocorrencia.status = novo_status
+        ocorrencia.save()
+                
+    return redirect('ocorrencias:ocorrencias_lista')
 
 def detalhar_ocorrencia(request, id):
     ocorrencia = get_object_or_404(Ocorrencia, id=id)
