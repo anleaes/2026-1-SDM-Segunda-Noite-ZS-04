@@ -34,7 +34,7 @@
                 <td style="padding: 10px;">{{ servico.descricao|default:"Sem descrição disponível." }}</td>
                 <td style="padding: 10px;">{{ servico.secretaria }}</td>
                 <td style="padding: 10px; text-align: center;">
-                    <a href="#" class="btn-lista">Solicitar</a>
+                    <a href="{% url 'ocorrencias:ocorrencia_criar' %}?servico_id={{ servico.id }}" class="btn-lista">Solicitar</a>
                 </td>
             </tr>
             {% empty %}

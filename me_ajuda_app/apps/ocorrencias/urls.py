@@ -10,7 +10,7 @@ router.register('', views.OcorrenciaViewSet, basename='ocorrencias')
 urlpatterns = [
     path('api/', include(router.urls)),
     path('painel/', views.painel_funcionario, name='painel_funcionario'),
-   # path('ocorrencia/criar', ocorrencia_form, name='ocorrencia_novo'),
+    path('criar/', views.ocorrencia_criar, name='ocorrencia_criar'),
     path('lista/', views.ocorrencias_lista, name='ocorrencias_lista'),
     path('atualizar-status/<int:ocorrencia_id>/', views.atualizar_status, name='atualizar_status'),
 ]

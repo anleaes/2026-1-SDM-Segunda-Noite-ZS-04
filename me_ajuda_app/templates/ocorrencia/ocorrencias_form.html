@@ -1,21 +1,29 @@
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    
-    <div>
-        <label for="{{ form.titulo.id_for_label }}">Título:</label>
-        {{ form.titulo }}
-        {% if form.titulo.errors %}
-            <div style="color: red;">{{ form.titulo.errors }}</div>
-        {% endif %}
-    </div>
+{% extends 'base.html' %}
 
-    <div>
-        <label for="{{ form.descricao.id_for_label }}">Descrição:</label>
-        {{ form.descricao }}
-        {% if form.descricao.errors %}
-            <div style="color: red;">{{ form.descricao.errors }}</div>
-        {% endif %}
-    </div>
+{% block title %} Cadastrar Nova Ocorrência {% endblock title %}
 
-    <button type="submit">Salvar</button>
-</form>
+{% block body %}
+<div class="registro-container">
+    <h2 style="text-align: center;">Cadastrar Nova Ocorrência</h2>
+    <p>Preencha as informações necessárias para registrar a ocorrência no sistema.</p>
+
+    <form method="POST" action="{% url 'ocorrencias:ocorrencia_criar' %}">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div class="form-group">
+                <label>{{ field.label }}:</label>
+                {{ field }}
+                {% if field.errors %}
+                    <span class="erro">{{ field.errors|striptags }}</span>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <div class="form-acoes">
+            <button type="submit" class="btn-primario">Salvar Ocorrência</button>
+            <a href="{% url 'ocorrencias:ocorrencias_lista' %}" class="btn-secundario">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock body %}
