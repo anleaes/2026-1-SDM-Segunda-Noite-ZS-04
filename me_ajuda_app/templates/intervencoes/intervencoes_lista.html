@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Lista de Intervenções {% endblock title %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/intervencoes_lista.css' %}">
+{% endblock extra_head %}
+
+{% block content %}
+<div class="lista-container">
+    
+    <div class="lista-header">
+        <h2>Painel de Intervenções</h2>
+        <a href="#" class="btn-nova">+ Registrar Intervenção</a>
+    </div>
+
+    <div class="grid-intervencoes">
+        {% for intervencao in intervencoes %}
+            <div class="intervencao-card">
+                <div class="card-info">
+                    <h4>Intervenção #{{ intervencao.id }}</h4>
+                    <p><strong>Descrição:</strong> {{ intervencao.descricao|truncatewords:20 }}</p>
+                    
+                    <div class="card-meta">
+                        {% if intervencao.data_inicio %}
+                            <span><strong>Início:</strong> {{ intervencao.data_inicio|date:"d/m/Y" }}</span>
+                        {% endif %}
+                        {% if intervencao.responsavel %}
+                            <span style="margin-left: 15px;"><strong>Responsável:</strong> {{ intervencao.responsavel }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="card-acoes">
+                    <a href="#" class="btn-detalhes">Visualizar</a>
+                </div>
+            </div>
+        {% empty %}
+            <div class="sem-registro">
+                <p>Nenhuma intervenção registrada no sistema até o momento.</p>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock content %}
