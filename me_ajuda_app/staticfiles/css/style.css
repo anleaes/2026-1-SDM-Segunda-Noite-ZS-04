@@ -323,123 +323,125 @@ li .nav-item:hover {
 
 /* Container do Formulário */
 .form-servico-container {
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 30px;
-    background-color: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  font-family: Arial, sans-serif;
 }
 
 .form-servico-container h2 {
-    color: #2c3e50;
-    margin-bottom: 10px;
-    font-size: 1.6rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  font-size: 1.6rem;
 }
 
 .form-servico-container p {
-    color: #7f8c8d;
-    margin-bottom: 25px;
-    font-size: 0.95rem;
+  color: #7f8c8d;
+  margin-bottom: 25px;
+  font-size: 0.95rem;
 }
 
 /* Grupos de Campos (Labels e Inputs) */
 .form-group-servico {
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-group-servico label {
-    margin-bottom: 8px;
-    color: #475569;
-    font-weight: 600;
-    font-size: 0.9rem;
+  margin-bottom: 8px;
+  color: #475569;
+  font-weight: 600;
+  font-size: 0.9rem;
 }
 
 /* Estilização dos campos gerados pelo Django */
 .form-group-servico input[type="text"],
 .form-group-servico textarea,
 .form-group-servico select {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #cbd5e1;
-    border-radius: 4px;
-    font-size: 0.95rem;
-    color: #334155;
-    background-color: #fff;
-    box-sizing: border-box;
-    transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  color: #334155;
+  background-color: #fff;
+  box-sizing: border-box;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 .form-group-servico input:focus,
 .form-group-servico textarea:focus,
 .form-group-servico select:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-    outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  outline: none;
 }
 
 .form-group-servico textarea {
-    resize: vertical;
-    min-height: 100px;
+  resize: vertical;
+  min-height: 100px;
 }
 
 /* Alertas de Erro */
 .erro-feedback {
-    color: #dc2626;
-    font-size: 0.85rem;
-    margin-top: 5px;
-    display: block;
+  color: #dc2626;
+  font-size: 0.85rem;
+  margin-top: 5px;
+  display: block;
 }
 
 .erros-gerais {
-    background-color: #fef2f2;
-    border: 1px solid #fca5a5;
-    color: #991b1b;
-    padding: 12px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-    font-size: 0.9rem;
+  background-color: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: #991b1b;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
 }
 
 /* Área de Botões */
 .form-servico-acoes {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-top: 25px;
-    border-top: 1px solid #e2e8f0;
-    padding-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 25px;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 20px;
 }
 
 .btn-salvar-servico {
-    background-color: #2563eb;
-    color: #ffffff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s;
+  background-color: #2563eb;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 .btn-salvar-servico:hover {
-    background-color: #1d4ed8;
+  background-color: #1d4ed8;
 }
 
 .btn-cancelar-servico {
-    color: #64748b;
-    text-decoration: none;
-    font-size: 0.95rem;
-    transition: color 0.2s;
+  color: #64748b;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s;
 }
 
 .btn-cancelar-servico:hover {
-    color: #334155;
+  color: #334155;
 }
 
 .form-busca {
@@ -463,6 +465,7 @@ li .nav-item:hover {
   margin-top: 20px;
 }
 
+.painel-container,
 .ocorrencias-container,
 .servicos-container {
   padding: 20px;
@@ -488,92 +491,157 @@ li .nav-item:hover {
 /* static/css/ocorrencia_detail.css */
 
 .detail-container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 25px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e0e0e0;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e0e0e0;
 }
 
 .detail-header {
-    border-bottom: 2px solid #0056b3;
-    padding-bottom: 12px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  border-bottom: 2px solid #0056b3;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .detail-header h2 {
-    margin: 0;
-    color: #333;
+  margin: 0;
+  color: #333;
 }
 
 .status-badge {
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 0.9em;
-    font-weight: bold;
-    background-color: #e2e3e5;
-    color: #383d41;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.9em;
+  font-weight: bold;
+  background-color: #e2e3e5;
+  color: #383d41;
 }
 
 .detail-section {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .detail-group {
-    margin-bottom: 15px;
-    line-height: 1.6;
+  margin-bottom: 15px;
+  line-height: 1.6;
 }
 
 .detail-label {
-    display: block;
-    font-weight: bold;
-    color: #495057;
-    font-size: 0.9em;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  display: block;
+  font-weight: bold;
+  color: #495057;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .detail-value {
-    color: #212529;
-    font-size: 1.1em;
-    display: block;
-    background: #f8f9fa;
-    padding: 10px;
-    border-radius: 4px;
-    border-left: 3px solid #0056b3;
+  color: #212529;
+  font-size: 1.1em;
+  display: block;
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+  border-left: 3px solid #0056b3;
 }
 
 .detail-value-text {
-    white-space: pre-wrap; /* Mantém as quebras de linha do texto longo */
+  white-space: pre-wrap; /* Mantém as quebras de linha do texto longo */
 }
 
 .acoes-detail {
-    margin-top: 30px;
-    padding-top: 15px;
-    border-top: 1px solid #e0e0e0;
-    display: flex;
-    gap: 12px;
+  margin-top: 30px;
+  padding-top: 15px;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  gap: 12px;
 }
 
 .btn-voltar {
-    background-color: #6c757d;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 4px;
-    text-align: center;
+  background-color: #6c757d;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 4px;
+  text-align: center;
 }
 
 .btn-editar {
-    background-color: #0056b3;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 4px;
-    text-align: center;
+  background-color: #0056b3;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.titulo-painel {
+  font-size: 24px;
+  color: #001f3f;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e0e6ed;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  color: #5c6c7c;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.card-numero {
+  font-size: 32px;
+  font-weight: bold;
+  color: #001f3f;
+}
+
+.secao-tabela {
+  background: #fff;
+  border: 1px solid #e0e6ed;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.header-tabela {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header-tabela h3 {
+  margin: 0;
+  color: #001f3f;
+  font-size: 18px;
+}
+
+.header-tabela a {
+  color: #336bd3;
+  text-decoration: none;
+  font-size: 14px;
 }
