@@ -1,47 +1,47 @@
 {% extends 'base.html' %}
-{% load static %}
 
 {% block title %} Lista de Intervenções {% endblock title %}
 
-{% block extra_head %}
-<link rel="stylesheet" href="{% static 'css/intervencoes_lista.css' %}">
-{% endblock extra_head %}
-
-{% block content %}
-<div class="lista-container">
+{% block body %} 
+<div class="ocorrencias-container" style="padding: 20px;">
+    <h2 style="text-align: center;">Lista de Intervenções</h2>
     
-    <div class="lista-header">
-        <h2>Painel de Intervenções</h2>
-        <a href="#" class="btn-nova">+ Registrar Intervenção</a>
-    </div>
+    {% if is_gestor %}
+    <p>Abaixo estão listadas as intervenções realizadas pelos funcionários.</p>
+    {% else %}
+    <p>Abaixo estão listadas as suas intervenções realizadas.</p>
+    {% endif %}
 
-    <div class="grid-intervencoes">
-        {% for intervencao in intervencoes %}
-            <div class="intervencao-card">
-                <div class="card-info">
-                    <h4>Intervenção #{{ intervencao.id }}</h4>
-                    <p><strong>Descrição:</strong> {{ intervencao.descricao|truncatewords:20 }}</p>
-                    
-                    <div class="card-meta">
-                        {% if intervencao.data_inicio %}
-                            <span><strong>Início:</strong> {{ intervencao.data_inicio|date:"d/m/Y" }}</span>
-                        {% endif %}
-                        {% if intervencao.responsavel %}
-                            <span style="margin-left: 15px;"><strong>Responsável:</strong> {{ intervencao.responsavel }}</span>
-                        {% endif %}
-                    </div>
-                </div>
-
-                <div class="card-acoes">
-                    <a href="#" class="btn-detalhes">Visualizar</a>
-                </div>
-            </div>
-        {% empty %}
-            <div class="sem-registro">
-                <p>Nenhuma intervenção registrada no sistema até o momento.</p>
-            </div>
-        {% endfor %}
-    </div>
-
+    <table class="tabela-ocorrencias" border="1">
+        <thead>
+            <tr style="background-color: #f2f2f2; text-align: left;">
+                <th style="padding: 10px;">Data</th>
+                <th style="padding: 10px;">Título da Intervenção</th>
+                <th style="padding: 10px;">Ocorrência</th>
+                <th style="padding: 10px;">Responsável</th>
+                <th style="padding: 10px;">Custo (Mão de Obra)</th>
+                <th style="padding: 10px;">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for intervencao in intervencoes %}
+            <tr>
+                <td style="padding: 10px;">{{ intervencao.data_exec|date:"d/m/Y" }}</td>
+                <td style="padding: 10px;"><strong>{{ intervencao.titulo }}</strong></td>
+                <td style="padding: 10px;">#{{ intervencao.ocorrencia.id }} - {{ intervencao.ocorrencia.titulo }}</td>
+                <td style="padding: 10px;">{{ intervencao.funcionario.nome }} {{ intervencao.funcionario.sobrenome }}</td>
+                <td style="padding: 10px;">R$ {{ intervencao.custo_trab }}</td>
+                <td style="padding: 10px; text-align: center;">
+                    <a href="#" class="btn-lista">Visualizar</a>
+                    <a href="#" class="btn-lista">Editar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" style="padding: 20px; text-align: center;">Nenhuma intervenção encontrada no momento.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
-{% endblock content %}
+{% endblock body %}
