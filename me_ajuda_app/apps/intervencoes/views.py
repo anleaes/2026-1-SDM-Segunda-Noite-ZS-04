@@ -60,3 +60,19 @@ def editar_intervencao(request, id):
         'acao': 'Editar',
     }
     return render(request, 'intervencoes/intervencoes_forms.html', context)
+
+@login_required
+def alocacao_equipamentos(request):
+    cart = request.session.get('cart_equipamentos', {})
+    total = 0.0
+    usuario = request.user.usuario
+    is_funcionario = hasattr(usuario, 'funcionario')
+    for id, item in cart.items():
+        total += float(item['custo_total'])
+    context = {
+        'cart': cart,
+        'total': total,
+        'is_funcionario': is_funcionario,
+    }
+
+    return render(request, 'intervencoes/intervencoes_alocacao.html', context)
