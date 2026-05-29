@@ -3,6 +3,7 @@ from .models import Secretaria
 from rest_framework import viewsets
 from .serializer import SecretariaSerializer
 from .forms import SecretariaForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 class SecretariaViewSet(viewsets.ModelViewSet):
@@ -10,6 +11,8 @@ class SecretariaViewSet(viewsets.ModelViewSet):
     serializer_class = SecretariaSerializer  
 
 def secretaria_lista(request):
+    is_funcionario = False
+    is_cidadao = False
 
     if request.user.is_authenticated:
         usuario = request.user.usuario
@@ -26,6 +29,7 @@ def secretaria_lista(request):
     
     return render(request, 'secretaria/secretarias_lista.html', context)
 
+@login_required(login_url='/usuarios/login/')
 def secretaria_criar(request):
     
     if request.method == 'POST':
