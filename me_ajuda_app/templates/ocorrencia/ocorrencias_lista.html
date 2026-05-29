@@ -28,7 +28,7 @@
         <tbody>
             {% for ocorrencia in ocorrencias %}
             <tr>
-                <td style="padding: 10px;">#{{ ocorrencia.id }}</td>
+                <td style="padding: 10px;">#{{ ocorrencia.protocolo.protocolo_numero }}</td>
                 <td style="padding: 10px;">{{ ocorrencia.titulo }}</td>
                 <td style="padding: 10px;">{{ ocorrencia.criado_em|date:"d/m/Y H:i" }}</td>
                 <td style="padding: 10px;">
