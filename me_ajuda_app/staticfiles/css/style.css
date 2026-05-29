@@ -778,3 +778,114 @@ li .nav-item:hover {
 .btn-cancelar-equipamento:hover {
     color: #334155;
 }
+
+/* Container do Formulário de Secretaria */
+.form-secretaria-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    font-family: Arial, sans-serif;
+}
+
+.form-secretaria-container h2 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 1.6rem;
+}
+
+.form-secretaria-container p {
+    color: #7f8c8d;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+}
+
+/* Divs de agrupamento de cada campo */
+.form-group-secretaria {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group-secretaria label {
+    margin-bottom: 8px;
+    color: #475569;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Inputs, Textareas e Elementos de Seleção */
+.form-group-secretaria input,
+.form-group-secretaria textarea,
+.form-group-secretaria select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    color: #334155;
+    background-color: #fff;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group-secretaria input:focus,
+.form-group-secretaria textarea:focus,
+.form-group-secretaria select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    outline: none;
+}
+
+.form-group-secretaria textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Mensagens de Erro de Validação */
+.erro-secretaria {
+    color: #dc2626;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    display: block;
+}
+
+/* Área de Ações e Botões do Rodapé */
+.form-secretaria-acoes {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 25px;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 20px;
+}
+
+.btn-salvar-secretaria {
+    background-color: #2563eb;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-salvar-secretaria:hover {
+    background-color: #1d4ed8;
+}
+
+.btn-cancelar-secretaria {
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.btn-cancelar-secretaria:hover {
+    color: #334155;
+}
