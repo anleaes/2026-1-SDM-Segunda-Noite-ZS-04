@@ -24,3 +24,20 @@ def secretaria_lista(request):
     }
     
     return render(request, 'secretaria/secretarias_lista.html', context)
+
+def secretaria_criar(request):
+    # Se o formulário foi enviado (POST)
+    if request.method == 'POST':
+        form = SecretariaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('secretarias_lista')  # Redireciona para a listagem de secretarias pública
+    else:
+        # Se for apenas o acesso inicial à página (GET)
+        form = SecretariaForm()
+
+    context = {
+        'form': form,
+    }
+    
+    return render(request, 'secretaria_form.html', context)
