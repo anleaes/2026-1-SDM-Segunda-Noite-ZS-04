@@ -29,19 +29,18 @@ def servicos_lista(request):
 
 
 def servico_criar(request):
-    # Verifica se a requisição é um envio de dados (POST)
+
     if request.method == 'POST':
         form = ServicoForm(request.POST)
         if form.is_valid():
             form.save()
-            # Redireciona de volta para a lista de serviços após salvar
-            return redirect('ocorrencias:servicos_lista')
+            return redirect('servicos_lista')  
     else:
-        # Se for um acesso normal (GET), entrega o formulário vazio
+    
         form = ServicoForm()
 
     context = {
         'form': form,
     }
-    
+
     return render(request, 'servicos_form.html', context)
