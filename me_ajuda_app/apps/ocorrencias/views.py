@@ -53,6 +53,8 @@ def detalhar_ocorrencia(request, id):
 
 @login_required
 def painel_funcionario(request):
+    usuario = request.user.usuario
+    is_funcionario = hasattr(usuario, 'funcionario')
     abertas_count = Ocorrencia.objects.filter(status='ABE').count()
     andamento_count = Ocorrencia.objects.filter(status='AND').count()
     fechadas_count = Ocorrencia.objects.filter(status='FEC').count()
@@ -67,6 +69,7 @@ def painel_funcionario(request):
         'fechadas': fechadas_count,
         'intervencoes': intervencoes_count,
         'recentes': recentes,
+        'is_funcionario': is_funcionario,
     }
     
     return render(request, 'ocorrencia/painel.html', context)
