@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect, render
 from .models import Intervencao
 from rest_framework import viewsets
 from .serializer import IntervencaoSerializer
@@ -9,9 +9,7 @@ class IntervencaoViewSet(viewsets.ModelViewSet):
     queryset = Intervencao.objects.all()
     serializer_class = IntervencaoSerializer  
 
-    def listar_intervencoes(request):
-    # Busca todas as intervenções do banco de dados
-    # Ordenado pelas mais recentes (ajuste o campo de data se necessário)
+def listar_intervencoes(request):
     intervencoes = Intervencao.objects.all().order_by('-id')
 
     context = {
@@ -24,7 +22,7 @@ def nova_intervencao(request):
         form = IntervencaoForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('intervencoes_lista') # Redireciona de volta para a lista
+            return redirect('intervencoes:intervencoes_lista')
     else:
         form = IntervencaoForm()
 
@@ -34,7 +32,6 @@ def nova_intervencao(request):
     }
     return render(request, 'intervencoes/intervencao_form.html', context)
 
-
 def editar_intervencao(request, id):
     intervencao = get_object_or_404(Intervencao, id=id)
 
@@ -42,7 +39,7 @@ def editar_intervencao(request, id):
         form = IntervencaoForm(request.POST, request.FILES, instance=intervencao)
         if form.is_valid():
             form.save()
-            return redirect('intervencoes_lista')
+            return redirect('intervencoes:intervencoes_lista')
     else:
         form = IntervencaoForm(instance=intervencao)
 
