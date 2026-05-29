@@ -3,6 +3,7 @@ from .models import Servico
 from rest_framework import viewsets
 from .serializer import ServicoSerializer
 from .forms import ServicoForm
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -41,7 +42,7 @@ def servicos_lista(request):
     
     return render(request, 'servicos/servicos_lista.html', context)
 
-
+@login_required(login_url='/usuarios/login/')
 def servico_criar(request):
 
     usuario = request.user.usuario
