@@ -5,6 +5,8 @@ from django.shortcuts import render
 def home(request):
     template_name = 'core/home.html'
     context = {}
+    is_funcionario = False
+    is_cidadao = False
 
     if request.user.is_authenticated:
         try:
