@@ -1,0 +1,21 @@
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <div>
+        <label for="{{ form.titulo.id_for_label }}">Título:</label>
+        {{ form.titulo }}
+        {% if form.titulo.errors %}
+            <div style="color: red;">{{ form.titulo.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div>
+        <label for="{{ form.descricao.id_for_label }}">Descrição:</label>
+        {{ form.descricao }}
+        {% if form.descricao.errors %}
+            <div style="color: red;">{{ form.descricao.errors }}</div>
+        {% endif %}
+    </div>
+
+    <button type="submit">Salvar</button>
+</form>
