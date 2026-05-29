@@ -11,4 +11,5 @@ router.register('', views.ServicoViewSet, basename='servicos')
 urlpatterns = [
     path('api/', include(router.urls) ),
     path('lista/', views.servicos_lista, name='servicos_lista'),
+    path('novo/', views.servico_criar, name='servico_criar'),
 ]
