@@ -10,5 +10,5 @@ router.register('', views.SecretariaViewSet, basename='secretarias')
 urlpatterns = [
     path('Api/', include(router.urls) ),
     path('secretarias/', views.secretaria_lista, name='secretarias_lista'),
-    path('secretarias/nova/', views.secretaria_criar, name='secretaria_criar'),
+    path('nova/', views.secretaria_criar, name='secretaria_criar'),
 ]
