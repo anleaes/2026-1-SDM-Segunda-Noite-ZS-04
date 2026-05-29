@@ -29,12 +29,27 @@
                 <td style="padding: 10px;">{{ ocorrencia.titulo }}</td>
                 <td style="padding: 10px;">{{ ocorrencia.criado_em|date:"d/m/Y H:i" }}</td>
                 <td style="padding: 10px;">
-                    <span {{ ocorrencia.status }}">
-                        {{ ocorrencia.get_status_display }}
-                    </span>
+                {% if is_funcionario %}
+                <form method="POST" action="{% url 'ocorrencias:atualizar_status' ocorrencia.id %}" style="display: flex; gap: 5px; align-items: center;">
+                    {% csrf_token %}
+                    <select name="status" style="padding: 5px; border-radius: 4px; border: 1px solid #ccc; font-size: 13px;">
+                        <option value="ABE" {% if ocorrencia.status == 'ABE' %}selected{% endif %}>Aberta</option>
+                        <option value="AND" {% if ocorrencia.status == 'AND' %}selected{% endif %}>Em andamento</option>
+                        <option value="FEC" {% if ocorrencia.status == 'FEC' %}selected{% endif %}>Fechada</option>
+                    </select>
+                    <button type="submit" class="btn-primario"> OK </button>
+                </form>
+                {% else %}
+                <span {{ ocorrencia.status }}">
+                    {{ ocorrencia.get_status_display }}
+                </span>
+                {% endif %}
                 </td>
                 <td style="padding: 10px;">
                     <a href="#" class="btn-lista">Visualizar</a>
+                    {% if is_funcionario %}
+                    <a href="#" class="btn-lista">Nova Intervenção</a>
+                    {% endif %}
                 </td>
             </tr>
             {% empty %}
