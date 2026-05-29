@@ -11,4 +11,5 @@ urlpatterns = [
     path('api/', include(router.urls) ),
     path('lista/', views.listar_intervencoes, name='intervencoes_lista'),
     path('nova/', views.nova_intervencao, name='nova_intervencao'),
+    path('alocacao/', views.alocacao_equipamentos, name='alocacao_equipamentos'),
 ]

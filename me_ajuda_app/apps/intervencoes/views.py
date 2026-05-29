@@ -1,5 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
+
+from me_ajuda_app.apps.equipamentos.models import Equipamento
 from .models import Intervencao
 from rest_framework import viewsets
 from .serializer import IntervencaoSerializer
@@ -76,3 +78,27 @@ def alocacao_equipamentos(request):
     }
 
     return render(request, 'intervencoes/intervencoes_alocacao.html', context)
+
+@login_required
+def add_equipamento(request, equipamento_id):
+    equipamento = get_object_or_404(Equipamento, id=equipamento_id)
+    cart = request.session.get('cart_equipamentos', {})
+    eid = str(equipamento.id)
+    
+    if eid in cart:
+        cart[eid]['horas_usado'] += 1
+    else:
+        cart[eid] = {
+            'nome': equipamento.nome,
+            'preco': float(equipamento.preco),
+            'horas_usado': 1,
+            'custo_total': float(equipamento.preco),
+        }
+        
+    horas = cart[eid]['horas_usado']
+    preco = float(cart[eid]['preco'])
+    cart[eid]['custo_total'] = preco * horas
+    
+    request.session['cart_equipamentos'] = cart
+    request.session.modified = True
+    return redirect('intervencoes:alocacao_equipamentos')
