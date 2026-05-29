@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Detalhes da Ocorrência {% endblock title %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/ocorrencia_detail.css' %}">
+{% endblock extra_head %}
+
+{% block content %}
+<div class="detail-container">
+    
+    <div class="detail-header">
+        <h2>Ocorrência #{{ ocorrencia.id }}</h2>
+        {% if ocorrencia.status %}
+            <span class="status-badge">{{ ocorrencia.status }}</span>
+        {% endif %}
+    </div>
+
+    <div class="detail-section">
+        <div class="detail-group">
+            <span class="detail-label">Título / Assunto:</span>
+            <span class="detail-value">{{ ocorrencia.titulo }}</span>
+        </div>
+
+        <div class="detail-group">
+            <span class="detail-label">Descrição detalhada:</span>
+            <span class="detail-value detail-value-text">{{ ocorrencia.descricao }}</span>
+        </div>
+
+        {% if ocorrencia.localizacao %}
+        <div class="detail-group">
+            <span class="detail-label">Localização:</span>
+            <span class="detail-value">{{ ocorrencia.localizacao }}</span>
+        </div>
+        {% endif %}
+
+        {% if ocorrencia.data_criacao %}
+        <div class="detail-group">
+            <span class="detail-label">Data de Registro:</span>
+            <span class="detail-value">{{ ocorrencia.data_criacao|date:"d/m/Y H:i" }}</span>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="acoes-detail">
+        <a href="{% url 'listar_ocorrencias' %}" class="btn-voltar">Voltar para Lista</a>
+        <a href="{% url 'editar_ocorrencia' ocorrencia.id %}" class="btn-editar">Editar Ocorrência</a>
+    </div>
+
+</div>
+{% endblock content %}
