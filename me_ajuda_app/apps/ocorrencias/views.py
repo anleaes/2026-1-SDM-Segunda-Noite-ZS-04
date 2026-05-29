@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils import timezone
 from intervencoes.models import Intervencao
 from protocolos.views import protocolo_criar
 from .models import Ocorrencia
@@ -19,9 +20,10 @@ def ocorrencias_lista(request):
     is_funcionario = hasattr(usuario, 'funcionario')
     
     if is_funcionario:
-        ocorrencias = Ocorrencia.objects.all().order_by('-criado_em')
+        secretarias = usuario.funcionario.secretarias.all()
+        ocorrencias = Ocorrencia.objects.filter(servico__secretaria__in=secretarias).order_by('-criado_em')
     elif is_cidadao:
-        ocorrencias = Ocorrencia.objects.filter(cidadao=usuario.cidadao).order_by('criado_em')
+        ocorrencias = Ocorrencia.objects.filter(cidadao=usuario.cidadao).order_by('-criado_em')
     else:
         ocorrencias = Ocorrencia.objects.none()
 
@@ -39,6 +41,11 @@ def atualizar_status(request, ocorrencia_id):
     if request.method == 'POST' and hasattr(usuario, 'funcionario'):
         ocorrencia = get_object_or_404(Ocorrencia, id=ocorrencia_id)
         novo_status = request.POST.get('status')
+
+        if novo_status == 'FEC':
+            ocorrencia.fechado_em = timezone.now()
+        else:            
+            ocorrencia.fechado_em = None
         
         ocorrencia.status = novo_status
         ocorrencia.save()
