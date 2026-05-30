@@ -30,6 +30,11 @@ def listar_intervencoes(request):
 def nova_intervencao(request, ocorrencia_id=None):  
     cart = request.session.get('cart_equipamentos', {}) 
 
+    if ocorrencia_id:
+        request.session['ocorrencia_atual'] = ocorrencia_id
+    else:
+        ocorrencia_id = request.session.get('ocorrencia_atual')
+
     total_equipamentos = 0.0
     for equipamento_id, item in cart.items():
         total_equipamentos += float(item.get('custo_total', 0))
