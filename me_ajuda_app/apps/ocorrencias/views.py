@@ -118,3 +118,14 @@ def ocorrencia_criar(request):
     }
 
     return render(request, 'ocorrencia/ocorrencias_form.html', context)
+
+@login_required(login_url='/usuarios/login/')
+def ocorrencia_deletar(request, id):
+   
+    ocorrencia = get_object_or_404(Ocorrencia, id=id)
+    
+ 
+    if request.method == 'POST':
+        ocorrencia.delete()
+        
+    return redirect('ocorrencias:ocorrencias_lista')
