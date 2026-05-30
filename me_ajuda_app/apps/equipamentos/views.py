@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import Equipamento
 from rest_framework import viewsets
 from .serializer import EquipamentoSerializer
 from django.contrib.auth.decorators import login_required
+from .forms import EquipamentoForm
 
 # Create your views here.
 class EquipamentoViewSet(viewsets.ModelViewSet):
@@ -13,7 +14,7 @@ class EquipamentoViewSet(viewsets.ModelViewSet):
 def equipamentos_lista(request):
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
-    equipamentos = Equipamento.objects.filter(disponivel=True).order_by('-id')
+    equipamentos = Equipamento.objects.all().order_by('nome')
 
     context = {
         'equipamentos': equipamentos,
@@ -21,10 +22,6 @@ def equipamentos_lista(request):
     }
     
     return render(request, 'equipamentos/equipamentos_lista.html', context)
-
-
-from django.shortcuts import render, redirect
-from .forms import EquipamentoForm
 
 def equipamento_criar(request):
 
