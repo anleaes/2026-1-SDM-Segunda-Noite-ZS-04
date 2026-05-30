@@ -51,7 +51,7 @@
                 <td style="padding: 10px;">
                     <a href="{% url 'ocorrencias:visualizar_ocorrencia' ocorrencia.id %}" class="btn-lista">Visualizar</a>
                     {% if is_funcionario %}
-                    <a href="{% url 'intervencoes:nova_intervencao' %}" class="btn-lista">Nova Intervenção</a>
+                    <a href="{% url 'intervencoes:nova_intervencao' ocorrencia.id %}" class="btn-lista">Nova Intervenção</a>
                     {% endif %}
                 </td>
             </tr>

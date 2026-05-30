@@ -4,32 +4,46 @@
 
 {% block body %} 
 <div class="ocorrencias-container" style="padding: 20px;">
+    
+    <div style="text-align: right; margin-bottom: 20px; display: flex; gap: 10px; justify-content: flex-end;">
+        <a href="{% url 'intervencoes:alocacao_equipamentos' %}" class="btn-primario">
+            Ver Alocação de Equipamentos
+        </a>
+        <a href="{% url 'equipamentos:equipamento_criar' %}" class="btn-primario">
+            Criar Equipamento
+        </a>
+    </div>
+
     <h2 style="text-align: center;">Lista de Equipamentos</h2>
     
     <p>Selecione os equipamentos que serão utilizados na intervenção.</p>
 
-    <table class="tabela-ocorrencias" border="1">
+    <table class="tabela-ocorrencias" border="1" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
         <thead>
             <tr style="background-color: #f2f2f2; text-align: left;">
+                <th style="padding: 10px;">ID</th>
                 <th style="padding: 10px;">Nome</th>
                 <th style="padding: 10px;">Descrição</th>
                 <th style="padding: 10px;">Preço/Hora</th>
-                <th style="padding: 10px;">Ação</th>
+                <th style="padding: 10px; text-align: center;">Ação</th>
             </tr>
         </thead>
         <tbody>
             {% for equipamento in equipamentos %}
             <tr>
-                <td style="padding: 10px;">{{ equipamento.nome }}</td>
+                <td style="padding: 10px;">{{ equipamento.id }}</td>
+                <td style="padding: 10px;"><strong>{{ equipamento.nome }}</strong></td>
                 <td style="padding: 10px;">{{ equipamento.descricao }}</td>
-                <td style="padding: 10px;">R$ {{ equipamento.preco }}</td>
+                <td style="padding: 10px;">R$ {{ equipamento.preco|floatformat:2 }}</td>
                 <td style="padding: 10px; text-align: center;">
-                    <a href="#" class="btn-lista">Adicionar</a>
+                    <a href="{% url 'intervencoes:add_equipamento' equipamento.id %}" class="btn-lista" style="background-color: #007bff; color: white; padding: 5px 10px; text-decoration: none; border-radius: 4px;">
+                        Adicionar
+                    </a>
                 </td>
             </tr>
             {% empty %}
             <tr>
-                <td colspan="6" style="padding: 20px; text-align: center;">Nenhum equipamento encontrado no momento.</td>
+                <td colspan="5" style="padding: 20px; text-align: center;">Nenhum equipamento encontrado no momento.</td>
             </tr>
             {% endfor %}
         </tbody>

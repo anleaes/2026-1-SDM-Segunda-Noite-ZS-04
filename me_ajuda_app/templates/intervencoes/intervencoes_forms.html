@@ -11,7 +11,7 @@
         <h3 style="margin-top: 0; color: #001f3f;">Detalhes da Intervenção</h3>
         <p>Preencha os detalhes técnicos da intervenção</p>
 
-        <form method="POST" action="{% url 'intervencoes:nova_intervencao' %}" enctype="multipart/form-data">
+        <form method="POST" action="{% url 'intervencoes:nova_intervencao' ocorrencia_id %}" enctype="multipart/form-data">
             {% csrf_token %}
 
             {% for field in form %}
@@ -26,7 +26,7 @@
 
             <div class="form-acoes" style="margin-top: 20px;">
                 <button type="submit" class="btn-primario">Confirmar e Salvar Intervenção</button>
-                <a href="#" class="btn-voltar">Alocar Equipamentos</a>
+                <a href="{% url 'intervencoes:alocacao_equipamentos' %}" class="btn-voltar">Alocar Equipamentos</a>
             </div>
         </form>
     </div>
@@ -34,12 +34,11 @@
     <hr>
 
     <div class="resumo-lateral">
-        <div>
-            <h3 style="margin-top: 0; color: #001f3f;">Equipamentos Utilizados</h3>
-            
-            {% if alocacao %}
-            <ul class="resumo-lista">
-                {% for id, item in cart.items %}
+    <div>
+        <h3 >Equipamentos Utilizados</h3>        
+        {% if cart %}
+            <ul class="resumo-lista" style="list-style-type: none; padding: 0; margin: 0;">
+                {% for equipamento_id, item in cart.items %}
                 <li style="margin-bottom: 10px; font-size: 14px;">
                     <strong>{{ item.nome }}</strong> <br>
                     {{ item.horas_usado }}h x R$ {{ item.preco|floatformat:2 }} = 
@@ -48,17 +47,25 @@
                 {% endfor %}
             </ul>
             
-            <hr class="resumo-divisor margin-vertical">
+            <hr class="resumo-divisor margin-vertical" style="border: 0; border-top: 1px solid #ddd; margin: 15px 0;">
             
             <div style="font-size: 16px;">
                 <strong>Total Equipamentos:</strong> 
-                <span class="resumo-total-valor">R$ {{ total_equipamentos|floatformat:2 }}</span>
+                <span class="resumo-total-valor" style="color: #d9534f; font-size: 18px; float: right; font-weight: bold;">
+                    R$ {{ total_equipamentos|floatformat:2 }}
+                </span>
             </div>
-            {% else %}
-            <p style="font-size: 14px; color: #666;"">Nenhum equipamento foi adicionado a esta intervenção.</p>
-            {% endif %}
+        {% else %}
+            <p style="font-size: 14px; color: #666;">Nenhum equipamento foi adicionado a esta intervenção.</p>
+        {% endif %}
+
+        <div style="margin-top: 20px; text-align: center;">
+            <a href="{% url 'equipamentos:equipamentos_lista' %}" class="btn-voltar">
+                + Editar Equipamentos
+            </a>
         </div>
     </div>
+</div>
 
 </div>
 {% endblock body %}

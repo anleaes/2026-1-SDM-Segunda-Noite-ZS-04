@@ -1,3 +1,50 @@
 {% extends 'base.html' %}
 
-{% block title %} Alocação de Equipamentos {% endblock title %}
+{% block body %}
+<br />
+<br />
+<br />
+<br />
+<b>Alocação de Equipamentos</b>
+<br />
+<br />
+{% if cart %}
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID Equipamento</th>
+            <th>Nome</th>
+            <th>Preço/Hora</th>
+            <th>Horas de Uso</th>
+            <th>Subtotal</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for equipamento_id, item in cart.items %}
+        <tr>
+            <td>{{ equipamento_id }}</td>
+            <td>{{ item.nome }}</td>
+            <td>{{ item.preco }}</td>
+            <td>
+                <form method="post" action="{% url 'intervencoes:edit_equipamento' equipamento_id %}">
+                    {% csrf_token %}
+                    <input type="number" name="horas_usado" value="{{ item.horas_usado }}" min="1">
+                    <button type="submit">Atualizar</button>
+                </form>
+            </td>
+            <td>{{ item.custo_total }}</td>
+            <td>
+                <a href="{% url 'intervencoes:delete_equipamento' equipamento_id %}">Remover</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<h3>Total: {{ total }}</h3>>
+{% else %}
+<p>Carrinho vazio. Nenhum equipamento alocado.</p>
+{% endif %}
+<a href="{% url 'equipamentos:equipamentos_lista' %}">Voltar para Seleção de Equipamentos</a>
+<a href="{% url 'intervencoes:nova_intervencao' ocorrencia_id %}">Prosseguir para Intervenção</a>
+{% endblock body %}
