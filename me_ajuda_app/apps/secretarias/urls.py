@@ -8,7 +8,7 @@ router = routers.SimpleRouter()
 router.register('', views.SecretariaViewSet, basename='secretarias')
 
 urlpatterns = [
-    path('Api/', include(router.urls) ),
+    path('api/', include(router.urls) ),
     path('secretarias/', views.secretaria_lista, name='secretarias_lista'),
     path('nova/', views.secretaria_criar, name='secretaria_criar'),
 ]
