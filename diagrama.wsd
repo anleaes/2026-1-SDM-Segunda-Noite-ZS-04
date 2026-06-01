@@ -24,7 +24,7 @@ class Funcionario {
     -registro: Char
     -funcao: CharChoices (TEC, GES, ANA)
     -ativo: Boolean
-    -secretaria: ManyToMany[Secretaria]
+    -secretarias: ManyToMany[Secretaria]
     +toString()
 }
 
