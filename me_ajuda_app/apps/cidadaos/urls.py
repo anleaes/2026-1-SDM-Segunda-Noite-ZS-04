@@ -8,5 +8,5 @@ router = routers.SimpleRouter()
 router.register('', views.CidadaoViewSet, basename='cidadaos')
 
 urlpatterns = [
-    path('', include(router.urls) )
+    path('api/', include(router.urls) )
 ]

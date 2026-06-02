@@ -8,5 +8,5 @@ router = routers.SimpleRouter()
 router.register('', views.FuncionarioViewSet, basename='funcionarios')
 
 urlpatterns = [
-    path('', include(router.urls) )
+    path('api/', include(router.urls) )
 ]
