@@ -8,5 +8,8 @@ router = routers.SimpleRouter()
 router.register('', views.FuncionarioViewSet, basename='funcionarios')
 
 urlpatterns = [
-    path('api/', include(router.urls) )
+    path('api/', include(router.urls) ),
+    # path('listar/', views.lista_funcioanarios, name='lista_funcioanarios'),
+    # path('editar/<int:funcionario_id>/', views.editar_funcionario, name='editar_funcionario'),
+    # path('excluir/<int:funcionario_id>/', views.excluir_funcionario, name='excluir_funcionario'),
 ]
