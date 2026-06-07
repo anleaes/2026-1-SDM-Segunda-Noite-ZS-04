@@ -9,6 +9,8 @@ router.register('', views.SecretariaViewSet, basename='secretarias')
 
 urlpatterns = [
     path('api/', include(router.urls) ),
-    path('secretarias/', views.secretaria_lista, name='secretarias_lista'),
-    path('nova/', views.secretaria_criar, name='secretaria_criar'),
+    path('listar/', views.secretaria_lista, name='secretarias_lista'),
+    path('criar/', views.secretaria_criar, name='secretaria_criar'),
+    # path('editar/<int:secretaria_id>/', views.editar_secretaria, name='editar_secretaria'),
+    # path('excluir/<int:secretaria_id>/', views.excluir_secretaria, name='excluir_secretaria'),
 ]

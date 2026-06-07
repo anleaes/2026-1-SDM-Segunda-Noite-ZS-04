@@ -33,7 +33,7 @@ def ocorrencias_lista(request):
         'is_cidadao': is_cidadao,
     }
     
-    return render(request, 'ocorrencia/ocorrencias_lista.html', context)
+    return render(request, 'ocorrencias/lista_ocorrencias.html', context)
 
 def atualizar_status(request, ocorrencia_id):
     usuario = request.user.usuario
@@ -64,7 +64,7 @@ def visualizar_ocorrencia(request, id):
         'is_cidadao': is_cidadao,
         'is_funcionario': is_funcionario,
     }
-    return render(request, 'ocorrencia/ocorrencia_details.html', context)
+    return render(request, 'ocorrencias/ver_ocorrencia.html', context)
 
 @login_required(login_url='/usuarios/login/')
 def painel_funcionario(request):
@@ -87,7 +87,7 @@ def painel_funcionario(request):
         'is_funcionario': is_funcionario,
     }
     
-    return render(request, 'ocorrencia/painel.html', context)
+    return render(request, 'ocorrencias/painel_ocorrencias.html', context)
 
 @login_required(login_url='/usuarios/login/')
 def ocorrencia_criar(request):
@@ -117,7 +117,7 @@ def ocorrencia_criar(request):
         'is_cidadao': is_cidadao,
     }
 
-    return render(request, 'ocorrencia/ocorrencias_form.html', context)
+    return render(request, 'ocorrencias/criar_ocorrencia.html', context)
 
 @login_required(login_url='/usuarios/login/')
 def ocorrencia_deletar(request, id):

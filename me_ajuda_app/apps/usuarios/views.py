@@ -93,7 +93,7 @@ def login_usuario(request):
         else:
             messages.error(request, 'CPF ou senha incorretos.')
 
-    return render(request, 'usuarios/login.html')
+    return render(request, 'usuarios/login_usuario.html')
 
 @login_required(login_url='/usuarios/login/')
 def logout_usuario(request):
@@ -114,7 +114,7 @@ def usuario_perfil(request):
         'is_funcionario': hasattr(usuario, 'funcionario'),
         'usuario': usuario,
     }
-    return render(request, 'usuarios/usuario_perfil.html', context)
+    return render(request, 'usuarios/ver_usuario.html', context)
 
 @login_required(login_url='/usuarios/login/')
 def editar_perfil(request):
@@ -160,4 +160,4 @@ def editar_perfil(request):
         'is_funcionario': is_funcionario,
     }
     
-    return render(request, 'usuarios/editar_perfil.html', context)
+    return render(request, 'usuarios/editar_usuario.html', context)

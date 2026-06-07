@@ -24,7 +24,7 @@ def listar_intervencoes(request):
         'is_funcionario': is_funcionario,
         'is_gestor': is_gestor,
     }
-    return render(request, 'intervencoes/intervencoes_lista.html', context)
+    return render(request, 'intervencoes/lista_intervencoes.html', context)
 
 @login_required(login_url='/usuarios/login/')
 def nova_intervencao(request, ocorrencia_id=None):  
@@ -71,7 +71,7 @@ def nova_intervencao(request, ocorrencia_id=None):
         'ocorrencia_id': ocorrencia_id,
     }
     
-    return render(request, 'intervencoes/intervencoes_forms.html', context)
+    return render(request, 'intervencoes/criar_intervencao.html', context)
 
 @login_required(login_url='/usuarios/login/')
 def editar_intervencao(request, id):
@@ -89,7 +89,7 @@ def editar_intervencao(request, id):
         'form': form,
         'acao': 'Editar',
     }
-    return render(request, 'intervencoes/intervencoes_forms.html', context)
+    return render(request, 'intervencoes/criar_intervencao.html', context)
 
 @login_required(login_url='/usuarios/login/')
 def alocacao_equipamentos(request):
@@ -105,7 +105,7 @@ def alocacao_equipamentos(request):
         'is_funcionario': is_funcionario,
     }
 
-    return render(request, 'intervencoes/intervencoes_alocacao.html', context)
+    return render(request, 'intervencoes/alocacao_intervencao.html', context)
 
 @login_required(login_url='/usuarios/login/')
 def add_equipamento(request, equipamento_id):
