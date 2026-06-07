@@ -1,5 +1,6 @@
 from datetime import timedelta
 from django.shortcuts import render
+from django_filters.rest_framework import DjangoFilterBackend
 from .models import Protocolo
 from rest_framework import viewsets
 from .serializer import ProtocoloSerializer
@@ -7,6 +8,8 @@ from .serializer import ProtocoloSerializer
 class ProtocoloViewSet(viewsets.ModelViewSet):
     queryset = Protocolo.objects.all()
     serializer_class = ProtocoloSerializer 
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['ocorrencia']
 
 def protocolo_criar(ocorrencia):
     if hasattr(ocorrencia, 'protocolo'):

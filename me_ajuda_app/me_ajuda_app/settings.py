@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'intervencaoequipamentos.apps.IntervencaoequipamentosConfig',
     'corsheaders',
     'core.apps.CoreConfig',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
