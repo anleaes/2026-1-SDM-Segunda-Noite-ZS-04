@@ -13,7 +13,7 @@ class IntervencaoViewSet(viewsets.ModelViewSet):
     serializer_class = IntervencaoSerializer  
 
 @login_required(login_url='/usuarios/login/')
-def listar_intervencoes(request):
+def lista_intervencoes(request):
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
     is_gestor = usuario.funcionario.funcao == 'GES'
@@ -40,8 +40,10 @@ def lista_equipamentos_intervencao(request):
     return render(request, 'intervencoes/lista_equipamentos_intervencao.html', context)
 
 @login_required(login_url='/usuarios/login/')
-def nova_intervencao(request, ocorrencia_id=None):  
+def criar_intervencao(request, ocorrencia_id=None):  
     cart = request.session.get('cart_equipamentos', {}) 
+    usuario = request.user.usuario
+    is_funcionario = hasattr(usuario, 'funcionario')
 
     if ocorrencia_id:
         request.session['ocorrencia_atual'] = ocorrencia_id
@@ -81,6 +83,7 @@ def nova_intervencao(request, ocorrencia_id=None):
         'form': form,
         'cart': cart,
         'total_equipamentos': total_equipamentos,
+        'is_funcionario': is_funcionario,
         'ocorrencia_id': ocorrencia_id,
     }
     
@@ -88,6 +91,8 @@ def nova_intervencao(request, ocorrencia_id=None):
 
 @login_required(login_url='/usuarios/login/')
 def editar_intervencao(request, id):
+    usuario = request.user.usuario
+    is_funcionario = hasattr(usuario, 'funcionario')
     intervencao = get_object_or_404(Intervencao, id=id)
 
     if request.method == 'POST':
@@ -101,6 +106,7 @@ def editar_intervencao(request, id):
     context = {
         'form': form,
         'acao': 'Editar',
+        'is_funcionario': is_funcionario,
     }
     return render(request, 'intervencoes/criar_intervencao.html', context)
 
@@ -110,6 +116,7 @@ def alocacao_equipamentos(request):
     total = 0.0
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
+    
     for equipamento_id, item in cart.items():
         total += float(item['custo_total'])
     context = {
@@ -121,7 +128,7 @@ def alocacao_equipamentos(request):
     return render(request, 'intervencoes/alocacao_intervencao.html', context)
 
 @login_required(login_url='/usuarios/login/')
-def add_equipamento(request, equipamento_id):
+def adicionar_alocacao(request, equipamento_id):
     equipamento = get_object_or_404(Equipamento, id=equipamento_id)
     cart = request.session.get('cart_equipamentos', {})
     eid = str(equipamento.id)
@@ -145,7 +152,7 @@ def add_equipamento(request, equipamento_id):
     return redirect('intervencoes:alocacao_equipamentos')
 
 @login_required(login_url='/usuarios/login/')
-def edit_equipamento(request, equipamento_id):
+def editar_alocacao(request, equipamento_id):
     if request.method == 'POST':
         horas = int(request.POST.get('horas_usado', 1))
         cart = request.session.get('cart_equipamentos', {})
@@ -164,7 +171,7 @@ def edit_equipamento(request, equipamento_id):
     return redirect('intervencoes:alocacao_equipamentos')
 
 @login_required(login_url='/usuarios/login/')
-def delete_equipamento(request, equipamento_id):
+def excluir_alocacao(request, equipamento_id):
     cart = request.session.get('cart_equipamentos', {})
     eid = str(equipamento_id)
     if eid in cart:

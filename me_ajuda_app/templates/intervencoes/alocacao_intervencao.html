@@ -27,7 +27,7 @@
             <td>{{ item.nome }}</td>
             <td>{{ item.preco }}</td>
             <td>
-                <form method="post" action="{% url 'intervencoes:edit_equipamento' equipamento_id %}">
+                <form method="post" action="{% url 'intervencoes:editar_alocacao' equipamento_id %}">
                     {% csrf_token %}
                     <input type="number" name="horas_usado" value="{{ item.horas_usado }}" min="1">
                     <button type="submit">Atualizar</button>
@@ -35,7 +35,7 @@
             </td>
             <td>{{ item.custo_total }}</td>
             <td>
-                <a href="{% url 'intervencoes:delete_equipamento' equipamento_id %}">Remover</a>
+                <a href="{% url 'intervencoes:excluir_alocacao' equipamento_id %}">Remover</a>
             </td>
         </tr>
         {% endfor %}
@@ -47,11 +47,11 @@
 {% endif %}
 <a href="{% url 'intervencoes:lista_equipamentos_intervencao' %}">Voltar para Seleção de Equipamentos</a>
 {% if request.session.ocorrencia_atual %}
-    <a href="{% url 'intervencoes:nova_intervencao' request.session.ocorrencia_atual %}" class="btn-primario">
+    <a href="{% url 'intervencoes:criar_intervencao' request.session.ocorrencia_atual %}" class="btn-primario">
         Prosseguir para Intervenção
     </a>
 {% else %}
-    <a href="{% url 'intervencoes:nova_intervencao' %}" class="btn-primario">
+    <a href="{% url 'intervencoes:criar_intervencao' %}" class="btn-primario">
         Prosseguir para Intervenção
     </a>
 {% endif %}

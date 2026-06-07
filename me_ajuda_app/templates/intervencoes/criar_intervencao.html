@@ -11,7 +11,7 @@
         <h3 style="margin-top: 0; color: #001f3f;">Detalhes da Intervenção</h3>
         <p>Preencha os detalhes técnicos da intervenção</p>
 
-        <form method="POST" action="{% url 'intervencoes:nova_intervencao' ocorrencia_id %}" enctype="multipart/form-data">
+        <form method="POST" action="{% url 'intervencoes:criar_intervencao' ocorrencia_id %}" enctype="multipart/form-data">
             {% csrf_token %}
 
             {% for field in form %}
