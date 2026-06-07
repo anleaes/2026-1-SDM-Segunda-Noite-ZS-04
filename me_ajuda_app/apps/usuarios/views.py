@@ -1,5 +1,6 @@
 from django.shortcuts import render,get_object_or_404, redirect
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from .models import Usuario
 from rest_framework import viewsets
@@ -161,3 +162,31 @@ def editar_perfil(request):
     }
     
     return render(request, 'usuarios/editar_usuario.html', context)
+
+@login_required(login_url='/usuarios/login/')
+def alterar_senha(request):
+    template_name = 'usuarios/alterar_senha_usuario.html'
+    usuario = request.user.usuario
+    is_cidadao = hasattr(usuario, 'cidadao')
+    is_funcionario = hasattr(usuario, 'funcionario')
+
+    if request.method == 'POST':
+        form = PasswordChangeForm(user=request.user, data=request.POST)
+
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            messages.success(request, 'Sua senha foi alterada com sucesso!')
+            return redirect('usuarios:usuario_perfil')
+        else:
+            messages.error(request, 'Por favor, corrija os erros abaixo.')
+    else:
+        form = PasswordChangeForm(user=request.user)
+
+    context = {
+        'form': form,
+        'is_cidadao': is_cidadao,
+        'is_funcionario': is_funcionario,
+    }
+
+    return render(request, template_name, context)

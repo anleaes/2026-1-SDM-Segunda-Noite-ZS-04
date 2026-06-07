@@ -5,6 +5,15 @@
 {% block body %}
 <div class="perfil-container">   
     <h2 class="perfil-title">Meu Perfil</h2> 
+
+    {% if messages %}
+        <div class="erros-bloco">
+            {% for message in messages %}
+                <span style="color: red; font-weight: bold;">{{ message }}</span>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <div class="perfil-secao">
         <h3>Dados Pessoais</h3>
         <p><strong>Nome:</strong> {{ usuario.nome }} {{ usuario.sobrenome }}</p>
@@ -37,6 +46,7 @@
 
     <div style="margin-top: 20px">
         <a href="{% url 'usuarios:editar_perfil' %}" class="btn-primario">Editar Dados</a>
+        <a href="{% url 'usuarios:alterar_senha' %}" class="btn-primario">Alterar Senha</a>
     </div>
 
 </div>

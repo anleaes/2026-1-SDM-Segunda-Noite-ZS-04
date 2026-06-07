@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %} Alterar Senha {%endblock title %}
+
+{% block body %}
+<div class="registro-container">
+    <h2 class="form-title">Alterar Senha</h2>
+
+    <form method="POST" action="{% url 'usuarios:alterar_senha' %}">
+        {% csrf_token %}
+
+        {% if messages %}
+            <div class="erros-bloco">
+                {% for message in messages %}
+                    <span style="color: red; font-weight: bold;">{{ message }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="form-group">
+            <label>Senha Anterior:</label>
+            {{ form.old_password }}
+            <span class="erro">{{ form.old_password.errors }}</span>
+        </div>
+
+        <div class="form-group">
+            <label>Nova Senha:</label>
+            {{ form.new_password1 }}
+            <span class="erro">{{ form.new_password1.errors }}</span>
+        </div>
+
+        <div class="form-group">
+            <label>Confirmar Nova Senha:</label>
+            {{ form.new_password2 }}
+            <span class="erro">{{ form.new_password2.errors }}</span>
+        </div>
+
+        <hr>
+        
+        <button type="submit" class="btn-primario">Alterar</button>
+        <a href="{% url 'usuarios:usuario_perfil' %}" class="btn-secundario">Cancelar</a>
+    </form>
+</div>
+{% endblock body%}
