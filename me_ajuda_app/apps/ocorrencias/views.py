@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from intervencoes.models import Intervencao
-from protocolos.views import protocolo_criar
+from protocolos.views import criar_protocolo
 from .models import Ocorrencia
 from rest_framework import viewsets
 from .serializer import OcorrenciaSerializer
@@ -103,7 +103,7 @@ def ocorrencia_criar(request):
             f.cidadao = usuario.cidadao
             f.status = 'ABE'
             f.save()
-            protocolo_criar(f)
+            criar_protocolo(f)
             return redirect('ocorrencias:ocorrencias_lista')  
     else:
         form = OcorrenciaForm()
