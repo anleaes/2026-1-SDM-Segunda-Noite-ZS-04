@@ -45,7 +45,7 @@
 {% else %}
 <p>Carrinho vazio. Nenhum equipamento alocado.</p>
 {% endif %}
-<a href="{% url 'equipamentos:equipamentos_lista' %}">Voltar para Seleção de Equipamentos</a>
+<a href="{% url 'intervencoes:lista_equipamentos_intervencao' %}">Voltar para Seleção de Equipamentos</a>
 {% if request.session.ocorrencia_atual %}
     <a href="{% url 'intervencoes:nova_intervencao' request.session.ocorrencia_atual %}" class="btn-primario">
         Prosseguir para Intervenção

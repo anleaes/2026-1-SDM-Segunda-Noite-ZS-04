@@ -46,7 +46,7 @@
             <a class="nav-item" href="#">Cidadãos</a>
           </li>
           <li>
-            <a class="nav-item" href="#">Equipamentos</a>
+            <a class="nav-item" href="{% url 'equipamentos:equipamentos_lista' %}">Equipamentos</a>
           </li>
           {% elif is_cidadao %}
           <li>
