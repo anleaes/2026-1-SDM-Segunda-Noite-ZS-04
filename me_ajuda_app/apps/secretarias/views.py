@@ -27,7 +27,7 @@ def secretaria_lista(request):
         'is_funcionario': is_funcionario,
     }
     
-    return render(request, 'secretaria/secretarias_lista.html', context)
+    return render(request, 'secretarias/lista_secretarias.html', context)
 
 @login_required(login_url='/usuarios/login/')
 def secretaria_criar(request):
@@ -45,4 +45,4 @@ def secretaria_criar(request):
         'form': form,
     }
     
-    return render(request, 'secretaria/secretaria_form.html', context)
+    return render(request, 'secretarias/criar_secretaria.html', context)

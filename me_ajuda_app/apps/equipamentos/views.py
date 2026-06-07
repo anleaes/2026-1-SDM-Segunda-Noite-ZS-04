@@ -21,7 +21,7 @@ def equipamentos_lista(request):
         'is_funcionario': is_funcionario,
     }
     
-    return render(request, 'equipamentos/equipamentos_lista.html', context)
+    return render(request, 'equipamentos/lista_equipamentos.html', context)
 
 def equipamento_criar(request):
 
@@ -38,4 +38,4 @@ def equipamento_criar(request):
         'form': form,
     }
     
-    return render(request, 'equipamentos/equipamento_form.html', context)
+    return render(request, 'equipamentos/criar_equipamento.html', context)

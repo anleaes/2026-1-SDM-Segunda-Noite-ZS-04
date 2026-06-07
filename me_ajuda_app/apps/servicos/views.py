@@ -40,7 +40,7 @@ def servicos_lista(request):
         'is_gestor': is_gestor,
     }
     
-    return render(request, 'servicos/servicos_lista.html', context)
+    return render(request, 'servicos/lista_servicos.html', context)
 
 @login_required(login_url='/usuarios/login/')
 def servico_criar(request):
@@ -61,4 +61,4 @@ def servico_criar(request):
         'is_funcionario': is_funcionario,
     }
 
-    return render(request, 'servicos/servicos_form.html', context)
+    return render(request, 'servicos/criar_servico.html', context)
