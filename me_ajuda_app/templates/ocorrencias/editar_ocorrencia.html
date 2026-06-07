@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %} Editar Ocorrência {% endblock title %}
+
+{% block body %}
+<div class="registro-container">
+    <h2 style="text-align: center;">Editar Ocorrência</h2>
+
+    <form method="POST" action="{% url 'ocorrencias:editar_ocorrencia' ocorrencia_id=ocorrencia.id %}">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div class="form-group">
+                <label>{{ field.label }}:</label>
+                {{ field }}
+                {% if field.errors %}
+                    <span class="erro">{{ field.errors|striptags }}</span>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <div class="form-acoes">
+            <button type="submit" class="btn-primario">Salvar Ocorrência</button>
+            <a href="{% url 'ocorrencias:ocorrencias_lista' %}" class="btn-secundario">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock body %}

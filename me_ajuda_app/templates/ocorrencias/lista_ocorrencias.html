@@ -50,12 +50,14 @@
                 </td>
                 <td style="padding: 10px;">
                     <a href="{% url 'ocorrencias:visualizar_ocorrencia' ocorrencia.id %}" class="btn-lista">Visualizar</a>
-                    {% if is_funcionario %}
-                    <a href="{% url 'intervencoes:criar_intervencao' ocorrencia.id %}" class="btn-lista">Nova Intervenção</a>
+                    {% if is_cidadao %}
+                    <a href="{% url 'ocorrencias:editar_ocorrencia' ocorrencia.id %}" class="btn-lista">Editar</a>
                     <form action="{% url 'ocorrencias:ocorrencia_deletar' ocorrencia.id %}" method="POST" class="form-deletar" onsubmit="return confirm('Tem certeza que deseja deletar esta ocorrência?');">
                         {% csrf_token %}
                         <button type="submit" class="btn-deletar">Deletar</button>
                     </form>
+                    {% elif is_funcionario %}
+                    <a href="{% url 'intervencoes:criar_intervencao' ocorrencia.id %}" class="btn-lista">Nova Intervenção</a>
                     {% endif %}
                 </td>
             </tr>
