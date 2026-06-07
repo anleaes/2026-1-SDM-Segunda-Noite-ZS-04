@@ -34,7 +34,7 @@
             <a class="nav-item" href="{% url 'intervencoes:intervencoes_lista' %}">Intervenções</a>
           </li>
           <li>
-            <a class="nav-item" href="{% url 'servicos:servicos_lista' %}">Serviços</a>
+            <a class="nav-item" href="{% url 'servicos:lista_servicos' %}">Serviços</a>
           </li>
           <li>
             <a class="nav-item" href="{% url 'ocorrencias:ocorrencias_lista' %}">Ocorrências</a>
@@ -50,7 +50,7 @@
           </li>
           {% elif is_cidadao %}
           <li>
-            <a class="nav-item" href="{% url 'servicos:servicos_lista' %}">Serviços</a>
+            <a class="nav-item" href="{% url 'servicos:lista_servicos' %}">Serviços</a>
           </li>
           <li>
             <a class="nav-item" href="{% url 'ocorrencias:ocorrencias_lista' %}">Minhas Ocorrências</a>
