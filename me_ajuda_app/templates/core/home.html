@@ -16,7 +16,7 @@
     </div>
     {% else %}
     <div class="acoes">
-      <a href="{% url 'usuarios:usuario_perfil' %}" class="btn-primario">Meu Perfil</a>
+      <a href="{% url 'usuarios:ver_usuario' %}" class="btn-primario">Meu Perfil</a>
       {% if is_funcionario %}
       <a href="{% url 'ocorrencias:painel_funcionario' %}" class="btn-secundario">Painel do Funcionário</a>
       {% elif is_cidadao %}
