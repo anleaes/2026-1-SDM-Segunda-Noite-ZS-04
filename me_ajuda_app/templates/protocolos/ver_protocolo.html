@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %} Detalhes do Protocolo {% endblock title %}
+
+{% block body %}
+<div class="detail-container">
+    <h2 class="perfil-title">Protocolo</h2>
+
+    <div class="perfil-secao">
+        <h3>Dados do Protocolo</h3>
+        <p><strong>Número do protocolo:</strong> {{ protocolo.protocolo_numero }}</p>
+        <p><strong>Data de Geração:</strong> {{ protocolo.gerado_em|date:"d/m/Y H:i" }}</p>
+        <p><strong>Prazo:</strong> {{ protocolo.prazo|date:"d/m/Y" }}</p>
+    </div>
+    <hr>
+
+    <div style="margin-top: 20px;">
+        <a href="{% url 'ocorrencias:visualizar_ocorrencia' protocolo.ocorrencia.id %}" class="btn-voltar">Voltar para Ocorrência</a>
+    </div>
+
+</div>
+{% endblock body %}

@@ -1,5 +1,5 @@
 from datetime import timedelta
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Protocolo
 from rest_framework import viewsets
@@ -25,3 +25,18 @@ def protocolo_criar(ocorrencia):
         gerado_em=agora,
         prazo=agora.date() + timedelta(days=15)
     )
+
+def ver_protocolo(request, protocolo_id):
+    template_name = 'protocolos/ver_protocolo.html'
+    protocolo = get_object_or_404(Protocolo, id=protocolo_id)
+    usuario = request.user.usuario
+    is_funcionario = hasattr(usuario, 'funcionario')
+    is_cidadao = hasattr(usuario, 'cidadao')
+
+    context = {
+        'protocolo': protocolo,
+        'is_funcionario': is_funcionario,
+        'is_cidadao': is_cidadao,
+    }
+    
+    return render(request, template_name, context)
