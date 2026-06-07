@@ -8,7 +8,7 @@
     
     {% if is_cidadao %}
     <div style="margin-bottom: 15px;">
-        <a href="{% url 'ocorrencias:ocorrencia_criar' %}" class="btn-primario">+ Cadastrar Nova Ocorrência</a>
+        <a href="{% url 'ocorrencias:criar_ocorrencia' %}" class="btn-primario">+ Cadastrar Nova Ocorrência</a>
     </div>
     <p>Abaixo estão listadas as suas ocorrências registradas.</p>
     {% elif is_funcionario %}
@@ -33,7 +33,7 @@
                 <td style="padding: 10px;">{{ ocorrencia.criado_em|date:"d/m/Y H:i" }}</td>
                 <td style="padding: 10px;">
                 {% if is_funcionario %}
-                <form method="POST" action="{% url 'ocorrencias:atualizar_status' ocorrencia.id %}" style="display: flex; gap: 5px; align-items: center;">
+                <form method="POST" action="{% url 'ocorrencias:atualizar_status_ocorrencia' ocorrencia.id %}" style="display: flex; gap: 5px; align-items: center;">
                     {% csrf_token %}
                     <select name="status" style="padding: 5px; border-radius: 4px; border: 1px solid #ccc; font-size: 13px;">
                         <option value="ABE" {% if ocorrencia.status == 'ABE' %}selected{% endif %}>Aberta</option>
@@ -49,12 +49,12 @@
                 {% endif %}
                 </td>
                 <td style="padding: 10px;">
-                    <a href="{% url 'ocorrencias:visualizar_ocorrencia' ocorrencia.id %}" class="btn-lista">Visualizar</a>
+                    <a href="{% url 'ocorrencias:ver_ocorrencia' ocorrencia.id %}" class="btn-lista">Visualizar</a>
                     {% if is_cidadao %}
                     <a href="{% url 'ocorrencias:editar_ocorrencia' ocorrencia.id %}" class="btn-lista">Editar</a>
-                    <form action="{% url 'ocorrencias:ocorrencia_deletar' ocorrencia.id %}" method="POST" class="form-deletar" onsubmit="return confirm('Tem certeza que deseja deletar esta ocorrência?');">
+                    <form action="{% url 'ocorrencias:excluir_ocorrencia' ocorrencia.id %}" method="POST" class="form-deletar" onsubmit="return confirm('Tem certeza que deseja deletar esta ocorrência?');">
                         {% csrf_token %}
-                        <button type="submit" class="btn-deletar">Deletar</button>
+                        <button type="submit" class="btn-deletar">Excluir</button>
                     </form>
                     {% elif is_funcionario %}
                     <a href="{% url 'intervencoes:criar_intervencao' ocorrencia.id %}" class="btn-lista">Nova Intervenção</a>
