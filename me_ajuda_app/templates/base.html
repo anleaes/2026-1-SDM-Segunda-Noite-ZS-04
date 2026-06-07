@@ -23,6 +23,9 @@
         <ul class="nav-links">
           {% if user.is_authenticated %}
           
+          <li>
+            <a class="nav-item" href="{% url 'secretarias:secretarias_lista' %}">Secretarias</a>
+          </li>
           {% if is_funcionario %}
           <li>
             <a class="nav-item" href="{% url 'ocorrencias:painel_funcionario' %}">Painel</a>
@@ -36,10 +39,16 @@
           <li>
             <a class="nav-item" href="{% url 'ocorrencias:ocorrencias_lista' %}">Ocorrências</a>
           </li>
-          {% elif is_cidadao %}
           <li>
-            <a class="nav-item" href="{% url 'secretarias:secretarias_lista' %}">Secretarias</a>
+            <a class="nav-item" href="#">Funcionários</a>
           </li>
+          <li>
+            <a class="nav-item" href="#">Cidadãos</a>
+          </li>
+          <li>
+            <a class="nav-item" href="#">Equipamentos</a>
+          </li>
+          {% elif is_cidadao %}
           <li>
             <a class="nav-item" href="{% url 'servicos:servicos_lista' %}">Serviços</a>
           </li>
