@@ -43,7 +43,7 @@
                 <td style="padding: 10px;">{{ servico.secretaria }}</td>
                 <td style="padding: 10px; text-align: center;">
                     {% if is_cidadao %}
-                    <a href="{% url 'ocorrencias:ocorrencia_criar' %}?servico_id={{ servico.id }}" class="btn-lista">Solicitar</a>
+                    <a href="{% url 'ocorrencias:criar_ocorrencia' %}?servico_id={{ servico.id }}" class="btn-lista">Solicitar</a>
                     {% elif is_gestor %}
                     <a href="{% url 'servicos:editar_servico' id_servico=servico.id %}" class="btn-lista">Editar</a>
                     <a href="{% url 'servicos:excluir_servico' id_servico=servico.id %}" class="btn-lista" style="background-color: red;">Excluir</a>

@@ -28,7 +28,7 @@
           </li>
           {% if is_funcionario %}
           <li>
-            <a class="nav-item" href="{% url 'ocorrencias:painel_funcionario' %}">Painel</a>
+            <a class="nav-item" href="{% url 'ocorrencias:painel_ocorrencias' %}">Painel</a>
           </li>
           <li>
             <a class="nav-item" href="{% url 'intervencoes:intervencoes_lista' %}">Intervenções</a>
@@ -37,7 +37,7 @@
             <a class="nav-item" href="{% url 'servicos:lista_servicos' %}">Serviços</a>
           </li>
           <li>
-            <a class="nav-item" href="{% url 'ocorrencias:ocorrencias_lista' %}">Ocorrências</a>
+            <a class="nav-item" href="{% url 'ocorrencias:lista_ocorrencias' %}">Ocorrências</a>
           </li>
           <li>
             <a class="nav-item" href="#">Funcionários</a>
@@ -53,7 +53,7 @@
             <a class="nav-item" href="{% url 'servicos:lista_servicos' %}">Serviços</a>
           </li>
           <li>
-            <a class="nav-item" href="{% url 'ocorrencias:ocorrencias_lista' %}">Minhas Ocorrências</a>
+            <a class="nav-item" href="{% url 'ocorrencias:lista_ocorrencias' %}">Minhas Ocorrências</a>
           </li>
           {% endif %}
 

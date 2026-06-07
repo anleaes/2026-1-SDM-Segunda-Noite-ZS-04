@@ -7,7 +7,7 @@
     <h2 style="text-align: center;">Cadastrar Nova Ocorrência</h2>
     <p>Preencha as informações necessárias para registrar a ocorrência no sistema.</p>
 
-    <form method="POST" action="{% url 'ocorrencias:ocorrencia_criar' %}">
+    <form method="POST" action="{% url 'ocorrencias:criar_ocorrencia' %}">
         {% csrf_token %}
 
         {% for field in form %}
@@ -22,7 +22,7 @@
 
         <div class="form-acoes">
             <button type="submit" class="btn-primario">Salvar Ocorrência</button>
-            <a href="{% url 'ocorrencias:ocorrencias_lista' %}" class="btn-secundario">Cancelar</a>
+            <a href="{% url 'ocorrencias:lista_ocorrencias' %}" class="btn-secundario">Cancelar</a>
         </div>
     </form>
 </div>

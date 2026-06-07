@@ -14,7 +14,7 @@ class OcorrenciaViewSet(viewsets.ModelViewSet):
     serializer_class = OcorrenciaSerializer  
 
 @login_required(login_url='/usuarios/login/')
-def ocorrencias_lista(request):
+def lista_ocorrencias(request):
     usuario = request.user.usuario
     is_cidadao = hasattr(usuario, 'cidadao')
     is_funcionario = hasattr(usuario, 'funcionario')
@@ -35,7 +35,8 @@ def ocorrencias_lista(request):
     
     return render(request, 'ocorrencias/lista_ocorrencias.html', context)
 
-def atualizar_status(request, ocorrencia_id):
+@login_required(login_url='/usuarios/login/')
+def atualizar_status_ocorrencia(request, ocorrencia_id):
     usuario = request.user.usuario
     
     if request.method == 'POST' and hasattr(usuario, 'funcionario'):
@@ -50,14 +51,14 @@ def atualizar_status(request, ocorrencia_id):
         ocorrencia.status = novo_status
         ocorrencia.save()
                 
-    return redirect('ocorrencias:ocorrencias_lista')
+    return redirect('ocorrencias:lista_ocorrencias')
 
 @login_required(login_url='/usuarios/login/')
-def visualizar_ocorrencia(request, id):
+def ver_ocorrencia(request, ocorrencia_id):
     usuario = request.user.usuario
     is_cidadao = hasattr(usuario, 'cidadao')
     is_funcionario = hasattr(usuario, 'funcionario')
-    ocorrencia = get_object_or_404(Ocorrencia, id=id)
+    ocorrencia = get_object_or_404(Ocorrencia, id=ocorrencia_id)
 
     context = {
         'ocorrencia': ocorrencia,
@@ -67,7 +68,7 @@ def visualizar_ocorrencia(request, id):
     return render(request, 'ocorrencias/ver_ocorrencia.html', context)
 
 @login_required(login_url='/usuarios/login/')
-def painel_funcionario(request):
+def painel_ocorrencias(request):
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
     abertas_count = Ocorrencia.objects.filter(status='ABE').count()
@@ -90,8 +91,7 @@ def painel_funcionario(request):
     return render(request, 'ocorrencias/painel_ocorrencias.html', context)
 
 @login_required(login_url='/usuarios/login/')
-def ocorrencia_criar(request):
-
+def criar_ocorrencia(request):
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
     is_cidadao = hasattr(usuario, 'cidadao')
@@ -104,7 +104,7 @@ def ocorrencia_criar(request):
             f.status = 'ABE'
             f.save()
             criar_protocolo(f)
-            return redirect('ocorrencias:ocorrencias_lista')  
+            return redirect('ocorrencias:lista_ocorrencias')  
     else:
         form = OcorrenciaForm()
         servico_id = request.GET.get('servico_id')
@@ -130,7 +130,7 @@ def editar_ocorrencia(request, ocorrencia_id):
         form = OcorrenciaForm(request.POST, instance=ocorrencia)
         if form.is_valid():
             form.save()
-            return redirect('ocorrencias:ocorrencias_lista')  
+            return redirect('ocorrencias:lista_ocorrencias')  
     else:
         form = OcorrenciaForm(instance=ocorrencia)
 
@@ -144,12 +144,10 @@ def editar_ocorrencia(request, ocorrencia_id):
     return render(request, 'ocorrencias/editar_ocorrencia.html', context)
 
 @login_required(login_url='/usuarios/login/')
-def ocorrencia_deletar(request, id):
-   
-    ocorrencia = get_object_or_404(Ocorrencia, id=id)
+def excluir_ocorrencia(request, ocorrencia_id):
+    ocorrencia = get_object_or_404(Ocorrencia, id=ocorrencia_id)
     
- 
     if request.method == 'POST':
         ocorrencia.delete()
         
-    return redirect('ocorrencias:ocorrencias_lista')
+    return redirect('ocorrencias:lista_ocorrencias')
