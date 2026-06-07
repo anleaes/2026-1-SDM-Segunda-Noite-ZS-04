@@ -1,58 +1,76 @@
 {% extends 'base.html' %}
 
+{% block title %} Alocação de Equipamentos {% endblock title %}
+
 {% block body %}
-<br />
-<br />
-<br />
-<br />
-<b>Alocação de Equipamentos</b>
-<br />
-<br />
-{% if cart %}
-<table border="1">
-    <thead>
+<div class="ocorrencias-container" style="padding: 20px;">
+    <h2 style="text-align: center;">Alocação de Equipamentos</h2>
+
+    <div style="margin-bottom: 15px;">
+        <a href="{% url 'intervencoes:lista_equipamentos_intervencao' %}" class="btn-primario" style="background-color: #6c757d;">
+            &larr; Voltar para Seleção de Equipamentos
+        </a>
+    </div>
+
+    {% if cart %}
+    <table class="tabela-ocorrencias" border="1" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead>
+            <tr style="background-color: #f2f2f2; text-align: left;">
+                <th style="padding: 10px;">ID Equipamento</th>
+                <th style="padding: 10px;">Nome</th>
+                <th style="padding: 10px;">Preço/Hora</th>
+                <th style="padding: 10px;">Horas de Uso</th>
+                <th style="padding: 10px;">Subtotal</th>
+                <th style="padding: 10px; text-align: center;">Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for equipamento_id, item in cart.items %}
+            <tr>
+                <td style="padding: 10px;">{{ equipamento_id }}</td>
+                <td style="padding: 10px;"><strong>{{ item.nome }}</strong></td>
+                <td style="padding: 10px;">R$ {{ item.preco }}</td>
+                
+                <td style="padding: 10px;">
+                    <form method="post" action="{% url 'intervencoes:editar_alocacao' equipamento_id %}" style="display: flex; gap: 8px; align-items: center;">
+                        {% csrf_token %}
+                        <input type="number" name="horas_usado" value="{{ item.horas_usado }}" min="1" style="width: 70px; padding: 5px; border: 1px solid #ccc; border-radius: 4px;">
+                        <button type="submit" class="btn-lista" style="border: none; cursor: pointer; background-color: #4B7BE5;">Atualizar</button>
+                    </form>
+                </td>
+                
+                <td style="padding: 10px;">R$ {{ item.custo_total }}</td>
+                <td style="padding: 10px; text-align: center;">
+                    <a href="{% url 'intervencoes:excluir_alocacao' equipamento_id %}" class="btn-lista" style="background-color: red;">Remover</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3 style="text-align: right; margin-top: 20px; color: #333;">Total: R$ {{ total }}</h3>
+
+    {% else %}
+    <table class="tabela-ocorrencias" border="1" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
         <tr>
-            <th>ID Equipamento</th>
-            <th>Nome</th>
-            <th>Preço/Hora</th>
-            <th>Horas de Uso</th>
-            <th>Subtotal</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for equipamento_id, item in cart.items %}
-        <tr>
-            <td>{{ equipamento_id }}</td>
-            <td>{{ item.nome }}</td>
-            <td>{{ item.preco }}</td>
-            <td>
-                <form method="post" action="{% url 'intervencoes:edit_equipamento' equipamento_id %}">
-                    {% csrf_token %}
-                    <input type="number" name="horas_usado" value="{{ item.horas_usado }}" min="1">
-                    <button type="submit">Atualizar</button>
-                </form>
-            </td>
-            <td>{{ item.custo_total }}</td>
-            <td>
-                <a href="{% url 'intervencoes:delete_equipamento' equipamento_id %}">Remover</a>
+            <td style="padding: 20px; text-align: center; color: #666;">
+                Nenhum equipamento alocado.
             </td>
         </tr>
-        {% endfor %}
-    </tbody>
-</table>
-<h3>Total: {{ total }}</h3>>
-{% else %}
-<p>Carrinho vazio. Nenhum equipamento alocado.</p>
-{% endif %}
-<a href="{% url 'intervencoes:lista_equipamentos_intervencao' %}">Voltar para Seleção de Equipamentos</a>
-{% if request.session.ocorrencia_atual %}
-    <a href="{% url 'intervencoes:nova_intervencao' request.session.ocorrencia_atual %}" class="btn-primario">
-        Prosseguir para Intervenção
-    </a>
-{% else %}
-    <a href="{% url 'intervencoes:nova_intervencao' %}" class="btn-primario">
-        Prosseguir para Intervenção
-    </a>
-{% endif %}
+    </table>
+    {% endif %}
+
+    <div style="margin-top: 30px; text-align: right;">
+        {% if request.session.ocorrencia_atual %}
+            <a href="{% url 'intervencoes:criar_intervencao' request.session.ocorrencia_atual %}" class="btn-primario">
+                Prosseguir para Intervenção &rarr;
+            </a>
+        {% else %}
+            <a href="{% url 'intervencoes:criar_intervencao' %}" class="btn-primario">
+                Prosseguir para Intervenção &rarr;
+            </a>
+        {% endif %}
+    </div>
+
+</div>
 {% endblock body %}
