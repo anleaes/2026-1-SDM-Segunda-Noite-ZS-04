@@ -4,7 +4,7 @@
 <div class="perfil-container">
     <h2 class="perfil-title">Editar Perfil</h2>
 
-    <form method="POST" action="{% url 'usuarios:editar_perfil' %}">
+    <form method="POST" action="{% url 'usuarios:editar_usuario' %}">
         {% csrf_token %}
         
         {% if messages %}
@@ -104,7 +104,7 @@
         <hr>
 
         <button type="submit" class="btn-primario">Salvar Alterações</button>
-        <a href="{% url 'usuarios:usuario_perfil' %}" class="btn-secundario">Cancelar</a>
+        <a href="{% url 'usuarios:ver_usuario' %}" class="btn-secundario">Cancelar</a>
     </form>
 </div>
 {% endblock body %}

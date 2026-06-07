@@ -6,7 +6,7 @@
 <div class="registro-container">
     <h2 class="form-title">Alterar Senha</h2>
 
-    <form method="POST" action="{% url 'usuarios:alterar_senha' %}">
+    <form method="POST" action="{% url 'usuarios:alterar_senha_usuario' %}">
         {% csrf_token %}
 
         {% if messages %}
@@ -38,7 +38,7 @@
         <hr>
         
         <button type="submit" class="btn-primario">Alterar</button>
-        <a href="{% url 'usuarios:usuario_perfil' %}" class="btn-secundario">Cancelar</a>
+        <a href="{% url 'usuarios:ver_usuario' %}" class="btn-secundario">Cancelar</a>
     </form>
 </div>
 {% endblock body%}

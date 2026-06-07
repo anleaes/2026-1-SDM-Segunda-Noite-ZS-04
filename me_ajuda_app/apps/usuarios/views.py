@@ -80,7 +80,7 @@ def registrar_usuario(request):
 
 def login_usuario(request):
     if request.user.is_authenticated:
-        return redirect('usuarios:usuario_perfil')
+        return redirect('usuarios:ver_usuario')
 
     if request.method == 'POST':
         cpf = request.POST.get('cpf')
@@ -90,7 +90,7 @@ def login_usuario(request):
 
         if user is not None:
             login(request, user)
-            return redirect('usuarios:usuario_perfil')
+            return redirect('usuarios:ver_usuario')
         else:
             messages.error(request, 'CPF ou senha incorretos.')
 
@@ -103,7 +103,7 @@ def logout_usuario(request):
 
 #criação de perfil do usuario
 @login_required(login_url='/usuarios/login/')
-def usuario_perfil(request):   
+def ver_usuario(request):   
 
     try:
         usuario = request.user.usuario
@@ -118,7 +118,7 @@ def usuario_perfil(request):
     return render(request, 'usuarios/ver_usuario.html', context)
 
 @login_required(login_url='/usuarios/login/')
-def editar_perfil(request):
+def editar_usuario(request):
     usuario = request.user.usuario
     is_cidadao = hasattr(usuario, 'cidadao')
     is_funcionario = hasattr(usuario, 'funcionario')
@@ -145,7 +145,7 @@ def editar_perfil(request):
             if perfil_form:
                 perfil_form.save()
                 
-            return redirect('usuarios:usuario_perfil')
+            return redirect('usuarios:ver_usuario')
             
     else:
         usuario_form = UsuarioForm(instance=usuario)
@@ -164,7 +164,7 @@ def editar_perfil(request):
     return render(request, 'usuarios/editar_usuario.html', context)
 
 @login_required(login_url='/usuarios/login/')
-def alterar_senha(request):
+def alterar_senha_usuario(request):
     template_name = 'usuarios/alterar_senha_usuario.html'
     usuario = request.user.usuario
     is_cidadao = hasattr(usuario, 'cidadao')
@@ -177,7 +177,7 @@ def alterar_senha(request):
             form.save()
             update_session_auth_hash(request, form.user)
             messages.success(request, 'Sua senha foi alterada com sucesso!')
-            return redirect('usuarios:usuario_perfil')
+            return redirect('usuarios:ver_usuario')
         else:
             messages.error(request, 'Por favor, corrija os erros abaixo.')
     else:
