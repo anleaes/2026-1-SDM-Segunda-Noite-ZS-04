@@ -120,6 +120,30 @@ def ocorrencia_criar(request):
     return render(request, 'ocorrencias/criar_ocorrencia.html', context)
 
 @login_required(login_url='/usuarios/login/')
+def editar_ocorrencia(request, ocorrencia_id):
+    usuario = request.user.usuario
+    is_funcionario = hasattr(usuario, 'funcionario')
+    is_cidadao = hasattr(usuario, 'cidadao')
+    ocorrencia =  get_object_or_404(Ocorrencia, id=ocorrencia_id)
+
+    if request.method == 'POST':
+        form = OcorrenciaForm(request.POST, instance=ocorrencia)
+        if form.is_valid():
+            form.save()
+            return redirect('ocorrencias:ocorrencias_lista')  
+    else:
+        form = OcorrenciaForm(instance=ocorrencia)
+
+    context = {
+        'form': form,
+        'ocorrencia': ocorrencia,
+        'is_funcionario': is_funcionario,
+        'is_cidadao': is_cidadao,
+    }
+
+    return render(request, 'ocorrencias/editar_ocorrencia.html', context)
+
+@login_required(login_url='/usuarios/login/')
 def ocorrencia_deletar(request, id):
    
     ocorrencia = get_object_or_404(Ocorrencia, id=id)

@@ -15,5 +15,5 @@ urlpatterns = [
     path('criar/', views.ocorrencia_criar, name='ocorrencia_criar'),
     path('<int:id>/', views.visualizar_ocorrencia, name='visualizar_ocorrencia'),
     path('excluir/<int:id>/', views.ocorrencia_deletar, name='ocorrencia_deletar'),
-    # path('editar/<int:id>/', views.editar_ocorrencia, name='editar_ocorrencia'),
+    path('editar/<int:ocorrencia_id>/', views.editar_ocorrencia, name='editar_ocorrencia'),
 ]
