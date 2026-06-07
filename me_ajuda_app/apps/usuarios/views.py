@@ -161,3 +161,23 @@ def editar_perfil(request):
     }
     
     return render(request, 'usuarios/editar_usuario.html', context)
+
+@login_required(login_url='/usuarios/login/')
+def alterar_senha(request):
+    template_name = 'usuarios/alterar_senha_usuario.html'
+    context = {}
+
+    if request.method == 'POST':
+        form = UserForm(user=request.user, data=request.POST)
+        
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+        else:
+            return redirect('usuarios:login_usuario')
+        
+    form = UserForm(user=request.user)
+
+    context['form'] = form
+
+    return render(request, template_name, context)

@@ -15,5 +15,5 @@ urlpatterns = [
     path('registrar/', views.registrar_usuario, name='registrar_usuario'),
     path('ver-usuario/', views.usuario_perfil, name='usuario_perfil'),
     path('editar-usuario/', views.editar_perfil, name='editar_perfil'),
-    # path('alterar-senha/', views.alterar_senha, name='alterar_senha'),
+    path('alterar-senha/', views.alterar_senha, name='alterar_senha'),
 ]
