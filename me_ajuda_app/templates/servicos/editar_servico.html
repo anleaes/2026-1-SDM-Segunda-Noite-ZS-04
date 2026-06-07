@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %} Editar Serviço {% endblock title %}
+
+{% block body %}
+<div class="registro-container">
+    <h2>Editar Serviço</h2>
+
+    <form method="POST" action="{% url 'servicos:editar_servico' id_servico=servico.id %}">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                {{ field }}
+                {% if field.errors %}
+                    <span class="erro">{{ field.errors|striptags }}</span>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <div class="form-acoes">
+            <button type="submit" class="btn-primario">Salvar Serviço</button>
+            <a href="{% url 'servicos:servicos_lista' %}" class="btn-secundario">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock body %}

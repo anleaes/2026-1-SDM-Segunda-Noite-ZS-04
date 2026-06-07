@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Servico
 from rest_framework import viewsets
 from .serializer import ServicoSerializer
@@ -62,3 +62,32 @@ def servico_criar(request):
     }
 
     return render(request, 'servicos/criar_servico.html', context)
+
+def editar_servico(request, id_servico):
+    template_name = 'servicos/editar_servico.html'
+    context ={}
+    servico = get_object_or_404(Servico, id=id_servico)
+    usuario = request.user.usuario
+    is_funcionario = hasattr(usuario, 'funcionario')
+
+    if request.method == 'POST':
+        form = ServicoForm(request.POST, instance=servico)
+        if form.is_valid():
+            form.save()
+            return redirect('servicos:servicos_lista')
+    else:
+        form = ServicoForm(instance=servico)
+
+    context = {
+        'form': form,
+        'servico': servico,
+        'is_funcionario': is_funcionario,
+    }
+
+    return render(request, template_name, context)
+
+def excluir_servico(request, id_servico):
+    servico = Servico.objects.get(id=id_servico)
+    servico.delete()
+    
+    return redirect('servicos:servicos_lista')
