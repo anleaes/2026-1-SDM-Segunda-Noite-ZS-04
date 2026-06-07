@@ -10,7 +10,7 @@ class SecretariaViewSet(viewsets.ModelViewSet):
     queryset = Secretaria.objects.all()
     serializer_class = SecretariaSerializer  
 
-def secretaria_lista(request):
+def lista_secretarias(request):
     is_funcionario = False
     is_cidadao = False
     is_gestor = False
@@ -33,13 +33,13 @@ def secretaria_lista(request):
     return render(request, 'secretarias/lista_secretarias.html', context)
 
 @login_required(login_url='/usuarios/login/')
-def secretaria_criar(request):
+def criar_secretaria(request):
     
     if request.method == 'POST':
         form = SecretariaForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('secretarias:secretaria_lista')  
+            return redirect('secretarias:lista_secretarias')  
     else:
         
         form = SecretariaForm()
@@ -61,7 +61,7 @@ def editar_secretaria(request, id_secretaria):
         form = SecretariaForm(request.POST, instance=secretaria)
         if form.is_valid():
             form.save()
-            return redirect('secretarias:secretaria_lista')
+            return redirect('secretarias:lista_secretarias')
     else:
         form = SecretariaForm(instance=secretaria)
 
@@ -77,4 +77,4 @@ def excluir_secretaria(request, id_secretaria):
     secretaria = Secretaria.objects.get(id=id_secretaria)
     secretaria.delete()
     
-    return redirect('secretarias:secretaria_lista')
+    return redirect('secretarias:lista_secretarias')
