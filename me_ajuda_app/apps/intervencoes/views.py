@@ -27,6 +27,19 @@ def listar_intervencoes(request):
     return render(request, 'intervencoes/lista_intervencoes.html', context)
 
 @login_required(login_url='/usuarios/login/')
+def lista_equipamentos_intervencao(request):
+    usuario = request.user.usuario
+    is_funcionario = hasattr(usuario, 'funcionario')
+    equipamentos = Equipamento.objects.all().order_by('nome')
+
+    context = {
+        'equipamentos': equipamentos,
+        'is_funcionario': is_funcionario,
+    }
+    
+    return render(request, 'intervencoes/lista_equipamentos_intervencao.html', context)
+
+@login_required(login_url='/usuarios/login/')
 def nova_intervencao(request, ocorrencia_id=None):  
     cart = request.session.get('cart_equipamentos', {}) 
 
