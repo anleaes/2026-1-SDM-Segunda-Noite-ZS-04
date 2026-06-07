@@ -10,8 +10,8 @@ router.register('', views.ServicoViewSet, basename='servicos')
 
 urlpatterns = [
     path('api/', include(router.urls) ),
-    path('listar/', views.servicos_lista, name='servicos_lista'),
-    path('criar/', views.servico_criar, name='servico_criar'),
+    path('listar/', views.lista_servicos, name='lista_servicos'),
+    path('criar/', views.criar_servico, name='criar_servico'),
     path('editar/<int:id_servico>/', views.editar_servico, name='editar_servico'),
     path('excluir/<int:id_servico>/', views.excluir_servico, name='excluir_servico'),
 ]

@@ -12,7 +12,7 @@ class ServicoViewSet(viewsets.ModelViewSet):
     queryset = Servico.objects.all()
     serializer_class = ServicoSerializer  
 
-def servicos_lista(request):
+def lista_servicos(request):
 
     query = request.GET.get('q', '')
     
@@ -43,7 +43,7 @@ def servicos_lista(request):
     return render(request, 'servicos/lista_servicos.html', context)
 
 @login_required(login_url='/usuarios/login/')
-def servico_criar(request):
+def criar_servico(request):
 
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
@@ -52,7 +52,7 @@ def servico_criar(request):
         form = ServicoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('servicos:servicos_lista')  
+            return redirect('servicos:lista_servicos')  
     else:
         form = ServicoForm()
 
@@ -74,7 +74,7 @@ def editar_servico(request, id_servico):
         form = ServicoForm(request.POST, instance=servico)
         if form.is_valid():
             form.save()
-            return redirect('servicos:servicos_lista')
+            return redirect('servicos:lista_servicos')
     else:
         form = ServicoForm(instance=servico)
 
@@ -90,4 +90,4 @@ def excluir_servico(request, id_servico):
     servico = Servico.objects.get(id=id_servico)
     servico.delete()
     
-    return redirect('servicos:servicos_lista')
+    return redirect('servicos:lista_servicos')
