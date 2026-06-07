@@ -11,7 +11,6 @@
         <p><strong>Título:</strong> {{ ocorrencia.titulo }}</p>
         <p><strong>Serviço:</strong> {{ ocorrencia.servico.nome }}</p>
         <p><strong>Status:</strong> {{ ocorrencia.get_status_display }}</p>
-        <p><strong>Protocolo:</strong> {{ ocorrencia.protocolo.protocolo_numero }}</p>
     </div>
 
     <hr>
@@ -40,6 +39,7 @@
 
     <div style="margin-top: 20px;">
         <a href="{% url 'ocorrencias:ocorrencias_lista' %}" class="btn-voltar">Voltar para Lista</a>
+        <a href="{% url 'protocolos:ver_protocolo' ocorrencia.protocolo.id %}" class="btn-primario">Ver Protocolo</a>
     </div>
 
 </div>
