@@ -48,8 +48,8 @@
                     {% if is_cidadao %}
                     <a href="{% url 'ocorrencias:criar_ocorrencia' %}?servico_id={{ servico.id }}" class="btn-lista">Solicitar</a>
                     {% elif is_gestor %}
-                    <a href="{% url 'servicos:editar_servico' id_servico=servico.id %}" class="btn-lista">Editar</a>
-                    <a href="{% url 'servicos:excluir_servico' id_servico=servico.id %}" class="btn-lista" style="background-color: red;">Excluir</a>
+                    <a href="{% url 'servicos:editar_servico' servico_id=servico.id %}" class="btn-lista">Editar</a>
+                    <a href="{% url 'servicos:excluir_servico' servico_id=servico.id %}" class="btn-lista" style="background-color: red;">Excluir</a>
                     {% endif %}
                 </td>
                 {% endif %}

@@ -6,7 +6,7 @@
 <div class="registro-container">
     <h2>Editar Serviço</h2>
 
-    <form method="POST" action="{% url 'servicos:editar_servico' id_servico=servico.id %}">
+    <form method="POST" action="{% url 'servicos:editar_servico' servico_id=servico.id %}">
         {% csrf_token %}
 
         {% for field in form %}

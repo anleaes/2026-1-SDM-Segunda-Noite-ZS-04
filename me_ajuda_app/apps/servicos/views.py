@@ -64,10 +64,10 @@ def criar_servico(request):
     return render(request, 'servicos/criar_servico.html', context)
 
 @login_required(login_url='/usuarios/login/')
-def editar_servico(request, id_servico):
+def editar_servico(request, servico_id):
     template_name = 'servicos/editar_servico.html'
     context ={}
-    servico = get_object_or_404(Servico, id=id_servico)
+    servico = get_object_or_404(Servico, id=servico_id)
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
 
@@ -87,8 +87,9 @@ def editar_servico(request, id_servico):
 
     return render(request, template_name, context)
 
-def excluir_servico(request, id_servico):
-    servico = Servico.objects.get(id=id_servico)
+@login_required(login_url='/usuarios/login/')
+def excluir_servico(request, servico_id):
+    servico = Servico.objects.get(id=servico_id)
     servico.delete()
     
     return redirect('servicos:lista_servicos')
