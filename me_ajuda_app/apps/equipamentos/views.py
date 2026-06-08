@@ -14,11 +14,13 @@ class EquipamentoViewSet(viewsets.ModelViewSet):
 def lista_equipamentos(request):
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
+    is_gestor = usuario.funcionario.funcao == 'GES'
     equipamentos = Equipamento.objects.all().order_by('nome')
 
     context = {
         'equipamentos': equipamentos,
         'is_funcionario': is_funcionario,
+        'is_gestor': is_gestor
     }
     
     return render(request, 'equipamentos/lista_equipamentos.html', context)
