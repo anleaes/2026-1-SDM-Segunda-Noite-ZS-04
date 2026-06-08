@@ -9,8 +9,8 @@ router.register('', views.EquipamentoViewSet, basename='equipamentos')
 
 urlpatterns = [
     path('api/', include(router.urls) ),
-    path('listar/', views.equipamentos_lista, name='equipamentos_lista'),
-    path('criar/', views.equipamento_criar, name='equipamento_criar'),
+    path('listar/', views.lista_equipamentos, name='lista_equipamentos'),
+    path('criar/', views.criar_equipamento, name='criar_equipamento'),
     path('editar/<int:equipamento_id>/', views.editar_equipamento, name='editar_equipamento'),
     path('excluir/<int:equipamento_id>/', views.excluir_equipamento, name='excluir_equipamento'),
 ]

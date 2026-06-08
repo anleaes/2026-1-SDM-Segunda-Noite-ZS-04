@@ -40,13 +40,7 @@
             <a class="nav-item" href="{% url 'ocorrencias:lista_ocorrencias' %}">Ocorrências</a>
           </li>
           <li>
-            <a class="nav-item" href="#">Funcionários</a>
-          </li>
-          <li>
-            <a class="nav-item" href="#">Cidadãos</a>
-          </li>
-          <li>
-            <a class="nav-item" href="{% url 'equipamentos:equipamentos_lista' %}">Equipamentos</a>
+            <a class="nav-item" href="{% url 'equipamentos:lista_equipamentos' %}">Equipamentos</a>
           </li>
           {% elif is_cidadao %}
           <li>
