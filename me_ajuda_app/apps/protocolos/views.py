@@ -4,6 +4,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .models import Protocolo
 from rest_framework import viewsets
 from .serializer import ProtocoloSerializer
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 class ProtocoloViewSet(viewsets.ModelViewSet):
     queryset = Protocolo.objects.all()
@@ -11,6 +13,7 @@ class ProtocoloViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['ocorrencia']
 
+@login_required(login_url='/usuarios/login/')
 def criar_protocolo(ocorrencia):
     if hasattr(ocorrencia, 'protocolo'):
         return ocorrencia.protocolo
@@ -26,6 +29,7 @@ def criar_protocolo(ocorrencia):
         prazo=agora.date() + timedelta(days=15)
     )
 
+@login_required(login_url='/usuarios/login/')
 def ver_protocolo(request, protocolo_id):
     template_name = 'protocolos/ver_protocolo.html'
     protocolo = get_object_or_404(Protocolo, id=protocolo_id)
