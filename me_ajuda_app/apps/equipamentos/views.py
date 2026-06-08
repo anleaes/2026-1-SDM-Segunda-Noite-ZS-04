@@ -51,7 +51,7 @@ def editar_equipamento(request, equipamento_id):
         form = EquipamentoForm(request.POST, instance=equipamento)
         if form.is_valid():
             form.save()
-            return redirect('equipamentos:lista_equipamentos')  
+            return redirect('equipamentos:equipamentos_lista')  
     else:
         form = EquipamentoForm(instance=equipamento)
 
@@ -63,3 +63,10 @@ def editar_equipamento(request, equipamento_id):
     }
 
     return render(request, 'equipamentos/editar_equipamento.html', context)
+
+@login_required(login_url='/usuarios/login/')
+def excluir_equipamento(request, equipamento_id):
+    equipamento = get_object_or_404(Equipamento, id=equipamento_id)
+    equipamento.delete()
+        
+    return redirect('equipamentos:equipamentos_lista')

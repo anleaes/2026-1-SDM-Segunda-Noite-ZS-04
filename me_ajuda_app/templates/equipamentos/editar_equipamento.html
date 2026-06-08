@@ -1,13 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %} Cadastrar Novo Equipamento {% endblock title %}
+{% block title %} Editar Equipamento {% endblock title %}
 
 {% block body %}
 <div class="form-equipamento-container">
-    <h2 style="text-align: center;">Cadastrar Novo Equipamento</h2>
-    <p>Insira as especificações e detalhes técnicos do equipamento para registrá-lo no inventário.</p>
+    <h2 style="text-align: center;">Editar Equipamento</h2>
 
-    <form method="POST" action="{% url 'equipamentos:equipamento_criar' %}">
+    <form method="POST" action="{% url 'equipamentos:editar_equipamento' equipamento_id=equipamento.id %}">
         {% csrf_token %}
 
         {% for field in form %}
@@ -29,10 +28,10 @@
             </div>
             {% endif %}
         {% endfor %}
-
+        
         <div class="form-equipamento-acoes">
             <button type="submit" class="btn-salvar-equipamento">Salvar Equipamento</button>
-            <a href="{% url 'equipamentos:equipamentos_lista' %}" class="btn-cancelar-equipamento">Cancelar</a>
+            <a href="{% url 'equipamentos:equipamentos_lista' %}" class="btn-voltar">Cancelar</a>
         </div>
     </form>
 </div>
