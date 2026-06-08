@@ -16,7 +16,7 @@ class Ocorrencia(models.Model):
     status = models.CharField(
         "Status",
         max_length=3,
-        choices=[("ABE", "Aberto"), ("AND", "Andamento"), ("FEC", "Fechado")],
+        choices=[("ABE", "Aberta"), ("AND", "Em Andamento"), ("FEC", "Fechada")],
     )
     foto = models.ImageField("Foto", upload_to="ocorrencias/", null=True, blank=True)
     cidadao = models.ForeignKey(Cidadao, on_delete=models.CASCADE)
