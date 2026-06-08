@@ -37,7 +37,7 @@
     <div class="perfil-secao">
         <h3>Dados Profissionais</h3>
         <p><strong>Registro:</strong> {{ usuario.funcionario.registro }}</p>
-        <p><strong>Função:</strong> {{ usuario.funcionario.funcao }}</p>
+        <p><strong>Função:</strong> {{ usuario.funcionario.get_funcao_display }}</p>
         <p><strong>Situação:</strong> {% if usuario.funcionario.ativo %}Ativo{% else %}Inativo{% endif %}</p>
     </div>
     {% endif %}
