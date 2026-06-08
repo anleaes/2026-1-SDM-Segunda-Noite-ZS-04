@@ -8,7 +8,7 @@
     <div style="flex: 2; min-width: 300px; margin-bottom: 30px;">
         <h2 style="text-align: center;">Nova Intervenção</h2>
 
-        <h3 style="margin-top: 0; color: #001f3f;">Detalhes da Intervenção</h3>
+        <h3 style="margin-top: 0; color: #001f3f;">Detalhes Técnicos</h3>
         <p>Preencha os detalhes técnicos da intervenção</p>
 
         <form method="POST" action="{% url 'intervencoes:criar_intervencao' ocorrencia_id %}" enctype="multipart/form-data">
@@ -23,11 +23,6 @@
                 {% endif %}
             </div>
             {% endfor %}
-
-            <div class="form-acoes" style="margin-top: 20px;">
-                <button type="submit" class="btn-primario">Confirmar e Salvar Intervenção</button>
-                <a href="{% url 'intervencoes:alocacao_equipamentos' %}" class="btn-voltar">Alocar Equipamentos</a>
-            </div>
         </form>
     </div>
 
@@ -35,7 +30,10 @@
 
     <div class="resumo-lateral">
     <div>
-        <h3 >Equipamentos Utilizados</h3>        
+        <h3>Equipamentos Utilizados</h3>  
+        <div class="form-acoes" style="margin-top: 20px; margin-bottom: 20px;">
+            <a href="{% url 'intervencoes:alocacao_equipamentos' %}" class="btn-primario" style="background-color: green;">Alocar Equipamentos</a>
+        </div>      
         {% if cart %}
             <ul class="resumo-lista" style="list-style-type: none; padding: 0; margin: 0;">
                 {% for equipamento_id, item in cart.items %}
@@ -58,6 +56,13 @@
         {% else %}
             <p style="font-size: 14px; color: #666;">Nenhum equipamento foi adicionado a esta intervenção.</p>
         {% endif %}
+    </div>
+
+    <hr>
+
+    <div class="form-acoes" style="margin-top: 20px;">
+        <button type="submit" class="btn-primario">Confirmar e Salvar Intervenção</button>
+        <a href="{% url 'ocorrencias:lista_ocorrencias' %}" class="btn-voltar">Voltar para Lista</a>
     </div>
 </div>
 
