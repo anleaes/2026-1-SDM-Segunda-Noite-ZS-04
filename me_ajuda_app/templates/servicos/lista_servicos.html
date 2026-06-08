@@ -6,6 +6,7 @@
 <div class="servicos-container" style="padding: 20px;">
     <h2 style="text-align: center;">Catálogo de Serviços</h2>
 
+    {% if user.is_authenticated %}
     {% if is_gestor %}
     <div style="margin-bottom: 15px;">
         <a href="{% url 'servicos:criar_servico' %}" class="btn-primario">+ Cadastrar Novo Serviço</a>
@@ -13,11 +14,14 @@
     {% endif %}
 
     {% if is_cidadao %}
-    <p>Procure pelos serviços para solicitar.</p>
+    <p>Busque por serviços e faça sua solicitação online.</p>
     <form method="GET" action="" class="form-busca">
         <input class="campo-busca" type="text" name="q" value="{{ query }}" placeholder="Pesquisar por nome ou descrição..." />
         <button type="submit" class="btn-primario">Buscar</button>
     </form>
+    {% endif %}
+    {% else %}
+    <p>Conheça nossos serviços e encontre a solução ideal para o que você precisa.</p>
     {% endif %}
 
     <table class="tabela-servicos" border="1" >

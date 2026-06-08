@@ -24,6 +24,7 @@ def lista_servicos(request):
     else:
         servicos = Servico.objects.all().order_by('nome')
        
+    is_cidadao = False
     is_funcionario = False
     is_gestor = False
     

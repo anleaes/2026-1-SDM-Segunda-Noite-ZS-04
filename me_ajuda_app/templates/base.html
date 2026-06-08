@@ -22,7 +22,6 @@
 
         <ul class="nav-links">
           {% if user.is_authenticated %}
-          
           <li>
             <a class="nav-item" href="{% url 'secretarias:lista_secretarias' %}">Secretarias</a>
           </li>
@@ -64,6 +63,12 @@
           </li>
 
           {% else %}
+          <li>
+            <a class="nav-item" href="{% url 'secretarias:lista_secretarias' %}">Secretarias</a>
+          </li>
+          <li>
+            <a class="nav-item" href="{% url 'servicos:lista_servicos' %}">Serviços</a>
+          </li>
           <li><a href="{% url 'usuarios:login_usuario' %}" class="btn-primario">Entrar</a></li>
           <li><a href="{% url 'usuarios:registrar_usuario' %}" class="btn-secundario">Cadastrar</a></li>
           {% endif %}
