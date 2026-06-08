@@ -139,7 +139,7 @@ def alocacao_equipamentos(request):
         'is_funcionario': is_funcionario,
     }
 
-    return render(request, 'intervencoes/alocacao_intervencao.html', context)
+    return render(request, 'intervencoes/alocacao_equipamentos.html', context)
 
 @login_required(login_url='/usuarios/login/')
 def adicionar_alocacao(request, equipamento_id):
