@@ -63,6 +63,7 @@ def criar_servico(request):
 
     return render(request, 'servicos/criar_servico.html', context)
 
+@login_required(login_url='/usuarios/login/')
 def editar_servico(request, id_servico):
     template_name = 'servicos/editar_servico.html'
     context ={}
