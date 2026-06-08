@@ -22,7 +22,7 @@ class Cidadao {
 
 class Funcionario {
     -registro: Char
-    -funcao: CharChoices (TEC, GES, ANA)
+    -funcao: CharChoices (TEC, GES)
     -ativo: Boolean
     -secretarias: ManyToMany[Secretaria]
     +toString()

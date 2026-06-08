@@ -12,7 +12,6 @@ class Funcionario(Usuario):
         choices=[
             ("TEC", "Técnico"),
             ("GES", "Gestor"),
-            ("ANA", "Analista"),
         ],
     )
     ativo = models.BooleanField("Ativo", default=True)
