@@ -7,7 +7,7 @@
     <h2 style="text-align: center;">Cadastrar Novo Equipamento</h2>
     <p>Insira as especificações e detalhes técnicos do equipamento para registrá-lo no inventário.</p>
 
-    <form method="POST" action="{% url 'equipamentos:equipamento_criar' %}">
+    <form method="POST" action="{% url 'equipamentos:criar_equipamento' %}">
         {% csrf_token %}
 
         {% for field in form %}
@@ -32,7 +32,7 @@
 
         <div class="form-equipamento-acoes">
             <button type="submit" class="btn-salvar-equipamento">Salvar Equipamento</button>
-            <a href="{% url 'equipamentos:equipamentos_lista' %}" class="btn-cancelar-equipamento">Cancelar</a>
+            <a href="{% url 'equipamentos:lista_equipamentos' %}" class="btn-cancelar-equipamento">Cancelar</a>
         </div>
     </form>
 </div>

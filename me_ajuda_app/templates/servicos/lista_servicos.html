@@ -29,7 +29,9 @@
                 <th style="padding: 10px; width: 10%;">Prioriedade</th>
                 {% endif %}
                 <th style="padding: 10px; width: 15%;">Secretaria Responsável</th>
+                {% if is_cidadao or is_gestor %}
                 <th style="padding: 10px; width: 20%; text-align: center;">Ação</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -41,6 +43,7 @@
                 <td style="padding: 10px; text-align: center;">{{ servico.nivel_prioridade|default:"Não definida." }}</td>
                 {% endif %}
                 <td style="padding: 10px;">{{ servico.secretaria }}</td>
+                {% if is_cidadao or is_gestor %}
                 <td style="padding: 10px; text-align: center;">
                     {% if is_cidadao %}
                     <a href="{% url 'ocorrencias:criar_ocorrencia' %}?servico_id={{ servico.id }}" class="btn-lista">Solicitar</a>
@@ -49,6 +52,7 @@
                     <a href="{% url 'servicos:excluir_servico' id_servico=servico.id %}" class="btn-lista" style="background-color: red;">Excluir</a>
                     {% endif %}
                 </td>
+                {% endif %}
             </tr>
             {% empty %}
             <tr>

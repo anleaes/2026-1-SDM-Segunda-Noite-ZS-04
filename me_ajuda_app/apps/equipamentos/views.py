@@ -11,25 +11,26 @@ class EquipamentoViewSet(viewsets.ModelViewSet):
     serializer_class = EquipamentoSerializer  
 
 @login_required(login_url='/usuarios/login/')
-def equipamentos_lista(request):
+def lista_equipamentos(request):
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
+    is_gestor = usuario.funcionario.funcao == 'GES'
     equipamentos = Equipamento.objects.all().order_by('nome')
 
     context = {
         'equipamentos': equipamentos,
         'is_funcionario': is_funcionario,
+        'is_gestor': is_gestor
     }
     
     return render(request, 'equipamentos/lista_equipamentos.html', context)
 
-def equipamento_criar(request):
-
+def criar_equipamento(request):
     if request.method == 'POST':
         form = EquipamentoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('equipamentos:equipamentos_lista')  
+            return redirect('equipamentos:lista_equipamentos')  
     else:
        
         form = EquipamentoForm()
@@ -44,14 +45,13 @@ def equipamento_criar(request):
 def editar_equipamento(request, equipamento_id):
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
-    is_cidadao = hasattr(usuario, 'cidadao')
     equipamento =  get_object_or_404(Equipamento, id=equipamento_id)
 
     if request.method == 'POST':
         form = EquipamentoForm(request.POST, instance=equipamento)
         if form.is_valid():
             form.save()
-            return redirect('equipamentos:equipamentos_lista')  
+            return redirect('equipamentos:lista_equipamentos')  
     else:
         form = EquipamentoForm(instance=equipamento)
 
@@ -59,7 +59,6 @@ def editar_equipamento(request, equipamento_id):
         'form': form,
         'equipamento': equipamento,
         'is_funcionario': is_funcionario,
-        'is_cidadao': is_cidadao,
     }
 
     return render(request, 'equipamentos/editar_equipamento.html', context)
@@ -69,4 +68,4 @@ def excluir_equipamento(request, equipamento_id):
     equipamento = get_object_or_404(Equipamento, id=equipamento_id)
     equipamento.delete()
         
-    return redirect('equipamentos:equipamentos_lista')
+    return redirect('equipamentos:lista_equipamentos')
