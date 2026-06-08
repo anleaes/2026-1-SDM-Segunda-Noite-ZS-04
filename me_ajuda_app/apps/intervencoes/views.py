@@ -31,6 +31,8 @@ def lista_equipamentos_intervencao(request):
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
     equipamentos = Equipamento.objects.all().order_by('nome')
+    equipamentos_disponiveis = [e for e in equipamentos if e.disponivel]   
+    equipamentos = equipamentos_disponiveis     
 
     context = {
         'equipamentos': equipamentos,
