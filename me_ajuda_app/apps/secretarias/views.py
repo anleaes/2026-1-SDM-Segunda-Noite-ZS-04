@@ -50,9 +50,10 @@ def criar_secretaria(request):
     
     return render(request, 'secretarias/criar_secretaria.html', context)
 
+@login_required(login_url='/usuarios/login/')
 def editar_secretaria(request, id_secretaria):
     template_name = 'secretarias/editar_secretaria.html'
-    context ={}
+    context = {}
     secretaria = get_object_or_404(Secretaria, id=id_secretaria)
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
