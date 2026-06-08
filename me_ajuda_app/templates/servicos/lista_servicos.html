@@ -11,6 +11,8 @@
     <div style="margin-bottom: 15px;">
         <a href="{% url 'servicos:criar_servico' %}" class="btn-primario">+ Cadastrar Novo Serviço</a>
     </div>
+    {% elif is_funcionario %}
+        <p>Abaixo estão listados os serviços e seus respectivos níveis de prioridade.</p>
     {% endif %}
 
     {% if is_cidadao %}
