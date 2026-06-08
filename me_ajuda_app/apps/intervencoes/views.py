@@ -51,6 +51,7 @@ def criar_intervencao(request, ocorrencia_id=None):
     cart = request.session.get('cart_equipamentos', {}) 
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
+    template_name = 'intervencoes/criar_intervencao.html'
 
     if ocorrencia_id:
         request.session['ocorrencia_atual'] = ocorrencia_id
@@ -68,23 +69,29 @@ def criar_intervencao(request, ocorrencia_id=None):
             f.funcionario = request.user.usuario.funcionario
             if ocorrencia_id:
                 f.ocorrencia_id = ocorrencia_id
-            intervencao = form.save()
+
+            f.save()
             
             for equipamento_id, item in cart.items():
                 equipamento = Equipamento.objects.get(id=equipamento_id)
                 IntervencaoEquipamento.objects.create(
-                    intervencao=intervencao,
+                    intervencao=f,
                     equipamento=equipamento,
                     horas_usado=int(item['horas_usado']),
                     custo_total=float(item['custo_total'])
                 )
             
             request.session['cart_equipamentos'] = {}
+            if 'ocorrencia_atual' in request.session:
+                del request.session['ocorrencia_atual']
+
             request.session.modified = True
             
             return redirect('intervencoes:lista_intervencoes')
     else:
         form = IntervencaoForm()
+        if total_equipamentos:
+            form.fields['custo_trab'].initial = total_equipamentos
 
     context = {
         'form': form,
@@ -94,7 +101,7 @@ def criar_intervencao(request, ocorrencia_id=None):
         'ocorrencia_id': ocorrencia_id,
     }
     
-    return render(request, 'intervencoes/criar_intervencao.html', context)
+    return render(request, template_name, context)
 
 @login_required(login_url='/usuarios/login/')
 def editar_intervencao(request, intervencao_id):

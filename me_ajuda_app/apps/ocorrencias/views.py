@@ -18,6 +18,9 @@ def lista_ocorrencias(request):
     usuario = request.user.usuario
     is_cidadao = hasattr(usuario, 'cidadao')
     is_funcionario = hasattr(usuario, 'funcionario')
+
+    if 'cart_equipamentos' in request.session:
+        del request.session['cart_equipamentos']
     
     if is_funcionario:
         secretarias = usuario.funcionario.secretarias.all()
