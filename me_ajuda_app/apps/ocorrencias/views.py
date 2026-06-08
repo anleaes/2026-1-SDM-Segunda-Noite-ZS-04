@@ -125,6 +125,7 @@ def editar_ocorrencia(request, ocorrencia_id):
     is_funcionario = hasattr(usuario, 'funcionario')
     is_cidadao = hasattr(usuario, 'cidadao')
     ocorrencia =  get_object_or_404(Ocorrencia, id=ocorrencia_id)
+    template_name = 'ocorrencias/editar_ocorrencia.html'
 
     if request.method == 'POST':
         form = OcorrenciaForm(request.POST, instance=ocorrencia)
@@ -141,7 +142,7 @@ def editar_ocorrencia(request, ocorrencia_id):
         'is_cidadao': is_cidadao,
     }
 
-    return render(request, 'ocorrencias/editar_ocorrencia.html', context)
+    return render(request, template_name, context)
 
 @login_required(login_url='/usuarios/login/')
 def excluir_ocorrencia(request, ocorrencia_id):
