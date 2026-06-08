@@ -36,14 +36,15 @@ def lista_equipamentos_intervencao(request):
     is_funcionario = hasattr(usuario, 'funcionario')
     equipamentos = Equipamento.objects.all().order_by('nome')
     equipamentos_disponiveis = [e for e in equipamentos if e.disponivel]   
-    equipamentos = equipamentos_disponiveis     
+    equipamentos = equipamentos_disponiveis 
+    template_name = 'intervencoes/lista_equipamentos_intervencao.html'     
 
     context = {
         'equipamentos': equipamentos,
         'is_funcionario': is_funcionario,
     }
     
-    return render(request, 'intervencoes/lista_equipamentos_intervencao.html', context)
+    return render(request, template_name, context)
 
 @login_required(login_url='/usuarios/login/')
 def criar_intervencao(request, ocorrencia_id=None):  
