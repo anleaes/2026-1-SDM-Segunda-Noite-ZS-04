@@ -12,6 +12,6 @@ urlpatterns = [
     path('api/', include(router.urls) ),
     path('listar/', views.lista_servicos, name='lista_servicos'),
     path('criar/', views.criar_servico, name='criar_servico'),
-    path('editar/<int:id_servico>/', views.editar_servico, name='editar_servico'),
-    path('excluir/<int:id_servico>/', views.excluir_servico, name='excluir_servico'),
+    path('editar/<int:servico_id>/', views.editar_servico, name='editar_servico'),
+    path('excluir/<int:servico_id>/', views.excluir_servico, name='excluir_servico'),
 ]

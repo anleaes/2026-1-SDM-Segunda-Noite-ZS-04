@@ -25,6 +25,7 @@ def lista_equipamentos(request):
     
     return render(request, 'equipamentos/lista_equipamentos.html', context)
 
+@login_required(login_url='/usuarios/login/')
 def criar_equipamento(request):
     if request.method == 'POST':
         form = EquipamentoForm(request.POST)

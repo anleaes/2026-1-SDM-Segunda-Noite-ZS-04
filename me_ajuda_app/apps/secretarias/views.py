@@ -51,10 +51,10 @@ def criar_secretaria(request):
     return render(request, 'secretarias/criar_secretaria.html', context)
 
 @login_required(login_url='/usuarios/login/')
-def editar_secretaria(request, id_secretaria):
+def editar_secretaria(request, secretaria_id):
     template_name = 'secretarias/editar_secretaria.html'
     context = {}
-    secretaria = get_object_or_404(Secretaria, id=id_secretaria)
+    secretaria = get_object_or_404(Secretaria, id=secretaria_id)
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
 
@@ -74,8 +74,9 @@ def editar_secretaria(request, id_secretaria):
 
     return render(request, template_name, context)
 
-def excluir_secretaria(request, id_secretaria):
-    secretaria = Secretaria.objects.get(id=id_secretaria)
+@login_required(login_url='/usuarios/login/')
+def excluir_secretaria(request, secretaria_id):
+    secretaria = Secretaria.objects.get(id=secretaria_id)
     secretaria.delete()
     
     return redirect('secretarias:lista_secretarias')
