@@ -32,8 +32,9 @@
                 <td style="padding: 10px;">{{ intervencao.funcionario.nome }} {{ intervencao.funcionario.sobrenome }}</td>
                 <td style="padding: 10px;">R$ {{ intervencao.custo_trab }}</td>
                 <td style="padding: 10px; text-align: center;">
-                    <a href="#" class="btn-lista">Visualizar</a>
-                    <a href="#" class="btn-lista">Editar</a>
+                    <a href="{% url 'intervencoes:ver_intervencao' intervencao.id %}" class="btn-lista">Visualizar</a>
+                    <a href="{% url 'intervencoes:editar_intervencao' intervencao.id %}" class="btn-lista">Editar</a>
+                    <a href="{% url 'intervencoes:excluir_intervencao' intervencao.id %}" class="btn-lista" style="background-color: red;">Excluir</a>
                 </td>
             </tr>
             {% empty %}
