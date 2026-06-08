@@ -232,7 +232,6 @@ li .nav-item:hover {
   color: #666;
 }
 
-/* Linha de Ações/Botões superiores */
 .secretarias-acoes {
   margin-bottom: 20px;
 }
@@ -247,7 +246,6 @@ li .nav-item:hover {
   font-weight: bold;
 }
 
-/* Grid de Cards (Estilo da Foto) */
 .secretarias-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -255,7 +253,6 @@ li .nav-item:hover {
   margin-top: 20px;
 }
 
-/* Estrutura do Card Individual */
 .secretaria-card {
   background-color: #ffffff;
   border: 1px solid #e0e0e0;
@@ -294,7 +291,6 @@ li .nav-item:hover {
   margin-bottom: 15px;
 }
 
-/* Botão de Ação dentro do Card */
 .btn-ver-servicos {
   background-color: #007bff;
   color: white;
@@ -322,7 +318,6 @@ li .nav-item:hover {
   border-radius: 8px;
 }
 
-/* Container do Formulário */
 .form-servico-container {
   max-width: 600px;
   margin: 40px auto;
@@ -360,7 +355,6 @@ li .nav-item:hover {
   font-size: 0.9rem;
 }
 
-/* Estilização dos campos gerados pelo Django */
 .form-group-servico input[type="text"],
 .form-group-servico textarea,
 .form-group-servico select {
@@ -539,7 +533,7 @@ li .nav-item:hover {
 }
 
 .detail-value-text {
-  white-space: pre-wrap; /* Mantém as quebras de linha do texto longo */
+  white-space: pre-wrap;
 }
 
 .acoes-detail {
@@ -673,231 +667,223 @@ li .nav-item:hover {
   font-weight: bold;
 }
 
-/* Container do Formulário de Equipamentos */
 .form-equipamento-container {
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 30px;
-    background-color: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  font-family: Arial, sans-serif;
 }
 
 .form-equipamento-container h2 {
-    color: #2c3e50;
-    margin-bottom: 10px;
-    font-size: 1.6rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  font-size: 1.6rem;
 }
 
 .form-equipamento-container p {
-    color: #7f8c8d;
-    margin-bottom: 25px;
-    font-size: 0.95rem;
+  color: #7f8c8d;
+  margin-bottom: 25px;
+  font-size: 0.95rem;
 }
 
-/* Grupos de Campos (Labels e Inputs) */
 .form-group-equipamento {
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-group-equipamento label {
-    margin-bottom: 8px;
-    color: #475569;
-    font-weight: 600;
-    font-size: 0.9rem;
+  margin-bottom: 8px;
+  color: #475569;
+  font-weight: 600;
+  font-size: 0.9rem;
 }
 
-/* Inputs, Textareas e Selects gerados pelo Django */
 .form-group-equipamento input,
 .form-group-equipamento textarea,
 .form-group-equipamento select {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #cbd5e1;
-    border-radius: 4px;
-    font-size: 0.95rem;
-    color: #334155;
-    background-color: #fff;
-    box-sizing: border-box;
-    transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  color: #334155;
+  background-color: #fff;
+  box-sizing: border-box;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 .form-group-equipamento input:focus,
 .form-group-equipamento textarea:focus,
 .form-group-equipamento select:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-    outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  outline: none;
 }
 
-/* Exibição de Erros de Validação */
 .erro-equipamento {
-    color: #dc2626;
-    font-size: 0.85rem;
-    margin-top: 5px;
-    display: block;
+  color: #dc2626;
+  font-size: 0.85rem;
+  margin-top: 5px;
+  display: block;
 }
 
-/* Rodapé e Botões do Formulário */
 .form-equipamento-acoes {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-top: 25px;
-    border-top: 1px solid #e2e8f0;
-    padding-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 25px;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 20px;
 }
 
 .btn-salvar-equipamento {
-    background-color: #2563eb;
-    color: #ffffff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s;
+  background-color: #2563eb;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 .btn-salvar-equipamento:hover {
-    background-color: #1d4ed8;
+  background-color: #1d4ed8;
 }
 
 .btn-cancelar-equipamento {
-    color: #64748b;
-    text-decoration: none;
-    font-size: 0.95rem;
-    transition: color 0.2s;
+  color: #64748b;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s;
 }
 
 .btn-cancelar-equipamento:hover {
-    color: #334155;
+  color: #334155;
 }
 
-/* Container do Formulário de Secretaria */
 .form-secretaria-container {
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 30px;
-    background-color: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  font-family: Arial, sans-serif;
 }
 
 .form-secretaria-container h2 {
-    color: #2c3e50;
-    margin-bottom: 10px;
-    font-size: 1.6rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  font-size: 1.6rem;
 }
 
 .form-secretaria-container p {
-    color: #7f8c8d;
-    margin-bottom: 25px;
-    font-size: 0.95rem;
+  color: #7f8c8d;
+  margin-bottom: 25px;
+  font-size: 0.95rem;
 }
 
-/* Divs de agrupamento de cada campo */
 .form-group-secretaria {
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-group-secretaria label {
-    margin-bottom: 8px;
-    color: #475569;
-    font-weight: 600;
-    font-size: 0.9rem;
+  margin-bottom: 8px;
+  color: #475569;
+  font-weight: 600;
+  font-size: 0.9rem;
 }
 
-/* Inputs, Textareas e Elementos de Seleção */
 .form-group-secretaria input,
 .form-group-secretaria textarea,
 .form-group-secretaria select {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #cbd5e1;
-    border-radius: 4px;
-    font-size: 0.95rem;
-    color: #334155;
-    background-color: #fff;
-    box-sizing: border-box;
-    transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  color: #334155;
+  background-color: #fff;
+  box-sizing: border-box;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 .form-group-secretaria input:focus,
 .form-group-secretaria textarea:focus,
 .form-group-secretaria select:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-    outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  outline: none;
 }
 
 .form-group-secretaria textarea {
-    resize: vertical;
-    min-height: 120px;
+  resize: vertical;
+  min-height: 120px;
 }
 
-/* Mensagens de Erro de Validação */
 .erro-secretaria {
-    color: #dc2626;
-    font-size: 0.85rem;
-    margin-top: 5px;
-    display: block;
+  color: #dc2626;
+  font-size: 0.85rem;
+  margin-top: 5px;
+  display: block;
 }
 
-/* Área de Ações e Botões do Rodapé */
 .form-secretaria-acoes {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-top: 25px;
-    border-top: 1px solid #e2e8f0;
-    padding-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 25px;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 20px;
 }
 
 .btn-salvar-secretaria {
-    background-color: #2563eb;
-    color: #ffffff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s;
+  background-color: #2563eb;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 .btn-salvar-secretaria:hover {
-    background-color: #1d4ed8;
+  background-color: #1d4ed8;
 }
 
 .btn-cancelar-secretaria {
-    color: #64748b;
-    text-decoration: none;
-    font-size: 0.95rem;
-    transition: color 0.2s;
+  color: #64748b;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s;
 }
 
 .btn-cancelar-secretaria:hover {
-    color: #334155;
+  color: #334155;
 }
 
-/* Garante que o form do botão não quebre o alinhamento da tabela */
 .form-deletar {
   display: inline;
   margin: 0;
   padding: 0;
 }
 
-/* Botão Deletar (Vermelho para indicar ação destrutiva) */
 .btn-deletar {
   background-color: #dc2626;
   color: #ffffff;
@@ -912,4 +898,46 @@ li .nav-item:hover {
 
 .btn-deletar:hover {
   background-color: #b91c1c;
+}
+
+.arquivo-container {
+  margin-bottom: 15px;
+}
+
+.arquivo-wrapper {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.6;
+}
+
+.arquivo-wrapper a {
+  color: #4b7be5;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.arquivo-wrapper input[type="checkbox"] {
+  width: auto !important;
+  height: auto !important;
+  margin: 0 5px 0 0 !important;
+  display: inline-block !important;
+}
+
+.arquivo-wrapper input[type="file"] {
+  display: block;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.anexo {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  display: block;
 }

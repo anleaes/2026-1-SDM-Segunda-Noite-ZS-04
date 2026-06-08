@@ -95,9 +95,10 @@ def criar_ocorrencia(request):
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
     is_cidadao = hasattr(usuario, 'cidadao')
+    template_name = 'ocorrencias/criar_ocorrencia.html'
 
     if request.method == 'POST':
-        form = OcorrenciaForm(request.POST)
+        form = OcorrenciaForm(request.POST, request.FILES)
         if form.is_valid():
             f = form.save(commit=False)
             f.cidadao = usuario.cidadao
@@ -117,7 +118,7 @@ def criar_ocorrencia(request):
         'is_cidadao': is_cidadao,
     }
 
-    return render(request, 'ocorrencias/criar_ocorrencia.html', context)
+    return render(request, template_name, context)
 
 @login_required(login_url='/usuarios/login/')
 def editar_ocorrencia(request, ocorrencia_id):
@@ -128,7 +129,7 @@ def editar_ocorrencia(request, ocorrencia_id):
     template_name = 'ocorrencias/editar_ocorrencia.html'
 
     if request.method == 'POST':
-        form = OcorrenciaForm(request.POST, instance=ocorrencia)
+        form = OcorrenciaForm(request.POST, request.FILES, instance=ocorrencia)
         if form.is_valid():
             form.save()
             return redirect('ocorrencias:lista_ocorrencias')  

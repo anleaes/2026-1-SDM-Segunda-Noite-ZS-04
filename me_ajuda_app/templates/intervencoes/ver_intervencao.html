@@ -15,6 +15,16 @@
             <p><strong>Relato:</strong>
             <p> {{ intervencao.relato }}</p>
             <p><strong>Custo do Trabalho:</strong> R$ {{ intervencao.custo_trab|floatformat:2}}</p>
+            {% if intervencao.doc %}
+                <p><strong>Documento Anexado:</strong></p>
+                {% if '.png' in intervencao.doc.url|lower or '.jpg' in intervencao.doc.url|lower or '.jpeg' in intervencao.doc.url|lower %}
+                    <img class="anexo" src="{{ intervencao.doc.url }}" alt="Documento da Intervenção" >
+                {% else %}
+                    <a href="{{ intervencao.doc.url }}" target="_blank" class="btn-primario">
+                        📄 Visualizar / Baixar Arquivo Anexado
+                    </a>
+                {% endif %}
+            {% endif %}
         </div>
     </div>
 
