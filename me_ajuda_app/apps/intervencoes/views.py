@@ -17,7 +17,11 @@ def lista_intervencoes(request):
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
     is_gestor = usuario.funcionario.funcao == 'GES'
-    intervencoes = Intervencao.objects.filter(funcionario=usuario.funcionario).order_by('-data_exec')
+        
+    if is_gestor:
+        intervencoes = Intervencao.objects.all().order_by('-data_exec')
+    else:
+        intervencoes = Intervencao.objects.filter(funcionario=usuario.funcionario).order_by('-data_exec')
 
     context = {
         'intervencoes': intervencoes,
