@@ -13,7 +13,6 @@ class ProtocoloViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['ocorrencia']
 
-@login_required(login_url='/usuarios/login/')
 def criar_protocolo(ocorrencia):
     if hasattr(ocorrencia, 'protocolo'):
         return ocorrencia.protocolo

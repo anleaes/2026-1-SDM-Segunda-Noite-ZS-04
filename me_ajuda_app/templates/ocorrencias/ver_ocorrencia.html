@@ -21,7 +21,7 @@
         <p><strong>Local:</strong> {{ ocorrencia.endereco }}, {{ ocorrencia.numero }} {% if ocorrencia.complemento %}- {{ ocorrencia.complemento }}{% endif %}</p>
         {% if ocorrencia.foto %}
             <p><strong>Foto:</strong></p>
-            <img src="{{ ocorrencia.foto.url }}" alt="Foto da Ocorrência" style="max-width: 100%; border-radius: 8px;">
+            <img class="anexo" src="{{ ocorrencia.foto.url }}" alt="Foto da Ocorrência">
         {% endif %}
     </div>
 

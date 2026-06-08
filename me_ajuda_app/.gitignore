@@ -22,3 +22,4 @@
 /apps/intervencaoequipamentos/migrations/*
 /apps/core/__pycache__/*
 /apps/core/migrations/*
+media/

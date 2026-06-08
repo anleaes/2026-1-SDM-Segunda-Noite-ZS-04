@@ -7,7 +7,7 @@
     <h2 style="text-align: center;">Cadastrar Nova Ocorrência</h2>
     <p>Preencha as informações necessárias para registrar a ocorrência no sistema.</p>
 
-    <form method="POST" action="{% url 'ocorrencias:criar_ocorrencia' %}">
+    <form method="POST" action="{% url 'ocorrencias:criar_ocorrencia' %}" enctype="multipart/form-data">
         {% csrf_token %}
 
         {% for field in form %}
