@@ -8,8 +8,8 @@ from equipamentos.models import Equipamento
 class IntervencaoEquipamento(models.Model):
     horas_usado = models.IntegerField("Horas Usado")
     custo_total = models.FloatField("Custo Total")
-    intervencao = models.ForeignKey(Intervencao, on_delete=models.CASCADE)
-    equipamento = models.ForeignKey(Equipamento, on_delete=models.CASCADE)
+    intervencao = models.ForeignKey(Intervencao, on_delete=models.CASCADE, related_name='equipamentos')
+    equipamento = models.ForeignKey(Equipamento, on_delete=models.CASCADE, related_name='intervencoes')
 
     class Meta:
         verbose_name = "Equipamento da Intervenção"

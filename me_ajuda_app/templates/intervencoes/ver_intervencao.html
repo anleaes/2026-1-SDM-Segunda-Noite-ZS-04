@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %} Detalhes da Intervenção {% endblock title %}
+
+{% block body %}
+<div class="registro-container">
+    
+    <div style="flex: 2; min-width: 300px; margin-bottom: 30px;">
+        <h2 style="text-align: center;">Intervenção #{{ intervencao.id }}</h2>
+
+        <div class="perfil-secao">
+            <h3>Detalhes Técnicos</h3>
+            <p><strong>Título:</strong> {{ intervencao.titulo }}</p>
+            <p><strong>Data de Execução:</strong> {{ intervencao.data_exec|date:"d/m/Y" }}</p>
+            <p><strong>Relato:</strong>
+            <p> {{ intervencao.relato }}</p>
+            <p><strong>Custo do Trabalho:</strong> R$ {{ intervencao.custo_trab|floatformat:2}}</p>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="resumo-lateral">
+    <div>
+        <h3>Equipamentos Utilizados</h3>        
+        {% if equipamentos %}
+            <ul class="resumo-lista" style="list-style-type: none; padding: 0; margin: 0;">
+                {% for equipamento in equipamentos %}
+                <li style="margin-bottom: 10px; font-size: 14px;">
+                    <strong>{{ equipamento.equipamento.nome }}</strong> <br>
+                    {{ equipamento.horas_usado }}h x R$ {{ equipamento.preco|floatformat:2 }} = 
+                    <span style="color: #28a745; font-weight: bold;">R$ {{ equipamento.custo_total|floatformat:2 }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+            
+            <hr class="resumo-divisor margin-vertical" style="border: 0; border-top: 1px solid #ddd; margin: 15px 0;">
+            
+            <div style="font-size: 16px;">
+                <strong>Total Equipamentos:</strong> 
+                <span class="resumo-total-valor" style="color: #d9534f; font-size: 18px; float: right; font-weight: bold;">
+                    R$ {{ total_equipamentos|floatformat:2 }}
+                </span>
+            </div>
+        {% else %}
+            <p style="font-size: 14px; color: #666;">Nenhum equipamento foi adicionado a esta intervenção.</p>
+        {% endif %}
+    </div>
+
+    <hr>
+
+    <div class="form-acoes" style="margin-top: 20px;">
+        <a href="{% url 'intervencoes:lista_intervencoes' %}" class="btn-voltar">Voltar para Lista</a>
+    </div>
+</div>
+
+</div>
+{% endblock body %}

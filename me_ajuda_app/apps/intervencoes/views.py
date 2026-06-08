@@ -75,7 +75,7 @@ def criar_intervencao(request, ocorrencia_id=None):
             request.session['cart_equipamentos'] = {}
             request.session.modified = True
             
-            return redirect('intervencoes:intervencoes_lista')
+            return redirect('intervencoes:lista_intervencoes')
     else:
         form = IntervencaoForm()
 
@@ -90,25 +90,25 @@ def criar_intervencao(request, ocorrencia_id=None):
     return render(request, 'intervencoes/criar_intervencao.html', context)
 
 @login_required(login_url='/usuarios/login/')
-def editar_intervencao(request, id):
+def editar_intervencao(request, intervencao_id):
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
-    intervencao = get_object_or_404(Intervencao, id=id)
+    intervencao = get_object_or_404(Intervencao, id=intervencao_id)
 
     if request.method == 'POST':
         form = IntervencaoForm(request.POST, request.FILES, instance=intervencao)
         if form.is_valid():
             form.save()
-            return redirect('intervencoes:intervencoes_lista')
+            return redirect('intervencoes:lista_intervencoes')
     else:
         form = IntervencaoForm(instance=intervencao)
 
     context = {
         'form': form,
-        'acao': 'Editar',
+        'intervencao': intervencao,
         'is_funcionario': is_funcionario,
     }
-    return render(request, 'intervencoes/criar_intervencao.html', context)
+    return render(request, 'intervencoes/editar_intervencao.html', context)
 
 @login_required(login_url='/usuarios/login/')
 def alocacao_equipamentos(request):
@@ -179,3 +179,32 @@ def excluir_alocacao(request, equipamento_id):
     request.session['cart_equipamentos'] = cart
     request.session.modified = True
     return redirect('intervencoes:alocacao_equipamentos')
+
+@login_required(login_url='/usuarios/login/')
+def ver_intervencao(request, intervencao_id):
+    usuario = request.user.usuario
+    is_cidadao = hasattr(usuario, 'cidadao')
+    is_funcionario = hasattr(usuario, 'funcionario')
+    intervencao = get_object_or_404(Intervencao, id=intervencao_id)
+    equipamentos = intervencao.equipamentos.all()
+
+    total_equipamentos = 0.0
+    for equipamento in equipamentos:
+        total_equipamentos += float(equipamento.custo_total)
+
+    context = {
+        'intervencao': intervencao,
+        'is_cidadao': is_cidadao,
+        'is_funcionario': is_funcionario,
+        'equipamentos': equipamentos,
+        'intervencao': intervencao,
+        'total_equipamentos': total_equipamentos,
+    }
+    return render(request, 'intervencoes/ver_intervencao.html', context)
+
+@login_required(login_url='/usuarios/login/')
+def excluir_intervencao(request, intervencao_id):
+    intervencao = get_object_or_404(Intervencao, id=intervencao_id)
+    intervencao.delete()
+    
+    return redirect('intervencoes:lista_intervencoes')
