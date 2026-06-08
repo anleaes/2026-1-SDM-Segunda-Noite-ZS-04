@@ -28,8 +28,8 @@
                 <td style="padding: 10px;">{{ equipamento.descricao }}</td>
                 <td style="padding: 10px;">R$ {{ equipamento.preco|floatformat:2 }}</td>
                 <td style="padding: 10px; text-align: center; ">
-                    <a href="#" class="btn-lista">Editar</a>
-                    <a href="#" class="btn-lista" style="background-color: red;">Excluir</a>
+                    <a href="{% url 'equipamentos:editar_equipamento' equipamento_id=equipamento.id %}" class="btn-lista">Editar</a>
+                    <a href="{% url 'equipamentos:excluir_equipamento' equipamento_id=equipamento.id %}" class="btn-lista" style="background-color: red;">Excluir</a>
                 </td>
             </tr>
             {% empty %}
