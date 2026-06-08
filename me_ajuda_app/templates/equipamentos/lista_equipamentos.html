@@ -10,6 +10,8 @@
     <div style="margin-bottom: 15px;">
         <a href="{% url 'equipamentos:criar_equipamento' %}" class="btn-primario">+ Cadastrar Novo Equipamento</a>
     </div>
+    {% else %}
+        <p>Abaixo estão listados os equipamentos para serem alocados em intervenções.</p>
     {% endif %}
 
     <table class="tabela-ocorrencias" border="1" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
