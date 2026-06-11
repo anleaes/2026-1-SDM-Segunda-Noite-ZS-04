@@ -3,13 +3,12 @@
 {% block title %} Editar Intervenção {% endblock title %}
 
 {% block body %}
-<div class="registro-container">
+<div class="form-padrao-container">
     
     <div style="flex: 2; min-width: 300px; margin-bottom: 30px;">
         <h2 style="text-align: center;">Editar Intervenção</h2>
 
         <h3>Detalhes Técnicos</h3>
-        <p>Preencha os detalhes técnicos da intervenção</p>
 
         <form method="POST" action="{% url 'intervencoes:editar_intervencao' intervencao_id=intervencao.id %}" enctype="multipart/form-data">
             {% csrf_token %}
@@ -34,7 +33,7 @@
                         {% endif %}
                     </div>
                 {% else %}
-                    <div class="form-group">
+                    <div class="form-group-padrao">
                         <label>{{ field.label }}:</label>
                         {{ field }}
                         {% if field.errors %}
@@ -47,12 +46,10 @@
             <hr>
 
             <div class="form-acoes" style="margin-top: 20px;">
-                <button type="submit" class="btn-primario">Salvar Intervenção</button>
-                <a href="{% url 'intervencoes:lista_intervencoes' %}" class="btn-voltar">Voltar para Lista</a>
+                <button type="submit" class="btn-primario">Salvar</button>
+                <a href="{% url 'intervencoes:lista_intervencoes' %}" class="btn-voltar">Cancelar</a>
             </div>
         </form>
     </div>
-</div>
-
 </div>
 {% endblock body %}

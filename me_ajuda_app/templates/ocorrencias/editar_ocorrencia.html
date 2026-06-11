@@ -3,7 +3,7 @@
 {% block title %} Editar Ocorrência {% endblock title %}
 
 {% block body %}
-<div class="registro-container">
+<div class="form-padrao-container">
     <h2 style="text-align: center;">Editar Ocorrência</h2>
 
     <form method="POST" action="{% url 'ocorrencias:editar_ocorrencia' ocorrencia_id=ocorrencia.id %}" enctype="multipart/form-data">
@@ -29,7 +29,7 @@
                     {% endif %}
                 </div>
             {% else %}
-                <div class="form-group">
+                <div class="form-group-padrao">
                     <label>{{ field.label }}:</label>
                     {{ field }}
                     {% if field.errors %}
@@ -39,9 +39,9 @@
             {% endif %}
         {% endfor %}
 
-        <div class="form-acoes">
-            <button type="submit" class="btn-primario">Salvar Ocorrência</button>
-            <a href="{% url 'ocorrencias:lista_ocorrencias' %}" class="btn-secundario">Cancelar</a>
+        <div class="form-padrao-acoes">
+            <button type="submit" class="btn-primario">Salvar</button>
+            <a href="{% url 'ocorrencias:lista_ocorrencias' %}" class="btn-voltar">Cancelar</a>
         </div>
     </form>
 </div>

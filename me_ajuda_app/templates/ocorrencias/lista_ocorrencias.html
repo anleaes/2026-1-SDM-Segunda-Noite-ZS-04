@@ -8,7 +8,7 @@
     
     {% if is_cidadao %}
     <div style="margin-bottom: 15px;">
-        <a href="{% url 'ocorrencias:criar_ocorrencia' %}" class="btn-primario">+ Cadastrar Nova Ocorrência</a>
+        <a href="{% url 'ocorrencias:criar_ocorrencia' %}" class="btn-primario">+ Cadastrar Ocorrência</a>
     </div>
     <p>Abaixo estão listadas as suas ocorrências registradas.</p>
     {% elif is_funcionario %}
@@ -57,7 +57,7 @@
                         <button type="submit" class="btn-lista" style="background-color: red;">Excluir</button>
                     </form>
                     {% elif is_funcionario %}
-                    <a href="{% url 'intervencoes:criar_intervencao' ocorrencia.id %}" class="btn-lista">Nova Intervenção</a>
+                    <a href="{% url 'intervencoes:criar_intervencao' ocorrencia.id %}" class="btn-lista">+ Cadastrar Intervenção</a>
                     {% endif %}
                 </td>
             </tr>

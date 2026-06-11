@@ -3,14 +3,14 @@
 {% block title %} Editar Serviço {% endblock title %}
 
 {% block body %}
-<div class="registro-container">
-    <h2>Editar Serviço</h2>
+<div class="form-padrao-container">
+    <h2 style="text-align: center;">Editar Serviço</h2>
 
     <form method="POST" action="{% url 'servicos:editar_servico' servico_id=servico.id %}">
         {% csrf_token %}
 
         {% for field in form %}
-            <div class="form-group">
+            <div class="form-group-padrao">
                 <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
                 {{ field }}
                 {% if field.errors %}
@@ -19,9 +19,9 @@
             </div>
         {% endfor %}
 
-        <div class="form-acoes">
-            <button type="submit" class="btn-primario">Salvar Serviço</button>
-            <a href="{% url 'servicos:lista_servicos' %}" class="btn-secundario">Cancelar</a>
+        <div class="form-padrao-acoes">
+            <button type="submit" class="btn-primario">Salvar</button>
+            <a href="{% url 'servicos:lista_servicos' %}" class="btn-voltar">Cancelar</a>
         </div>
     </form>
 </div>

@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %} Cadastrar Novo Equipamento {% endblock title %}
+{% block title %} Cadastrar Equipamento {% endblock title %}
 
 {% block body %}
-<div class="form-equipamento-container">
-    <h2 style="text-align: center;">Cadastrar Novo Equipamento</h2>
-    <p>Insira as especificações e detalhes técnicos do equipamento para registrá-lo no inventário.</p>
+<div class="form-padrao-container">
+    <h2 style="text-align: center;">Cadastrar Equipamento</h2>
+    <p>Insira as especificações e detalhes técnicos do equipamento para registrá-lo no sistema.</p>
 
     <form method="POST" action="{% url 'equipamentos:criar_equipamento' %}">
         {% csrf_token %}
@@ -16,22 +16,22 @@
                 <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
                 {{ field }}
                 {% if field.errors %}
-                    <span class="erro-equipamento">{{ field.errors|striptags }}</span>
+                    <span class="erro">{{ field.errors|striptags }}</span>
                 {% endif %}
             </div>
             {% else %}
-            <div class="form-group-equipamento">
+            <div class="form-group-padrao">
                 <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
                 {{ field }}
                 {% if field.errors %}
-                    <span class="erro-equipamento">{{ field.errors|striptags }}</span>
+                    <span class="erro">{{ field.errors|striptags }}</span>
                 {% endif %}
             </div>
             {% endif %}
         {% endfor %}
 
-        <div class="form-equipamento-acoes">
-            <button type="submit" class="btn-primario">Salvar Equipamento</button>
+        <div class="form-padrao-acoes">
+            <button type="submit" class="btn-primario">Salvar</button>
             <a href="{% url 'equipamentos:lista_equipamentos' %}" class="btn-voltar">Cancelar</a>
         </div>
     </form>

@@ -3,7 +3,7 @@
 {% block title %} Editar Equipamento {% endblock title %}
 
 {% block body %}
-<div class="form-equipamento-container">
+<div class="form-padrao-container">
     <h2 style="text-align: center;">Editar Equipamento</h2>
 
     <form method="POST" action="{% url 'equipamentos:editar_equipamento' equipamento_id=equipamento.id %}">
@@ -15,22 +15,22 @@
                 <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
                 {{ field }}
                 {% if field.errors %}
-                    <span class="erro-equipamento">{{ field.errors|striptags }}</span>
+                    <span class="erro">{{ field.errors|striptags }}</span>
                 {% endif %}
             </div>
             {% else %}
-            <div class="form-group-equipamento">
+            <div class="form-group-padrao">
                 <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
                 {{ field }}
                 {% if field.errors %}
-                    <span class="erro-equipamento">{{ field.errors|striptags }}</span>
+                    <span class="erro">{{ field.errors|striptags }}</span>
                 {% endif %}
             </div>
             {% endif %}
         {% endfor %}
         
-        <div class="form-equipamento-acoes">
-            <button type="submit" class="btn-primario">Salvar Equipamento</button>
+        <div class="form-padrao-acoes">
+            <button type="submit" class="btn-primario">Salvar</button>
             <a href="{% url 'equipamentos:lista_equipamentos' %}" class="btn-voltar">Cancelar</a>
         </div>
     </form>
