@@ -8,14 +8,14 @@
     
     {% if is_cidadao %}
     <div style="margin-bottom: 15px;">
-        <a href="{% url 'ocorrencias:criar_ocorrencia' %}" class="btn-primario">+ Cadastrar Nova Ocorrência</a>
+        <a href="{% url 'ocorrencias:criar_ocorrencia' %}" class="btn-primario">+ Cadastrar Ocorrência</a>
     </div>
     <p>Abaixo estão listadas as suas ocorrências registradas.</p>
     {% elif is_funcionario %}
         <p>Abaixo estão listadas as ocorrências da secretaria que necessitam de resolução.</p>
     {% endif %}
 
-    <table class="tabela-ocorrencias" border="1">
+    <table class="tabela-lista">
         <thead>
             <tr style="background-color: #f2f2f2; text-align: left;">
                 <th style="padding: 10px;">Protocolo/ID</th>
@@ -54,10 +54,10 @@
                     <a href="{% url 'ocorrencias:editar_ocorrencia' ocorrencia.id %}" class="btn-lista">Editar</a>
                     <form action="{% url 'ocorrencias:excluir_ocorrencia' ocorrencia.id %}" method="POST" class="form-deletar" onsubmit="return confirm('Tem certeza que deseja deletar esta ocorrência?');">
                         {% csrf_token %}
-                        <button type="submit" class="btn-deletar">Excluir</button>
+                        <button type="submit" class="btn-lista" style="background-color: red;">Excluir</button>
                     </form>
                     {% elif is_funcionario %}
-                    <a href="{% url 'intervencoes:criar_intervencao' ocorrencia.id %}" class="btn-lista">Nova Intervenção</a>
+                    <a href="{% url 'intervencoes:criar_intervencao' ocorrencia.id %}" class="btn-lista">+ Cadastrar Intervenção</a>
                     {% endif %}
                 </td>
             </tr>

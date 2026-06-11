@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %} Nova Intervenção {% endblock title %}
+{% block title %} Cadastrar Intervenção {% endblock title %}
 
 {% block body %}
-<div class="registro-container">
+<div class="form-padrao-container">
     
     <div style="flex: 2; min-width: 300px; margin-bottom: 30px;">
-        <h2 style="text-align: center;">Nova Intervenção</h2>
+        <h2 style="text-align: center;">Cadastrar Intervenção</h2>
 
         <h3 style="margin-top: 0; color: #001f3f;">Detalhes Técnicos</h3>
         <p>Preencha os detalhes técnicos da intervenção</p>
@@ -15,7 +15,7 @@
             {% csrf_token %}
 
             {% for field in form %}
-            <div class="form-group" style="margin-bottom: 15px;">
+            <div class="form-group-padrao" style="margin-bottom: 15px;">
                 <label>{{ field.label }}:</label>
                 {{ field }}
                 {% if field.errors %}
@@ -25,7 +25,7 @@
             {% endfor %}
 
             <div class="form-acoes" style="margin-top: 20px;">
-                <button type="submit" class="btn-primario">Confirmar e Salvar Intervenção</button>
+                <button type="submit" class="btn-primario">Confirmar e Salvar</button>
             </div>
         </form>
     </div>
@@ -65,7 +65,7 @@
     <hr>
 
     <div class="form-acoes" style="margin-top: 20px;">
-        <a href="{% url 'ocorrencias:lista_ocorrencias' %}" class="btn-voltar">Voltar para Lista</a>
+        <a href="{% url 'ocorrencias:lista_ocorrencias' %}" class="btn-voltar">Cancelar</a>
     </div>
 </div>
 

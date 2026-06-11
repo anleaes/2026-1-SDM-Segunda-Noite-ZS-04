@@ -27,6 +27,9 @@ def lista_equipamentos(request):
 
 @login_required(login_url='/usuarios/login/')
 def criar_equipamento(request):
+    usuario = request.user.usuario
+    is_funcionario = hasattr(usuario, 'funcionario')
+
     if request.method == 'POST':
         form = EquipamentoForm(request.POST)
         if form.is_valid():
@@ -38,6 +41,7 @@ def criar_equipamento(request):
 
     context = {
         'form': form,
+        'is_funcionario': is_funcionario,
     }
     
     return render(request, 'equipamentos/criar_equipamento.html', context)

@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 
-{% block title %} Cadastrar Nova Ocorrência {% endblock title %}
+{% block title %} Cadastrar Ocorrência {% endblock title %}
 
 {% block body %}
-<div class="registro-container">
-    <h2 style="text-align: center;">Cadastrar Nova Ocorrência</h2>
+<div class="form-padrao-container">
+    <h2 style="text-align: center;">Cadastrar Ocorrência</h2>
     <p>Preencha as informações necessárias para registrar a ocorrência no sistema.</p>
 
     <form method="POST" action="{% url 'ocorrencias:criar_ocorrencia' %}" enctype="multipart/form-data">
         {% csrf_token %}
 
         {% for field in form %}
-            <div class="form-group">
+            <div class="form-group-padrao">
                 <label>{{ field.label }}:</label>
                 {{ field }}
                 {% if field.errors %}
@@ -20,9 +20,9 @@
             </div>
         {% endfor %}
 
-        <div class="form-acoes">
-            <button type="submit" class="btn-primario">Salvar Ocorrência</button>
-            <a href="{% url 'ocorrencias:lista_ocorrencias' %}" class="btn-secundario">Cancelar</a>
+        <div class="form-padrao-acoes">
+            <button type="submit" class="btn-primario">Salvar</button>
+            <a href="{% url 'ocorrencias:lista_ocorrencias' %}" class="btn-voltar">Cancelar</a>
         </div>
     </form>
 </div>

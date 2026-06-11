@@ -11,12 +11,12 @@
 
     {% if not user.is_authenticated %}
     <div class="acoes">
-      <a href="{% url 'usuarios:login_usuario' %}" class="btn-primario">Fazer Login</a>
+      <a href="{% url 'usuarios:login_usuario' %}" class="btn-primario" style="background-color: #3362b4;">Fazer Login</a>
       <a href="{% url 'usuarios:registrar_usuario' %}" class="btn-secundario">Cadastre-se</a>
     </div>
     {% else %}
     <div class="acoes">
-      <a href="{% url 'usuarios:ver_usuario' %}" class="btn-primario">Meu Perfil</a>
+      <a href="{% url 'usuarios:ver_usuario' %}" class="btn-primario" style="background-color: #3362b4;">Meu Perfil</a>
       {% if is_funcionario %}
       <a href="{% url 'ocorrencias:painel_ocorrencias' %}" class="btn-secundario">Painel do Funcionário</a>
       {% elif is_cidadao %}
