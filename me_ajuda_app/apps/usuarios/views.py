@@ -101,7 +101,6 @@ def logout_usuario(request):
     logout(request)
     return redirect('usuarios:login_usuario')
 
-#criação de perfil do usuario
 @login_required(login_url='/usuarios/login/')
 def ver_usuario(request):   
 
