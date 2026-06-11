@@ -11,6 +11,7 @@ class SecretariaViewSet(viewsets.ModelViewSet):
     serializer_class = SecretariaSerializer  
 
 def lista_secretarias(request):
+    template_name = 'secretarias/lista_secretarias.html'
     is_funcionario = False
     is_cidadao = False
     is_gestor = False
@@ -30,10 +31,11 @@ def lista_secretarias(request):
         'is_gestor': is_gestor,
     }
     
-    return render(request, 'secretarias/lista_secretarias.html', context)
+    return render(request, template_name, context)
 
 @login_required(login_url='/usuarios/login/')
 def criar_secretaria(request):
+    template_name = 'secretarias/criar_secretaria.html'
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
     
@@ -51,12 +53,11 @@ def criar_secretaria(request):
         'is_funcionario': is_funcionario
     }
     
-    return render(request, 'secretarias/criar_secretaria.html', context)
+    return render(request, template_name, context)
 
 @login_required(login_url='/usuarios/login/')
 def editar_secretaria(request, secretaria_id):
     template_name = 'secretarias/editar_secretaria.html'
-    context = {}
     secretaria = get_object_or_404(Secretaria, id=secretaria_id)
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')

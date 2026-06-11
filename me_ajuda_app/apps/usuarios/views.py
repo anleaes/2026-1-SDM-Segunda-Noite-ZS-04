@@ -18,6 +18,8 @@ class UsuarioViewSet(viewsets.ModelViewSet):
     serializer_class = UsuarioSerializer 
 
 def registrar_usuario(request):
+    template_name = 'usuarios/registrar_usuario.html'
+
     if request.method == 'POST':
         tipo_usuario = request.POST.get('tipo_usuario')
         
@@ -76,9 +78,11 @@ def registrar_usuario(request):
         'funcionario_form': funcionario_form,
     }
     
-    return render(request, 'usuarios/registrar_usuario.html', context)
+    return render(request, template_name, context)
 
 def login_usuario(request):
+    template_name = 'usuarios/login_usuario.html'
+
     if request.user.is_authenticated:
         return redirect('usuarios:ver_usuario')
 
@@ -94,7 +98,7 @@ def login_usuario(request):
         else:
             messages.error(request, 'CPF ou senha incorretos.')
 
-    return render(request, 'usuarios/login_usuario.html')
+    return render(request, template_name)
 
 @login_required(login_url='/usuarios/login/')
 def logout_usuario(request):
@@ -103,6 +107,7 @@ def logout_usuario(request):
 
 @login_required(login_url='/usuarios/login/')
 def ver_usuario(request):   
+    template_name = 'usuarios/ver_usuario.html'
 
     try:
         usuario = request.user.usuario
@@ -114,10 +119,12 @@ def ver_usuario(request):
         'is_funcionario': hasattr(usuario, 'funcionario'),
         'usuario': usuario,
     }
-    return render(request, 'usuarios/ver_usuario.html', context)
+    return render(request, template_name, context)
 
 @login_required(login_url='/usuarios/login/')
 def editar_usuario(request):
+    template_name = 'usuarios/editar_usuario.html'
+    
     usuario = request.user.usuario
     is_cidadao = hasattr(usuario, 'cidadao')
     is_funcionario = hasattr(usuario, 'funcionario')
@@ -160,7 +167,7 @@ def editar_usuario(request):
         'is_funcionario': is_funcionario,
     }
     
-    return render(request, 'usuarios/editar_usuario.html', context)
+    return render(request, template_name, context)
 
 @login_required(login_url='/usuarios/login/')
 def alterar_senha_usuario(request):

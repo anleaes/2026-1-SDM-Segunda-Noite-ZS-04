@@ -13,7 +13,7 @@ class ServicoViewSet(viewsets.ModelViewSet):
     serializer_class = ServicoSerializer  
 
 def lista_servicos(request):
-
+    template_name = 'servicos/lista_servicos.html'
     query = request.GET.get('q', '')
     
     if query:
@@ -41,11 +41,11 @@ def lista_servicos(request):
         'is_gestor': is_gestor,
     }
     
-    return render(request, 'servicos/lista_servicos.html', context)
+    return render(request, template_name, context)
 
 @login_required(login_url='/usuarios/login/')
 def criar_servico(request):
-
+    template_name = 'servicos/criar_servico.html'
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
 
@@ -62,12 +62,11 @@ def criar_servico(request):
         'is_funcionario': is_funcionario,
     }
 
-    return render(request, 'servicos/criar_servico.html', context)
+    return render(request, template_name, context)
 
 @login_required(login_url='/usuarios/login/')
 def editar_servico(request, servico_id):
     template_name = 'servicos/editar_servico.html'
-    context ={}
     servico = get_object_or_404(Servico, id=servico_id)
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')

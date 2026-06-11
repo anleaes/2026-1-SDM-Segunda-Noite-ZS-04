@@ -15,6 +15,7 @@ class OcorrenciaViewSet(viewsets.ModelViewSet):
 
 @login_required(login_url='/usuarios/login/')
 def lista_ocorrencias(request):
+    template_name = 'ocorrencias/lista_ocorrencias.html'
     usuario = request.user.usuario
     is_cidadao = hasattr(usuario, 'cidadao')
     is_funcionario = hasattr(usuario, 'funcionario')
@@ -36,7 +37,7 @@ def lista_ocorrencias(request):
         'is_cidadao': is_cidadao,
     }
     
-    return render(request, 'ocorrencias/lista_ocorrencias.html', context)
+    return render(request, template_name, context)
 
 @login_required(login_url='/usuarios/login/')
 def atualizar_status_ocorrencia(request, ocorrencia_id):
@@ -58,6 +59,7 @@ def atualizar_status_ocorrencia(request, ocorrencia_id):
 
 @login_required(login_url='/usuarios/login/')
 def ver_ocorrencia(request, ocorrencia_id):
+    template_name = 'ocorrencias/ver_ocorrencia.html'
     usuario = request.user.usuario
     is_cidadao = hasattr(usuario, 'cidadao')
     is_funcionario = hasattr(usuario, 'funcionario')
@@ -68,10 +70,11 @@ def ver_ocorrencia(request, ocorrencia_id):
         'is_cidadao': is_cidadao,
         'is_funcionario': is_funcionario,
     }
-    return render(request, 'ocorrencias/ver_ocorrencia.html', context)
+    return render(request, template_name, context)
 
 @login_required(login_url='/usuarios/login/')
 def painel_ocorrencias(request):
+    template_name = 'ocorrencias/painel_ocorrencias.html'
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
     abertas_count = Ocorrencia.objects.filter(status='ABE').count()
@@ -91,14 +94,14 @@ def painel_ocorrencias(request):
         'is_funcionario': is_funcionario,
     }
     
-    return render(request, 'ocorrencias/painel_ocorrencias.html', context)
+    return render(request, template_name, context)
 
 @login_required(login_url='/usuarios/login/')
 def criar_ocorrencia(request):
+    template_name = 'ocorrencias/criar_ocorrencia.html'
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
     is_cidadao = hasattr(usuario, 'cidadao')
-    template_name = 'ocorrencias/criar_ocorrencia.html'
 
     if request.method == 'POST':
         form = OcorrenciaForm(request.POST, request.FILES)
@@ -125,11 +128,11 @@ def criar_ocorrencia(request):
 
 @login_required(login_url='/usuarios/login/')
 def editar_ocorrencia(request, ocorrencia_id):
+    template_name = 'ocorrencias/editar_ocorrencia.html'
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
     is_cidadao = hasattr(usuario, 'cidadao')
     ocorrencia =  get_object_or_404(Ocorrencia, id=ocorrencia_id)
-    template_name = 'ocorrencias/editar_ocorrencia.html'
 
     if request.method == 'POST':
         form = OcorrenciaForm(request.POST, request.FILES, instance=ocorrencia)

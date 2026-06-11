@@ -12,6 +12,7 @@ class EquipamentoViewSet(viewsets.ModelViewSet):
 
 @login_required(login_url='/usuarios/login/')
 def lista_equipamentos(request):
+    template_name = 'equipamentos/lista_equipamentos.html'
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
     is_gestor = usuario.funcionario.funcao == 'GES'
@@ -23,10 +24,11 @@ def lista_equipamentos(request):
         'is_gestor': is_gestor
     }
     
-    return render(request, 'equipamentos/lista_equipamentos.html', context)
+    return render(request, template_name, context)
 
 @login_required(login_url='/usuarios/login/')
 def criar_equipamento(request):
+    template_name = 'equipamentos/criar_equipamento.html'
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
 
@@ -44,10 +46,11 @@ def criar_equipamento(request):
         'is_funcionario': is_funcionario,
     }
     
-    return render(request, 'equipamentos/criar_equipamento.html', context)
+    return render(request, template_name, context)
 
 @login_required(login_url='/usuarios/login/')
 def editar_equipamento(request, equipamento_id):
+    template_name = 'equipamentos/editar_equipamento.html'
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
     equipamento =  get_object_or_404(Equipamento, id=equipamento_id)
@@ -66,7 +69,7 @@ def editar_equipamento(request, equipamento_id):
         'is_funcionario': is_funcionario,
     }
 
-    return render(request, 'equipamentos/editar_equipamento.html', context)
+    return render(request, template_name, context)
 
 @login_required(login_url='/usuarios/login/')
 def excluir_equipamento(request, equipamento_id):
