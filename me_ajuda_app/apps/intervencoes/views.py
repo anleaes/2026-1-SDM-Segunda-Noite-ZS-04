@@ -14,6 +14,7 @@ class IntervencaoViewSet(viewsets.ModelViewSet):
 
 @login_required(login_url='/usuarios/login/')
 def lista_intervencoes(request):
+    template_name = 'intervencoes/lista_intervencoes.html'
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
     is_gestor = usuario.funcionario.funcao == 'GES'
@@ -28,16 +29,16 @@ def lista_intervencoes(request):
         'is_funcionario': is_funcionario,
         'is_gestor': is_gestor,
     }
-    return render(request, 'intervencoes/lista_intervencoes.html', context)
+    return render(request, template_name, context)
 
 @login_required(login_url='/usuarios/login/')
 def lista_equipamentos_intervencao(request):
+    template_name = 'intervencoes/lista_equipamentos_intervencao.html'     
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
     equipamentos = Equipamento.objects.all().order_by('nome')
     equipamentos_disponiveis = [e for e in equipamentos if e.disponivel]   
     equipamentos = equipamentos_disponiveis 
-    template_name = 'intervencoes/lista_equipamentos_intervencao.html'     
 
     context = {
         'equipamentos': equipamentos,
@@ -48,10 +49,10 @@ def lista_equipamentos_intervencao(request):
 
 @login_required(login_url='/usuarios/login/')
 def criar_intervencao(request, ocorrencia_id=None):  
+    template_name = 'intervencoes/criar_intervencao.html'
     cart = request.session.get('cart_equipamentos', {}) 
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
-    template_name = 'intervencoes/criar_intervencao.html'
 
     if ocorrencia_id:
         request.session['ocorrencia_atual'] = ocorrencia_id
@@ -105,6 +106,7 @@ def criar_intervencao(request, ocorrencia_id=None):
 
 @login_required(login_url='/usuarios/login/')
 def editar_intervencao(request, intervencao_id):
+    template_name = 'intervencoes/editar_intervencao.html'
     usuario = request.user.usuario
     is_funcionario = hasattr(usuario, 'funcionario')
     intervencao = get_object_or_404(Intervencao, id=intervencao_id)
@@ -122,10 +124,11 @@ def editar_intervencao(request, intervencao_id):
         'intervencao': intervencao,
         'is_funcionario': is_funcionario,
     }
-    return render(request, 'intervencoes/editar_intervencao.html', context)
+    return render(request, template_name, context)
 
 @login_required(login_url='/usuarios/login/')
 def alocacao_equipamentos(request):
+    template_name = 'intervencoes/alocacao_equipamentos.html'
     cart = request.session.get('cart_equipamentos', {})
     total = 0.0
     usuario = request.user.usuario
@@ -139,7 +142,7 @@ def alocacao_equipamentos(request):
         'is_funcionario': is_funcionario,
     }
 
-    return render(request, 'intervencoes/alocacao_equipamentos.html', context)
+    return render(request, template_name, context)
 
 @login_required(login_url='/usuarios/login/')
 def adicionar_alocacao(request, equipamento_id):
@@ -196,6 +199,7 @@ def excluir_alocacao(request, equipamento_id):
 
 @login_required(login_url='/usuarios/login/')
 def ver_intervencao(request, intervencao_id):
+    template_name = 'intervencoes/ver_intervencao.html'
     usuario = request.user.usuario
     is_cidadao = hasattr(usuario, 'cidadao')
     is_funcionario = hasattr(usuario, 'funcionario')
@@ -214,7 +218,7 @@ def ver_intervencao(request, intervencao_id):
         'intervencao': intervencao,
         'total_equipamentos': total_equipamentos,
     }
-    return render(request, 'intervencoes/ver_intervencao.html', context)
+    return render(request, template_name, context)
 
 @login_required(login_url='/usuarios/login/')
 def excluir_intervencao(request, intervencao_id):
