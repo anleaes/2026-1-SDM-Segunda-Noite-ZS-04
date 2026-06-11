@@ -11,7 +11,21 @@
         <p><strong>Título:</strong> {{ ocorrencia.titulo }}</p>
         <p><strong>Serviço:</strong> {{ ocorrencia.servico.nome }}</p>
         <p><strong>Status:</strong> {{ ocorrencia.get_status_display }}</p>
+        <p><strong>Criada em:</strong> {{ ocorrencia.criado_em|date:"d/m/Y H:i" }}</p>
+        {% if ocorrencia.fechado_em %}
+            <p><strong>Fechada em:</strong> {{ ocorrencia.fechado_em|date:"d/m/Y H:i" }}</p>
+        {% endif %}
     </div>
+
+    {% if is_funcionario %}
+        <hr>
+
+        <div class="perfil-secao">
+            <h3>Dados do Cidadão</h3>
+            <p><strong>Nome:</strong> {{ ocorrencia.cidadao.nome }} {{ ocorrencia.cidadao.sobrenome }}</p>
+            <p><strong>Telefone:</strong> {{ ocorrencia.cidadao.fone }}</p>
+        </div>
+    {% endif %}
 
     <hr>
 
@@ -27,20 +41,22 @@
 
     <hr>
 
-    <div class="perfil-secao">
-        <h3>Datas</h3>
-        <p><strong>Criada em:</strong> {{ ocorrencia.criado_em|date:"d/m/Y H:i" }}</p>
-        {% if ocorrencia.fechado_em %}
-            <p><strong>Fechada em:</strong> {{ ocorrencia.fechado_em|date:"d/m/Y H:i" }}</p>
-        {% endif %}
-    </div>
+    {% if is_cidadao %}
+        <div class="perfil-secao">
+            <h3>Intervenções Realizadas</h3>
+            {% for intervencao in ocorrencia.intervencao_set.all %}
+                <p>{{ intervencao.data_exec|date:"d/m/Y" }} - {{ intervencao.titulo }}</p>
+            {% empty %}
+                <p>Nenhuma intervenção foi realizada nesta ocorrência ainda.</p>
+            {% endfor %}
+        </div>
 
-    <hr>
+        <hr>
+    {% endif %}
 
     <div style="margin-top: 20px;">
         <a href="{% url 'protocolos:ver_protocolo' ocorrencia.protocolo.id %}" class="btn-primario">Ver Protocolo</a>
         <a href="{% url 'ocorrencias:lista_ocorrencias' %}" class="btn-voltar">Voltar para Lista</a>
     </div>
-
 </div>
 {% endblock body %}
