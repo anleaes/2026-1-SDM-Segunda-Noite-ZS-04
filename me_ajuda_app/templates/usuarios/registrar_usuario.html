@@ -2,9 +2,11 @@
 
 {% load static %}
 
+{% block title %} Cadastrar Conta {%endblock title %}
+
 {% block body %}
 <div class="registro-container">
-    <h2 class="form-title">Cadastrar Nova Conta</h2>
+    <h2 class="form-title">Cadastrar Conta</h2>
 
     <form method="POST" action="{% url 'usuarios:registrar_usuario' %}" id="formRegistro">
         {% csrf_token %}
