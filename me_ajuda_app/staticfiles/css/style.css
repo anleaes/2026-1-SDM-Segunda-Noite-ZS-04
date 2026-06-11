@@ -88,11 +88,15 @@ li .nav-item:hover {
 
 .btn-primario {
   background-color: #1a325a;
-  color: #fff;
+  color: #ffffff;
   padding: 10px 20px;
-  text-decoration: none;
+  border: none;
   border-radius: 5px;
-  font-weight: bold;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-decoration: none;
 }
 
 .btn-secundario {
@@ -101,11 +105,59 @@ li .nav-item:hover {
   padding: 10px 20px;
   text-decoration: none;
   border-radius: 5px;
-  font-weight: bold;
   border: 1px #1a325a;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-voltar {
+  background-color: #6c757d;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-logout {
+  background-color: red;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-top: -5px;
+  text-decoration: none;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.btn-lista {
+  background-color: #007bff;
+  color: white;
+  padding: 5px 10px;
+  text-decoration: none;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: 600;
+  transition: background-color 0.2s;
 }
 
 .btn-primario:hover,
+.btn-logout:hover,
+.btn-voltar:hover,
+.btn-lista:hover,
 .btn-secundario:hover {
   opacity: 0.8;
 }
@@ -196,17 +248,6 @@ li .nav-item:hover {
   box-sizing: border-box;
 }
 
-.btn-logout {
-  background-color: red;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  border-radius: 5px;
-  padding: 5px 10px;
-  margin-top: -5px;
-}
-
 .perfil-secao {
   margin-bottom: 30px;
 }
@@ -233,16 +274,6 @@ li .nav-item:hover {
 
 .secretarias-acoes {
   margin-bottom: 20px;
-}
-
-.btn-nova-secretaria {
-  background-color: #28a745;
-  color: white;
-  padding: 10px 15px;
-  text-decoration: none;
-  border-radius: 4px;
-  display: inline-block;
-  font-weight: bold;
 }
 
 .secretarias-grid {
@@ -288,22 +319,6 @@ li .nav-item:hover {
   font-size: 0.85rem;
   color: #888;
   margin-bottom: 15px;
-}
-
-.btn-ver-servicos {
-  background-color: #007bff;
-  color: white;
-  padding: 8px 12px;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  font-weight: bold;
-  display: block;
-}
-
-.btn-ver-servicos:hover {
-  background-color: #0056b3;
 }
 
 .secretarias-vazio {
@@ -407,33 +422,6 @@ li .nav-item:hover {
   padding-top: 20px;
 }
 
-.btn-salvar-servico {
-  background-color: #2563eb;
-  color: #ffffff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.btn-salvar-servico:hover {
-  background-color: #1d4ed8;
-}
-
-.btn-cancelar-servico {
-  color: #64748b;
-  text-decoration: none;
-  font-size: 0.95rem;
-  transition: color 0.2s;
-}
-
-.btn-cancelar-servico:hover {
-  color: #334155;
-}
-
 .form-busca {
   margin-bottom: 20px;
   display: flex;
@@ -464,7 +452,7 @@ li .nav-item:hover {
 .tabela-lista th {
   background-color: #1a325a;
   font-weight: bold;
-  color: white
+  color: white;
 }
 
 .painel-container,
@@ -475,19 +463,6 @@ li .nav-item:hover {
   margin: 0 auto;
   box-sizing: border-box;
   border-radius: 5px;
-}
-
-.btn-lista {
-  background-color: #007bff;
-  color: white;
-  padding: 5px 10px;
-  text-decoration: none;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
-.btn-lista:hover {
-  background-color: #0056b3;
 }
 
 .detail-header {
@@ -551,28 +526,6 @@ li .nav-item:hover {
   border-top: 1px solid #e0e0e0;
   display: flex;
   gap: 12px;
-}
-
-.btn-voltar {
-  background-color: #6c757d;
-  color: white;
-  padding: 10px 20px;
-  text-decoration: none;
-  border-radius: 5px;
-  text-align: center;
-}
-
-.btn-voltar:hover {
-  background-color: #5a6268;
-}
-
-.btn-editar {
-  background-color: #0056b3;
-  color: white;
-  padding: 10px 20px;
-  text-decoration: none;
-  border-radius: 4px;
-  text-align: center;
 }
 
 .titulo-painel {
@@ -752,33 +705,6 @@ li .nav-item:hover {
   padding-top: 20px;
 }
 
-.btn-salvar-equipamento {
-  background-color: #2563eb;
-  color: #ffffff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.btn-salvar-equipamento:hover {
-  background-color: #1d4ed8;
-}
-
-.btn-cancelar-equipamento {
-  color: #64748b;
-  text-decoration: none;
-  font-size: 0.95rem;
-  transition: color 0.2s;
-}
-
-.btn-cancelar-equipamento:hover {
-  color: #334155;
-}
-
 .form-secretaria-container {
   max-width: 600px;
   margin: 40px auto;
@@ -860,53 +786,10 @@ li .nav-item:hover {
   padding-top: 20px;
 }
 
-.btn-salvar-secretaria {
-  background-color: #2563eb;
-  color: #ffffff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.btn-salvar-secretaria:hover {
-  background-color: #1d4ed8;
-}
-
-.btn-cancelar-secretaria {
-  color: #64748b;
-  text-decoration: none;
-  font-size: 0.95rem;
-  transition: color 0.2s;
-}
-
-.btn-cancelar-secretaria:hover {
-  color: #334155;
-}
-
 .form-deletar {
   display: inline;
   margin: 0;
   padding: 0;
-}
-
-.btn-deletar {
-  background-color: #dc2626;
-  color: #ffffff;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 4px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.btn-deletar:hover {
-  background-color: #b91c1c;
 }
 
 .arquivo-container {

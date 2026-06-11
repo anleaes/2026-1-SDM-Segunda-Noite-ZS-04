@@ -34,6 +34,8 @@ def lista_secretarias(request):
 
 @login_required(login_url='/usuarios/login/')
 def criar_secretaria(request):
+    usuario = request.user.usuario
+    is_funcionario = hasattr(usuario, 'funcionario')
     
     if request.method == 'POST':
         form = SecretariaForm(request.POST)
@@ -46,6 +48,7 @@ def criar_secretaria(request):
 
     context = {
         'form': form,
+        'is_funcionario': is_funcionario
     }
     
     return render(request, 'secretarias/criar_secretaria.html', context)

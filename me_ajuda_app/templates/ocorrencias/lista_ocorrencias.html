@@ -54,7 +54,7 @@
                     <a href="{% url 'ocorrencias:editar_ocorrencia' ocorrencia.id %}" class="btn-lista">Editar</a>
                     <form action="{% url 'ocorrencias:excluir_ocorrencia' ocorrencia.id %}" method="POST" class="form-deletar" onsubmit="return confirm('Tem certeza que deseja deletar esta ocorrência?');">
                         {% csrf_token %}
-                        <button type="submit" class="btn-deletar">Excluir</button>
+                        <button type="submit" class="btn-lista" style="background-color: red;">Excluir</button>
                     </form>
                     {% elif is_funcionario %}
                     <a href="{% url 'intervencoes:criar_intervencao' ocorrencia.id %}" class="btn-lista">Nova Intervenção</a>
