@@ -140,7 +140,7 @@ def editar_usuario(request):
         PerfilForm = None
 
     if request.method == 'POST':
-        usuario_form = UsuarioForm(request.POST, instance=usuario)
+        usuario_form = UsuarioForm(request.POST, instance=perfil or usuario)
         if PerfilForm:
             perfil_form = PerfilForm(request.POST, instance=perfil)
         else:
@@ -154,7 +154,7 @@ def editar_usuario(request):
             return redirect('usuarios:ver_usuario')
             
     else:
-        usuario_form = UsuarioForm(instance=usuario)
+        usuario_form = UsuarioForm(instance=perfil or usuario)
         if PerfilForm:
             perfil_form = PerfilForm(instance=perfil)
         else:
