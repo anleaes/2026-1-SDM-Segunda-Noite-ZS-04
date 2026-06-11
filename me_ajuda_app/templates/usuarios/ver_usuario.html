@@ -39,6 +39,10 @@
         <p><strong>Registro:</strong> {{ usuario.funcionario.registro }}</p>
         <p><strong>Função:</strong> {{ usuario.funcionario.get_funcao_display }}</p>
         <p><strong>Situação:</strong> {% if usuario.funcionario.ativo %}Ativo{% else %}Inativo{% endif %}</p>
+        <p><strong>Secretaria(s):</strong></p>
+        {% for secretaria in usuario.funcionario.secretarias.all %}
+            <p> - ({{ secretaria.sigla }}) {{ secretaria.nome }}</p> 
+        {% endfor %}
     </div>
     {% endif %}
 

@@ -47,7 +47,6 @@
 
         {% if is_cidadao %}
             <h3>Endereço e Contato</h3>
-            {{ perfil_form.non_field_errors }}
 
             <div class="form-group">
                 <label>Telefone:</label>
@@ -76,7 +75,6 @@
 
         {% if is_funcionario %}
             <h3>Dados Profissionais</h3>
-            {{ perfil_form.non_field_errors }}
 
             <div class="form-group">
                 <label>Registro (Matrícula):</label>
@@ -99,7 +97,7 @@
             <div class="form-group">
                 <label>Secretaria(s):</label>
                 {{ perfil_form.secretarias }}
-                <span class="erro">{{ perfil_form.secretaria.errors }}</span>
+                <span class="erro">{{ perfil_form.secretarias.errors }}</span>
             </div>
         {% endif %}
 
