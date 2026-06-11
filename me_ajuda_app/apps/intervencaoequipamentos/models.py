@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.core.validators import MinValueValidator
 from intervencoes.models import Intervencao
 from equipamentos.models import Equipamento
 
@@ -7,7 +7,7 @@ from equipamentos.models import Equipamento
 # Create your models here.
 class IntervencaoEquipamento(models.Model):
     horas_usado = models.IntegerField("Horas Usado")
-    custo_total = models.FloatField("Custo Total")
+    custo_total = models.FloatField("Custo Total", validators=[MinValueValidator(0.0)])
     intervencao = models.ForeignKey(Intervencao, on_delete=models.CASCADE, related_name='equipamentos')
     equipamento = models.ForeignKey(Equipamento, on_delete=models.CASCADE, related_name='intervencoes')
 

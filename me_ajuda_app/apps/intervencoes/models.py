@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.core.validators import MinValueValidator
 from funcionarios.models import Funcionario
 from ocorrencias.models import Ocorrencia
 
@@ -10,7 +10,7 @@ class Intervencao(models.Model):
     data_exec = models.DateField("Data de Execução")
     relato = models.TextField("Relato")
     custo_trab = models.DecimalField(
-        "Custo do Trabalho", max_digits=10, decimal_places=2
+        "Custo do Trabalho", max_digits=10, decimal_places=2, validators=[MinValueValidator(0.0)]
     )
     doc = models.FileField(
         "Documento", upload_to="intervencoes/", null=True, blank=True
