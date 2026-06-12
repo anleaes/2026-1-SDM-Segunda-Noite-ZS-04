@@ -13,7 +13,7 @@
         {% for field in form %}
             {% if field.field.widget.input_type == 'checkbox' %}
             <div class="form-checkbox" style="color: #475569; font-size: 0.9rem; font-weight: 600; margin-bottom: 15px;">
-                <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                <label>{{ field.label }}:</label>
                 {{ field }}
                 {% if field.errors %}
                     <span class="erro">{{ field.errors|striptags }}</span>
@@ -21,7 +21,7 @@
             </div>
             {% else %}
             <div class="form-group-padrao">
-                <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                <label>{{ field.label }}:</label>
                 {{ field }}
                 {% if field.errors %}
                     <span class="erro">{{ field.errors|striptags }}</span>
