@@ -56,7 +56,7 @@
                         {% csrf_token %}
                         <button type="submit" class="btn-lista" style="background-color: red;">Excluir</button>
                     </form>
-                    {% elif is_funcionario and not ocorrencia.status == 'FEC' %}
+                    {% elif is_funcionario and not ocorrencia.status == 'FEC' and user.usuario.funcionario.ativo %}
                     <a href="{% url 'intervencoes:criar_intervencao' ocorrencia.id %}" class="btn-lista">+ Cadastrar Intervenção</a>
                     {% endif %}
                 </td>
