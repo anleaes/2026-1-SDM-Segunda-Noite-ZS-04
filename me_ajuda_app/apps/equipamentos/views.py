@@ -13,10 +13,14 @@ class EquipamentoViewSet(viewsets.ModelViewSet):
 @login_required(login_url='/usuarios/login/')
 def lista_equipamentos(request):
     template_name = 'equipamentos/lista_equipamentos.html'
-    usuario = request.user.usuario
-    is_funcionario = hasattr(usuario, 'funcionario')
-    is_gestor = usuario.funcionario.funcao == 'GES'
     equipamentos = Equipamento.objects.all().order_by('nome')
+    is_funcionario = False
+    is_gestor = False
+
+    if not request.user.is_superuser:
+        usuario = request.user.usuario
+        is_funcionario = hasattr(usuario, 'funcionario')
+        is_gestor = usuario.funcionario.funcao == 'GES'
 
     context = {
         'equipamentos': equipamentos,
@@ -29,8 +33,11 @@ def lista_equipamentos(request):
 @login_required(login_url='/usuarios/login/')
 def criar_equipamento(request):
     template_name = 'equipamentos/criar_equipamento.html'
-    usuario = request.user.usuario
-    is_funcionario = hasattr(usuario, 'funcionario')
+    is_funcionario = False
+    
+    if not request.user.is_superuser:
+        usuario = request.user.usuario
+        is_funcionario = hasattr(usuario, 'funcionario')
 
     if request.method == 'POST':
         form = EquipamentoForm(request.POST)
@@ -51,9 +58,12 @@ def criar_equipamento(request):
 @login_required(login_url='/usuarios/login/')
 def editar_equipamento(request, equipamento_id):
     template_name = 'equipamentos/editar_equipamento.html'
-    usuario = request.user.usuario
-    is_funcionario = hasattr(usuario, 'funcionario')
-    equipamento =  get_object_or_404(Equipamento, id=equipamento_id)
+    is_funcionario = False
+    equipamento = get_object_or_404(Equipamento, id=equipamento_id)
+
+    if not request.user.is_superuser:
+        usuario = request.user.usuario
+        is_funcionario = hasattr(usuario, 'funcionario')
 
     if request.method == 'POST':
         form = EquipamentoForm(request.POST, instance=equipamento)

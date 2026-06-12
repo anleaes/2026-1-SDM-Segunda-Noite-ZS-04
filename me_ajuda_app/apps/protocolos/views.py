@@ -32,9 +32,13 @@ def criar_protocolo(ocorrencia):
 def ver_protocolo(request, protocolo_id):
     template_name = 'protocolos/ver_protocolo.html'
     protocolo = get_object_or_404(Protocolo, id=protocolo_id)
-    usuario = request.user.usuario
-    is_funcionario = hasattr(usuario, 'funcionario')
-    is_cidadao = hasattr(usuario, 'cidadao')
+    is_funcionario = False
+    is_cidadao = False
+    
+    if not request.user.is_superuser:
+        usuario = request.user.usuario
+        is_funcionario = hasattr(usuario, 'funcionario')
+        is_cidadao = hasattr(usuario, 'cidadao')
 
     context = {
         'protocolo': protocolo,

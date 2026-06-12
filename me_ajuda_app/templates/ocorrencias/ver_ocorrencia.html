@@ -17,7 +17,7 @@
         {% endif %}
     </div>
 
-    {% if is_funcionario %}
+    {% if is_funcionario or user.is_superuser %}
         <hr>
 
         <div class="perfil-secao">
@@ -41,7 +41,7 @@
 
     <hr>
 
-    {% if is_cidadao %}
+    {% if is_cidadao or user.is_superuser %}
         <div class="perfil-secao">
             <h3>Intervenções Realizadas</h3>
             {% for intervencao in ocorrencia.intervencao_set.all %}

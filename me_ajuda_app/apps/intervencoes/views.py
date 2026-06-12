@@ -15,13 +15,17 @@ class IntervencaoViewSet(viewsets.ModelViewSet):
 @login_required(login_url='/usuarios/login/')
 def lista_intervencoes(request):
     template_name = 'intervencoes/lista_intervencoes.html'
-    usuario = request.user.usuario
-    is_funcionario = hasattr(usuario, 'funcionario')
-    is_gestor = usuario.funcionario.funcao == 'GES'
+    is_funcionario = False
+    is_gestor = False
+    
+    if not request.user.is_superuser:
+        usuario = request.user.usuario
+        is_funcionario = hasattr(usuario, 'funcionario')
+        is_gestor = usuario.funcionario.funcao == 'GES'
         
-    if is_gestor:
+    if is_gestor or request.user.is_superuser:
         intervencoes = Intervencao.objects.all().order_by('-data_exec')
-    else:
+    elif is_funcionario:
         intervencoes = Intervencao.objects.filter(funcionario=usuario.funcionario).order_by('-data_exec')
 
     context = {
@@ -107,9 +111,12 @@ def criar_intervencao(request, ocorrencia_id=None):
 @login_required(login_url='/usuarios/login/')
 def editar_intervencao(request, intervencao_id):
     template_name = 'intervencoes/editar_intervencao.html'
-    usuario = request.user.usuario
-    is_funcionario = hasattr(usuario, 'funcionario')
+    is_funcionario = False
     intervencao = get_object_or_404(Intervencao, id=intervencao_id)
+
+    if not request.user.is_superuser:
+        usuario = request.user.usuario
+        is_funcionario = hasattr(usuario, 'funcionario')
 
     if request.method == 'POST':
         form = IntervencaoForm(request.POST, request.FILES, instance=intervencao)
@@ -200,11 +207,13 @@ def excluir_alocacao(request, equipamento_id):
 @login_required(login_url='/usuarios/login/')
 def ver_intervencao(request, intervencao_id):
     template_name = 'intervencoes/ver_intervencao.html'
-    usuario = request.user.usuario
-    is_cidadao = hasattr(usuario, 'cidadao')
-    is_funcionario = hasattr(usuario, 'funcionario')
     intervencao = get_object_or_404(Intervencao, id=intervencao_id)
     equipamentos = intervencao.equipamentos.all()
+    is_funcionario = False
+
+    if not request.user.is_superuser:
+        usuario = request.user.usuario
+        is_funcionario = hasattr(usuario, 'funcionario')
 
     total_equipamentos = 0.0
     for equipamento in equipamentos:
@@ -212,7 +221,6 @@ def ver_intervencao(request, intervencao_id):
 
     context = {
         'intervencao': intervencao,
-        'is_cidadao': is_cidadao,
         'is_funcionario': is_funcionario,
         'equipamentos': equipamentos,
         'intervencao': intervencao,
