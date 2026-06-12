@@ -15,6 +15,7 @@
       <a href="{% url 'usuarios:registrar_usuario' %}" class="btn-secundario">Cadastre-se</a>
     </div>
     {% else %}
+    {% if not user.is_superuser %}
     <div class="acoes">
       <a href="{% url 'usuarios:ver_usuario' %}" class="btn-primario" style="background-color: #3362b4;">Meu Perfil</a>
       {% if is_funcionario %}
@@ -23,6 +24,7 @@
       <a href="{% url 'ocorrencias:lista_ocorrencias' %}" class="btn-secundario">Minhas Ocorrências</a>
       {% endif %}
     </div>
+    {% endif %}
     {% endif %}
   </div>
 </main>

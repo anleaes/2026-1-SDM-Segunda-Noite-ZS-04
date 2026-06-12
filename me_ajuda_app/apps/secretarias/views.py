@@ -16,7 +16,7 @@ def lista_secretarias(request):
     is_cidadao = False
     is_gestor = False
 
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and not request.user.is_superuser:
         usuario = request.user.usuario
         is_funcionario = hasattr(usuario, 'funcionario')
         is_cidadao = hasattr(usuario, 'cidadao')
@@ -36,8 +36,11 @@ def lista_secretarias(request):
 @login_required(login_url='/usuarios/login/')
 def criar_secretaria(request):
     template_name = 'secretarias/criar_secretaria.html'
-    usuario = request.user.usuario
-    is_funcionario = hasattr(usuario, 'funcionario')
+    is_funcionario = False
+
+    if not request.user.is_superuser:
+        usuario = request.user.usuario
+        is_funcionario = hasattr(usuario, 'funcionario')
     
     if request.method == 'POST':
         form = SecretariaForm(request.POST)
@@ -45,7 +48,6 @@ def criar_secretaria(request):
             form.save()
             return redirect('secretarias:lista_secretarias')  
     else:
-        
         form = SecretariaForm()
 
     context = {
@@ -59,8 +61,11 @@ def criar_secretaria(request):
 def editar_secretaria(request, secretaria_id):
     template_name = 'secretarias/editar_secretaria.html'
     secretaria = get_object_or_404(Secretaria, id=secretaria_id)
-    usuario = request.user.usuario
-    is_funcionario = hasattr(usuario, 'funcionario')
+    is_funcionario = False
+
+    if not request.user.is_superuser:
+        usuario = request.user.usuario
+        is_funcionario = hasattr(usuario, 'funcionario')
 
     if request.method == 'POST':
         form = SecretariaForm(request.POST, instance=secretaria)

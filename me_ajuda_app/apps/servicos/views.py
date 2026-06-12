@@ -28,7 +28,7 @@ def lista_servicos(request):
     is_funcionario = False
     is_gestor = False
     
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and not request.user.is_superuser:
         usuario = request.user.usuario
         is_funcionario = hasattr(usuario, 'funcionario')
         is_cidadao = hasattr(usuario, 'cidadao')
@@ -46,8 +46,11 @@ def lista_servicos(request):
 @login_required(login_url='/usuarios/login/')
 def criar_servico(request):
     template_name = 'servicos/criar_servico.html'
-    usuario = request.user.usuario
-    is_funcionario = hasattr(usuario, 'funcionario')
+    is_funcionario = False
+
+    if not request.user.is_superuser:
+        usuario = request.user.usuario
+        is_funcionario = hasattr(usuario, 'funcionario')
 
     if request.method == 'POST':
         form = ServicoForm(request.POST)
@@ -68,8 +71,11 @@ def criar_servico(request):
 def editar_servico(request, servico_id):
     template_name = 'servicos/editar_servico.html'
     servico = get_object_or_404(Servico, id=servico_id)
-    usuario = request.user.usuario
-    is_funcionario = hasattr(usuario, 'funcionario')
+    is_funcionario = False
+
+    if not request.user.is_superuser:
+        usuario = request.user.usuario
+        is_funcionario = hasattr(usuario, 'funcionario')
 
     if request.method == 'POST':
         form = ServicoForm(request.POST, instance=servico)

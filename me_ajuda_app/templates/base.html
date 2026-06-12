@@ -21,7 +21,7 @@
         </div>
 
         <ul class="nav-links">
-          {% if user.is_authenticated %}
+          {% if user.is_authenticated and not user.is_superuser %}
           <li>
             <a class="nav-item" href="{% url 'secretarias:lista_secretarias' %}">Secretarias</a>
           </li>
@@ -54,6 +54,36 @@
             <a class="nav-item" href="{% url 'usuarios:ver_usuario' %}">Meu Perfil</a>
           </li>
 
+          <li>
+            <form method="POST"
+              action="{% url 'usuarios:logout_usuario' %}" style="display: inline">
+              {% csrf_token %}
+              <button type="submit" class="btn-logout">Sair</button>
+            </form>
+          </li>
+
+          {% elif user.is_superuser %}
+          <li>
+            <a class="nav-item" href="{% url 'secretarias:lista_secretarias' %}">Secretarias</a>
+          </li>
+          <li>
+            <a class="nav-item" href="{% url 'intervencoes:lista_intervencoes' %}">Intervenções</a>
+          </li>
+          <li>
+            <a class="nav-item" href="{% url 'servicos:lista_servicos' %}">Serviços</a>
+          </li>
+          <li>
+            <a class="nav-item" href="{% url 'ocorrencias:lista_ocorrencias' %}">Ocorrências</a>
+          </li>
+          <li>
+            <a class="nav-item" href="{% url 'equipamentos:lista_equipamentos' %}">Equipamentos</a>
+          </li>
+          <li>
+            <a class="nav-item" href="{% url 'cidadaos:lista_cidadaos' %}">Cidadãos</a>
+          </li>
+          <li>
+            <a class="nav-item" href="{% url 'funcionarios:lista_funcionarios' %}">Funcionários</a>
+          </li>
           <li>
             <form method="POST"
               action="{% url 'usuarios:logout_usuario' %}" style="display: inline">

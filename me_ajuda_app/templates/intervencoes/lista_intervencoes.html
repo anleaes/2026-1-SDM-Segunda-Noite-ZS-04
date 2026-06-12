@@ -6,7 +6,7 @@
 <div class="ocorrencias-container" style="padding: 20px;">
     <h2 style="text-align: center;">Lista de Intervenções</h2>
     
-    {% if is_gestor %}
+    {% if is_gestor or user.is_superuser %}
     <p>Abaixo estão listadas as intervenções realizadas pelos funcionários.</p>
     {% else %}
     <p>Abaixo estão listadas as suas intervenções realizadas.</p>

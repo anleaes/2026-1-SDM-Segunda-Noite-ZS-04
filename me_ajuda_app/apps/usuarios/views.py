@@ -94,7 +94,10 @@ def login_usuario(request):
 
         if user is not None:
             login(request, user)
-            return redirect('usuarios:ver_usuario')
+            if not request.user.is_superuser:
+                return redirect('usuarios:ver_usuario')
+            else:
+                return redirect('core:home')
         else:
             messages.error(request, 'CPF ou senha incorretos.')
 
