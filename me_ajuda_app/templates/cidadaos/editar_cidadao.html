@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %} Editar Cidadão {% endblock title %}
+
+{% block body %}
+<div class="form-padrao-container">
+    <h2 style="text-align: center;">Editar Cidadão</h2>
+
+    <form method="POST" action="{% url 'cidadaos:editar_cidadao' cidadao_id=cidadao.id %}">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div class="form-group-padrao">
+                <label>{{ field.label }}:</label>
+                {{ field }}
+                {% if field.errors %}
+                    <span class="erro">{{ field.errors|striptags }}</span>
+                {% endif %}
+            </div>
+        {% endfor %}
+        
+        <div class="form-padrao-acoes">
+            <button type="submit" class="btn-primario">Salvar</button>
+            <a href="{% url 'cidadaos:lista_cidadaos' %}" class="btn-voltar">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock body %}

@@ -3,6 +3,7 @@ from .models import Cidadao
 from rest_framework import viewsets
 from .serializer import CidadaoSerializer
 from django.contrib.auth.decorators import login_required
+from cidadaos.forms import CidadaoForm
 
 # Create your views here.
 class CidadaoViewSet(viewsets.ModelViewSet):
@@ -23,6 +24,30 @@ def lista_cidadaos(request):
         'cidadaos': cidadaos
     }
     
+    return render(request, template_name, context)
+
+@login_required(login_url='/usuarios/login/')
+def editar_cidadao(request, cidadao_id):
+    template_name = 'cidadaos/editar_cidadao.html'
+    usuario = request.user
+    cidadao =  get_object_or_404(Cidadao, id=cidadao_id)
+
+    if not usuario.is_superuser:
+        return redirect('core:home') 
+
+    if request.method == 'POST':
+        form = CidadaoForm(request.POST, instance=cidadao)
+        if form.is_valid():
+            form.save()
+            return redirect('cidadaos:lista_cidadaos')  
+    else:
+        form = CidadaoForm(instance=cidadao)
+
+    context = {
+        'form': form,
+        'cidadao': cidadao,
+    }
+
     return render(request, template_name, context)
 
 @login_required(login_url='/usuarios/login/')
