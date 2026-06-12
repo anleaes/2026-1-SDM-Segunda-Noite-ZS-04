@@ -30,7 +30,7 @@ def lista_cidadaos(request):
 def editar_cidadao(request, cidadao_id):
     template_name = 'cidadaos/editar_cidadao.html'
     usuario = request.user
-    cidadao =  get_object_or_404(Cidadao, id=cidadao_id)
+    cidadao = get_object_or_404(Cidadao, id=cidadao_id)
 
     if not usuario.is_superuser:
         return redirect('core:home') 
