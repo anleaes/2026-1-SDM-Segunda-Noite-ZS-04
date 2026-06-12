@@ -41,18 +41,20 @@
 
     <hr>
 
-    {% if is_cidadao or user.is_superuser %}
-        <div class="perfil-secao">
-            <h3>Intervenções Realizadas</h3>
-            {% for intervencao in ocorrencia.intervencao_set.all %}
+    <div class="perfil-secao">
+        <h3>Intervenções Realizadas</h3>
+        {% for intervencao in ocorrencia.intervencao_set.all %}
+            {% if is_funcionario or user.is_superuser %}
+                <p>{{ intervencao.data_exec|date:"d/m/Y" }} - {{ intervencao.titulo }} - Realizada por {{ intervencao.funcionario.nome }}</p>
+            {% else %}
                 <p>{{ intervencao.data_exec|date:"d/m/Y" }} - {{ intervencao.titulo }}</p>
-            {% empty %}
-                <p>Nenhuma intervenção foi realizada nesta ocorrência ainda.</p>
-            {% endfor %}
-        </div>
+            {% endif %}
+        {% empty %}
+            <p>Nenhuma intervenção foi realizada nesta ocorrência ainda.</p>
+        {% endfor %}
+    </div>
 
-        <hr>
-    {% endif %}
+    <hr>
 
     <div style="margin-top: 20px;">
         <a href="{% url 'protocolos:ver_protocolo' ocorrencia.protocolo.id %}" class="btn-primario">Ver Protocolo</a>
