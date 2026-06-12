@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %} Lista de Funcionários {% endblock title %}
+
+{% block body %} 
+<div class="ocorrencias-container" style="padding: 20px;">
+    <h2 style="text-align: center;">Lista de Funcionários</h2>
+
+    <table class="tabela-lista">
+        <thead>
+            <tr style="background-color: #f2f2f2; text-align: left;">
+                <th style="padding: 10px;">ID Funcionário</th>
+                <th style="padding: 10px;">ID Usuário</th>
+                <th style="padding: 10px;">Nome</th>
+                <th style="padding: 10px;">CPF</th>
+                <th style="padding: 10px;">E-mail</th>
+                <th style="padding: 10px; width: 20%; text-align: center;">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for funcionario in funcionarios %}
+            <tr>
+                <td style="padding: 10px;">{{ funcionario.id }}</td>
+                <td style="padding: 10px;"><strong>{{ funcionario.user.id }}</strong></td>
+                <td style="padding: 10px;">{{ funcionario.nome }} {{ funcionario.sobrenome }}</td>
+                <td style="padding: 10px;">{{ funcionario.cpf }}</td>
+                <td style="padding: 10px;">{{ funcionario.email }}</td>
+                <td style="padding: 10px; text-align: center; ">
+                    <a href="#" class="btn-lista">Editar</a>
+                    <a href="{% url 'funcionarios:excluir_funcionario' funcionario_id=funcionario.id %}" class="btn-lista" style="background-color: red;">Excluir</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" style="padding: 20px; text-align: center;">Nenhum funcionário encontrado no momento.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock body %}
