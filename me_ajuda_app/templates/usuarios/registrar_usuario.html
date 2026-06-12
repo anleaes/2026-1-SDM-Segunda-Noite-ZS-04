@@ -65,12 +65,12 @@
                 <div class="form-group">
                     <label >Selecione o Tipo de usuário:</label>
                     <select id="tipo_usuario" name="tipo_usuario">
-                        <option value="cidadao">Cidadão</option>
-                        <option value="funcionario">Funcionário</option>
+                        <option value="cidadao" {% if request.POST.tipo_usuario == 'cidadao' %}selected{% endif %}>Cidadão</option>
+                        <option value="funcionario" {% if request.POST.tipo_usuario == 'funcionario' %}selected{% endif %}>Funcionário</option>
                     </select>
                 </div>
 
-                <div id="secao_cidadao">
+                <div id="secao_cidadao" {% if request.POST.tipo_usuario == 'cidadao' %} style="display: block;" {% else %} style="display: none;"{% endif %};">
                     <h3>Dados do Cidadão</h3>
                     
                     <div class="form-group">
@@ -98,7 +98,7 @@
                     </div>
                 </div>
 
-                <div id="secao_funcionario" style="display: none;">
+                <div id="secao_funcionario" {% if request.POST.tipo_usuario == 'funcionario' %} style="display: block;" {% else %} style="display: none;"{% endif %};">
                     <h3>Dados Profissionais</h3>
                     
                     <div class="form-group">
@@ -131,7 +131,8 @@
         <hr>
         
         <div style="text-align: right;">
-            <button type="submit" class="btn-primario" id="btn_submit">Cadastrar</button>
+            <button type="submit" class="btn-primario" id="btn_cadastrar">Cadastrar</button>
+            <a href="{% url 'usuarios:login_usuario' %}" class="btn-voltar">Cancelar</a>
         </div>
     </form>
 
