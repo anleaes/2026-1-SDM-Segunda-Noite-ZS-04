@@ -331,9 +331,7 @@ li .nav-item:hover {
   color: white;
 }
 
-.painel-container,
-.ocorrencias-container,
-.servicos-container {
+.lista-container {
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
