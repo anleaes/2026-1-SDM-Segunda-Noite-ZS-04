@@ -28,6 +28,30 @@ def lista_funcionarios(request):
     return render(request, template_name, context)
 
 @login_required(login_url='/usuarios/login/')
+def editar_funcionario(request, funcionario_id):
+    template_name = 'funcionarios/editar_funcionario.html'
+    usuario = request.user
+    funcionario = get_object_or_404(Funcionario, id=funcionario_id)
+
+    if not usuario.is_superuser:
+        return redirect('core:home') 
+
+    if request.method == 'POST':
+        form = FuncionarioForm(request.POST, instance=funcionario)
+        if form.is_valid():
+            form.save()
+            return redirect('funcionarios:lista_funcionarios')  
+    else:
+        form = FuncionarioForm(instance=funcionario)
+
+    context = {
+        'form': form,
+        'funcionario': funcionario,
+    }
+
+    return render(request, template_name, context)
+
+@login_required(login_url='/usuarios/login/')
 def excluir_funcionario(request, funcionario_id):
     usuario = request.user
 

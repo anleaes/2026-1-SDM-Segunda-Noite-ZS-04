@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %} Editar Funcionário {% endblock title %}
+
+{% block body %}
+<div class="form-padrao-container">
+    <h2 style="text-align: center;">Editar Funcionário</h2>
+
+    <form method="POST" action="{% url 'funcionarios:editar_funcionario' funcionario_id=funcionario.id %}">
+        {% csrf_token %}
+
+        {% for field in form %}
+            {% if field.field.widget.input_type == 'checkbox' %}
+            <div class="form-checkbox" style="color: #475569; font-size: 0.9rem; font-weight: 600; margin-bottom: 15px;">
+                <label>{{ field.label }}:</label>
+                {{ field }}
+                {% if field.errors %}
+                    <span class="erro">{{ field.errors|striptags }}</span>
+                {% endif %}
+            </div>
+            {% else %}
+            <div class="form-group-padrao">
+                <label>{{ field.label }}:</label>
+                {{ field }}
+                {% if field.errors %}
+                    <span class="erro">{{ field.errors|striptags }}</span>
+                {% endif %}
+            </div>
+            {% endif %}
+        {% endfor %}
+        
+        <div class="form-padrao-acoes">
+            <button type="submit" class="btn-primario">Salvar</button>
+            <a href="{% url 'funcionarios:lista_funcionarios' %}" class="btn-voltar">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock body %}
