@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const secaoFuncionario = document.getElementById('secao_funcionario');
     const inputsCidadao = secaoCidadao.querySelectorAll('input, select');
     const inputsFuncionario = secaoFuncionario.querySelectorAll('input, select');
+    const btnCadastrar = document.getElementById('btn_cadastrar');
 
     function alternarTipoUsuario(tipo) {
         if (tipo === 'cidadao') {
@@ -59,6 +60,11 @@ document.addEventListener('DOMContentLoaded', function () {
             event.preventDefault();
             alert('Por favor, certifique-se de que as senhas são iguais.');
             confirmarSenha.focus();
+
+            return;
         }
+
+        btnCadastrar.disabled = true;
+        btnCadastrar.innerText = "Aguarde..."
     });
 });
